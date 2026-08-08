@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — goonscrubbih</title>
+<meta name="description" content="Who's behind these apps, what this site is for, and how to reach the source.">
+<meta property="og:title" content="About — goonscrubbih">
+<meta property="og:description" content="Who's behind these apps, what this site is for, and how to reach the source.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#0d0f12; --panel:#15181d; --line:#242931;
+    --ink:#e8eaed; --muted:#9aa3ad; --dim:#6b7480;
+    --accent:#5cc8ff; --accent-ink:#06232f;
+    --ok:#4ade80; --warn:#fbbf24;
+    --radius:12px;
+  }
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg:#fafafa; --panel:#fff; --line:#e4e6ea;
+      --ink:#16181d; --muted:#5b636e; --dim:#8b939e;
+      --accent:#0b74c4; --accent-ink:#fff;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 20px 80px}
+  header{padding:72px 0 40px}
+  .back{color:var(--muted); text-decoration:none; font-size:14px}
+  .back:hover{color:var(--accent)}
+  h1{font-size:34px; line-height:1.15; margin:20px 0 12px; letter-spacing:-.02em}
+  .tag{color:var(--muted); font-size:17px; margin:0; max-width:56ch}
+  h2{
+    font-size:12px; text-transform:uppercase; letter-spacing:.1em;
+    color:var(--dim); margin:48px 0 16px; font-weight:600;
+  }
+  p{color:var(--ink); max-width:60ch}
+  .muted{color:var(--muted)}
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 20px; margin-bottom:12px;
+    display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;
+  }
+  .card .body{flex:1 1 300px; min-width:0}
+  .card h3{margin:0 0 4px; font-size:17px; font-weight:600}
+  .card p{margin:0; color:var(--muted); font-size:14.5px}
+  .btn{
+    display:inline-block; background:var(--accent); color:var(--accent-ink);
+    text-decoration:none; font-weight:600; font-size:14px;
+    padding:9px 18px; border-radius:8px; white-space:nowrap;
+    transition:opacity .15s;
+  }
+  .btn:hover{opacity:.85}
+  .btn.ghost{background:transparent; color:var(--accent); border:1px solid var(--line)}
+  .addr{
+    display:block; width:100%; font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
+    background:var(--bg); border:1px solid var(--line); border-radius:8px;
+    color:var(--ink); padding:10px 12px; margin-top:8px;
+    word-break:break-all; cursor:pointer; text-align:left;
+  }
+  .addr:hover{border-color:var(--accent)}
+  .copied{color:var(--ok)}
+  footer{
+    margin-top:64px; padding-top:24px; border-top:1px solid var(--line);
+    color:var(--dim); font-size:13px;
+  }
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <a class="back" href="index.html">← Apps &amp; tools</a>
+  <h1>About</h1>
+  <p class="tag">Solo hobbyist developer. I build small, self-contained apps and tools on the side and give away what's actually free to give away.</p>
+</header>
+
+<h2>Mission &amp; scope</h2>
+<p class="muted">
+  Everything on this site is a side project, built and maintained by one person in spare time.
+  That means: no roadmap promises, no support SLA, and things ship when they're ready rather than
+  on a schedule. What's listed as "in development" is genuinely in progress, not a placeholder for
+  something already finished.
+</p>
+<p class="muted">
+  Apps here are free to download and use. If one saves you time or money, a donation
+  (see below) is welcome but never required — nothing on this site is paywalled or ad-gated.
+</p>
+
+<h2>Projects &amp; source</h2>
+<p class="muted">
+  Source for these projects isn't public yet — the download page ships built binaries and releases,
+  not repos. The GitHub profile below is the canonical place to check for any project going open-source.
+</p>
+
+<div class="card">
+  <div class="body"><h3>Location Simulator</h3><p>macOS · GPS position simulator for testing location-aware apps</p></div>
+  <a class="btn ghost" href="https://github.com/goonscrubbih">GitHub →</a>
+</div>
+<div class="card">
+  <div class="body"><h3>Jarvis</h3><p>macOS · ⌥Space HUD assistant</p></div>
+  <a class="btn ghost" href="https://github.com/goonscrubbih">GitHub →</a>
+</div>
+<div class="card">
+  <div class="body"><h3>GTA V Secrets Map</h3><p>Browser · pan/zoom secrets map</p></div>
+  <a class="btn ghost" href="https://github.com/goonscrubbih">GitHub →</a>
+</div>
+<div class="card">
+  <div class="body"><h3>FloorSnap</h3><p>iOS · LiDAR floor-plan scanner (in development)</p></div>
+  <a class="btn ghost" href="https://github.com/goonscrubbih">GitHub →</a>
+</div>
+<div class="card">
+  <div class="body"><h3>Arrow Flow</h3><p>iOS · arrow-routing puzzle (in development)</p></div>
+  <a class="btn ghost" href="https://github.com/goonscrubbih">GitHub →</a>
+</div>
+<div class="card">
+  <div class="body"><h3>Frosty Castle</h3><p>watchOS · Icy Tower-style climber (in development)</p></div>
+  <a class="btn ghost" href="https://github.com/goonscrubbih">GitHub →</a>
+</div>
+
+<h2>Support the work</h2>
+
+<div class="card" style="display:block">
+  <p style="margin-bottom:14px; max-width:none">Donations go straight back into time spent building the next thing. Never required.</p>
+
+  <div style="font-size:13px; color:var(--dim); font-weight:600; margin-top:14px">BITCOIN</div>
+  <button class="addr" data-copy>bc1q4p3dlyzk3jh0n7r3uhshwxclycf3waj7u99vsg</button>
+
+  <div style="font-size:13px; color:var(--dim); font-weight:600; margin-top:16px">ETHEREUM</div>
+  <button class="addr" data-copy>0xF80Ce6bc46F6927ad833F5Cc9Ca74cA2aA515305</button>
+
+  <p style="font-size:12.5px; color:var(--dim); margin-top:14px; max-width:none">Click an address to copy it. Please double-check the first and last characters before sending.</p>
+</div>
+
+<h2>Contact</h2>
+<p class="muted">
+  No public email listed. The best way to reach me is
+  <a href="https://github.com/goonscrubbih" style="color:var(--accent)">GitHub</a> —
+  open an issue on a repo once one exists, or check back here for updates.
+</p>
+
+<footer>
+  goonscrubbih · <a href="https://github.com/goonscrubbih">GitHub</a> · <a href="index.html">Apps &amp; tools</a><br>
+  No analytics, no cookies, nothing stored. This page is a single static file.
+</footer>
+
+</div>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(function(el){
+  el.addEventListener('click', function(){
+    var addr = el.dataset.addr || el.textContent.trim();
+    el.dataset.addr = addr;
+    navigator.clipboard.writeText(addr).then(function(){
+      el.textContent = 'Copied ✓';
+      el.classList.add('copied');
+      setTimeout(function(){
+        el.textContent = addr;
+        el.classList.remove('copied');
+      }, 1200);
+    });
+  });
+});
+</script>
+</body>
+</html>
