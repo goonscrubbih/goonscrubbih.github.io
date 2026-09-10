@@ -472,6 +472,7 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
     return anyPoints;
   }
 
+  var noneFinal = false;
   function renderStandings(teams, livePts){
     var body = document.getElementById("stand-body");
     if (!body) return;
@@ -480,17 +481,23 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
       t.now = Number(livePts[k]) || 0;
       return t;
     });
-    // Before any week is final every record is 0-0 and PF is 0; fall back to
-    // this week's live points so the table still ranks something real.
-    rows.sort(function(x, y){
-      if (y.wins !== x.wins) return y.wins - x.wins;
-      if (y.pf !== x.pf) return y.pf - x.pf;
-      return y.now - x.now;
-    });
+    // Until a week goes final every record is 0-0 and PF is 0. Ranking on this
+    // week's live points would crown whoever happened to play first (a
+    // Wednesday opener can put two teams "1st" and ten at zero), so before any
+    // game is final the table is unranked and ordered by name; the NOW column
+    // still shows the live points.
+    noneFinal = rows.every(function(t){ return !t.wins && !t.losses && !t.ties && !t.pf; });
+    rows.sort(noneFinal
+      ? function(x, y){ return x.team.localeCompare(y.team); }
+      : function(x, y){
+          if (y.wins !== x.wins) return y.wins - x.wins;
+          if (y.pf !== x.pf) return y.pf - x.pf;
+          return y.now - x.now;
+        });
     body.textContent = "";
     rows.forEach(function(t, i){
       var tr = el("tr", t.isMJ ? "mj" : null);
-      tr.appendChild(el("td", "rank", String(i + 1)));
+      tr.appendChild(el("td", "rank", noneFinal ? "\u2013" : String(i + 1)));
       var td = el("td");
       td.appendChild(el("div", "team", t.team));
       td.appendChild(el("div", "mgrc", t.manager));
@@ -510,7 +517,7 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
     var n = document.getElementById("stand-note");
     var time = new Date().toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
     if (s) s.textContent = "Week " + week + " · updated " + time;
-    if (n) n.textContent = "Live · Week " + week;
+    if (n) n.textContent = noneFinal ? ("Week " + week + " in progress · no games final") : ("Live · Week " + week);
     setPill(true, anyPoints ? ("Week " + week + " live") : ("Week " + week));
   }
 
