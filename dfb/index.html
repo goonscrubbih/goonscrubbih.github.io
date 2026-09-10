@@ -186,6 +186,44 @@ h1 .em{color:var(--a)}
 .err{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);
   padding:16px;border:1px dashed var(--rule);border-radius:8px}
 
+/* ---------- the wire ---------- */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 14px}
+.tab{font-family:Oswald,sans-serif;font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);background:var(--sunk);border:1px solid var(--rule);border-radius:100px;
+  padding:7px 15px;cursor:pointer;transition:color .15s,border-color .15s,background .15s;
+  display:inline-flex;align-items:center;gap:7px}
+.tab:hover{color:var(--ink);border-color:var(--rule-hard)}
+.tab.on{color:var(--ground);background:var(--ink);border-color:var(--ink)}
+.tab .cnt{font-family:"JetBrains Mono",monospace;font-size:10px;opacity:.72;font-variant-numeric:tabular-nums}
+.pane{display:none}
+.pane.on{display:block}
+.feed{display:grid;gap:2px}
+.row{display:flex;gap:13px;align-items:flex-start;padding:13px 15px;background:var(--surface);
+  border:1px solid var(--rule);border-radius:6px;text-decoration:none;transition:border-color .15s,transform .15s}
+a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
+.row .bar{width:3px;align-self:stretch;border-radius:2px;background:var(--rule-hard);flex:none;margin:1px 0}
+.row.sev-out .bar,.row.sev-ir .bar{background:var(--hot)}
+.row.sev-doubtful .bar{background:#E8763D}
+.row.sev-questionable .bar{background:var(--a)}
+.row.add .bar{background:var(--win)}
+.row.drop .bar{background:var(--hot)}
+.row .main{flex:1;min-width:0}
+.row .ttl{font-family:Oswald,sans-serif;font-size:15.5px;font-weight:500;color:var(--ink);
+  line-height:1.28;letter-spacing:.01em}
+.row .sub{font-size:13.5px;line-height:1.5;color:var(--body);margin-top:4px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.row .met{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 12px}
+.row .rt{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--muted);flex:none;
+  white-space:nowrap;padding-top:2px}
+.chip{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.11em;
+  text-transform:uppercase;padding:2px 7px;border-radius:3px;border:1px solid var(--rule-hard);color:var(--muted)}
+.chip.hot{color:var(--hot);border-color:color-mix(in oklab,var(--hot) 52%,var(--rule))}
+.chip.amb{color:var(--a);border-color:color-mix(in oklab,var(--a) 52%,var(--rule))}
+.chip.win{color:var(--win);border-color:color-mix(in oklab,var(--win) 52%,var(--rule))}
+.empty{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);
+  padding:22px 16px;border:1px dashed var(--rule);border-radius:6px;text-align:center}
+
 /* ---------- entrance ---------- */
 .rise{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
 .rise.in{opacity:1;transform:none}
@@ -281,6 +319,30 @@ h1 .em{color:var(--a)}
     </a>
 
   </div>
+</section>
+
+<!-- ============ THE WIRE ============ -->
+<section class="rise">
+  <div class="shead">
+    <h2>The Wire</h2>
+    <span class="pill" id="wire-pill"><span class="dot"></span><span id="wire-txt">Connecting</span></span>
+  </div>
+
+  <div class="tabs" id="wire-tabs">
+    <button class="tab on" data-pane="inj">Injuries <span class="cnt" id="c-inj"></span></button>
+    <button class="tab" data-pane="news">Headlines <span class="cnt" id="c-news"></span></button>
+    <button class="tab" data-pane="wav">Waivers <span class="cnt" id="c-wav"></span></button>
+    <button class="tab" data-pane="lg">League <span class="cnt" id="c-lg"></span></button>
+  </div>
+
+  <div class="pane on" id="pane-inj">
+    <div class="feed" id="feed-inj">
+      <div class="row"><div class="bar"></div><div class="main"><div class="ttl skel">Loading injury report</div><div class="sub skel">status</div></div></div>
+    </div>
+  </div>
+  <div class="pane" id="pane-news"><div class="feed" id="feed-news"></div></div>
+  <div class="pane" id="pane-wav"><div class="feed" id="feed-wav"></div></div>
+  <div class="pane" id="pane-lg"><div class="feed" id="feed-lg"></div></div>
 </section>
 
 <!-- ============ STANDINGS ============ -->
@@ -460,6 +522,276 @@ h1 .em{color:var(--a)}
     if (wrap) { wrap.textContent = ""; wrap.appendChild(el("div", "err", "Standings unavailable right now.")); }
   }
 
+
+  // ---------- the wire ----------
+  var ESPN_NEWS = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?limit=12";
+  var ROTOWIRE  = "https://www.rotowire.com/rss/news.php?sport=NFL";
+  var GQL       = "https://sleeper.app/graphql";
+  var SEV = { "Out":0, "IR":1, "Doubtful":2, "NA":3, "PUP":4, "Sus":5, "Questionable":6 };
+
+  function ago(ms){
+    if (!ms) return "";
+    var s = Math.floor((Date.now() - ms) / 1000);
+    if (s < 60) return "now";
+    if (s < 3600) return Math.floor(s/60) + "m";
+    if (s < 86400) return Math.floor(s/3600) + "h";
+    return Math.floor(s/86400) + "d";
+  }
+  function abbrev(n){
+    n = Number(n) || 0;
+    if (n >= 1e6) return (n/1e6).toFixed(1).replace(/\.0$/,"") + "M";
+    if (n >= 1e3) return (n/1e3).toFixed(1).replace(/\.0$/,"") + "K";
+    return String(n);
+  }
+  // The per-player endpoint has no full_name — build it from first+last, or code renders "undefined".
+  // Feeds arrive with wire boilerplate: RotoWire appends a "Visit RotoWire.com"
+  // tail and pads with newlines; ESPN descriptions open with a dateline dash.
+  function clean(s){
+    return String(s == null ? "" : s)
+      .replace(/\s+/g, " ")
+      .replace(/\s*Visit RotoWire\.com.*$/i, "")
+      .replace(/^[\s\u2014\u2013-]+/, "")
+      .trim();
+  }
+  function pname(p){
+    if (!p) return null;
+    return ((p.first_name || "") + " " + (p.last_name || "")).trim() || null;
+  }
+  // Team defenses use the team abbreviation as the player_id and do NOT resolve via get_player.
+  function isTeamId(id){ return !/^\d+$/.test(String(id)); }
+  function labelFor(id, map){
+    if (isTeamId(id)) return { name: String(id) + " D/ST", meta: "DEF" };
+    var p = map[id];
+    if (!p) return { name: "Player " + id, meta: "" };
+    return { name: pname(p) || ("Player " + id),
+             meta: [p.position, p.team].filter(Boolean).join(" · ") };
+  }
+
+  function gql(query){
+    return fetch(GQL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: query })
+    }).then(function(r){ return r.json(); });
+  }
+
+  // Resolve numeric player ids -> {first_name,last_name,position,team,injury_status,...}
+  function resolvePlayers(ids){
+    var nums = ids.filter(function(i){ return !isTeamId(i); });
+    var uniq = [];
+    var seen = {};
+    nums.forEach(function(i){ if (!seen[i]) { seen[i] = 1; uniq.push(i); } });
+    var chunks = [];
+    for (var i = 0; i < uniq.length; i += 100) chunks.push(uniq.slice(i, i + 100));
+    return Promise.all(chunks.map(function(c){
+      var q = "{" + c.map(function(id, i){
+        return "p" + i + ':get_player(sport:"nfl",player_id:"' + id + '")' +
+               "{first_name last_name position team injury_status injury_body_part}";
+      }).join(" ") + "}";
+      return gql(q).then(function(j){
+        var out = {};
+        if (j && j.data) Object.keys(j.data).forEach(function(k){
+          var idx = Number(k.slice(1));
+          if (j.data[k]) out[c[idx]] = j.data[k];
+        });
+        return out;
+      }).catch(function(){ return {}; });
+    })).then(function(parts){
+      var map = {};
+      parts.forEach(function(p){ Object.keys(p).forEach(function(k){ map[k] = p[k]; }); });
+      return map;
+    });
+  }
+
+  function row(cls, title, sub, meta, rt, href){
+    var n = el(href ? "a" : "div", "row" + (cls ? " " + cls : ""));
+    if (href) { n.href = href; n.target = "_blank"; n.rel = "noopener noreferrer"; }
+    n.appendChild(el("div", "bar"));
+    var m = el("div", "main");
+    m.appendChild(el("div", "ttl", title));
+    if (sub) m.appendChild(el("div", "sub", sub));
+    if (meta && meta.length){
+      var mt = el("div", "met");
+      meta.forEach(function(x){ if (x) mt.appendChild(el("span", null, x)); });
+      m.appendChild(mt);
+    }
+    n.appendChild(m);
+    if (rt) n.appendChild(el("div", "rt", rt));
+    return n;
+  }
+  function fill(id, nodes, emptyMsg){
+    var f = document.getElementById(id);
+    if (!f) return;
+    f.textContent = "";
+    if (!nodes.length) { f.appendChild(el("div", "empty", emptyMsg)); return; }
+    nodes.forEach(function(n){ f.appendChild(n); });
+  }
+  function count(id, n){
+    var c = document.getElementById(id);
+    if (c) c.textContent = n ? String(n) : "";
+  }
+
+  function renderInjuries(rosters, teams, map){
+    var out = [];
+    rosters.forEach(function(r){
+      (r.players || []).forEach(function(pid){
+        var p = map[pid];
+        if (!p || !p.injury_status) return;
+        var t = teams[r.roster_id] || {};
+        var starting = (r.starters || []).indexOf(pid) >= 0;
+        out.push({
+          sev: SEV[p.injury_status] === undefined ? 9 : SEV[p.injury_status],
+          status: p.injury_status,
+          name: pname(p) || ("Player " + pid),
+          pos: [p.position, p.team].filter(Boolean).join(" · "),
+          part: p.injury_body_part || "",
+          owner: t.team || "—",
+          mj: !!t.isMJ,
+          starting: starting
+        });
+      });
+    });
+    out.sort(function(a, b){ return a.sev - b.sev || a.name.localeCompare(b.name); });
+    count("c-inj", out.length);
+    fill("feed-inj", out.map(function(o){
+      var meta = [o.pos, "Rostered by " + o.owner];
+      if (o.starting) meta.push("In starting lineup");
+      return row("sev-" + o.status.toLowerCase(),
+        o.name,
+        o.status + (o.part ? " · " + o.part : ""),
+        meta, null, null);
+    }), "No injuries on any league roster.");
+  }
+
+  function renderNews(espn, roto){
+    var items = [];
+    (espn || []).forEach(function(a){
+      items.push({
+        t: Date.parse(a.published) || 0,
+        src: "ESPN",
+        title: clean(a.headline),
+        sub: clean(a.description),
+        href: (a.links && a.links.web && a.links.web.href) || ""
+      });
+    });
+    (roto || []).forEach(function(a){
+      items.push({ t: a.t, src: "RotoWire", title: a.title, sub: a.sub, href: a.href });
+    });
+    items = items.filter(function(i){ return i.title; });
+    items.sort(function(a, b){ return b.t - a.t; });
+    count("c-news", items.length);
+    fill("feed-news", items.map(function(i){
+      return row(null, i.title, i.sub, [i.src], ago(i.t), i.href || null);
+    }), "No headlines available right now.");
+  }
+
+  function renderWaivers(adds, drops, map){
+    var nodes = [];
+    (adds || []).forEach(function(a){
+      var l = labelFor(a.player_id, map);
+      nodes.push(row("add", l.name, null, [l.meta, "Added"], "+" + abbrev(a.count), null));
+    });
+    (drops || []).forEach(function(d){
+      var l = labelFor(d.player_id, map);
+      nodes.push(row("drop", l.name, null, [l.meta, "Dropped"], "-" + abbrev(d.count), null));
+    });
+    count("c-wav", nodes.length);
+    fill("feed-wav", nodes, "No waiver trends available.");
+  }
+
+  function renderLeagueWire(txns, teams, map){
+    var nodes = [];
+    (txns || []).slice().sort(function(a, b){
+      return (b.status_updated || b.created || 0) - (a.status_updated || a.created || 0);
+    }).forEach(function(t){
+      var rid = (t.roster_ids && t.roster_ids[0]) || null;
+      var who = (rid && teams[rid] && teams[rid].team) || "Someone";
+      var adds = Object.keys(t.adds || {}).map(function(id){ return labelFor(id, map).name; });
+      var drops = Object.keys(t.drops || {}).map(function(id){ return labelFor(id, map).name; });
+      var parts = [];
+      if (adds.length) parts.push("Added " + adds.join(", "));
+      if (drops.length) parts.push("dropped " + drops.join(", "));
+      if (!parts.length) return;
+      var kind = t.type === "trade" ? "Trade" : (t.type === "waiver" ? "Waiver" : "Free agent");
+      var meta = [kind];
+      if (t.status && t.status !== "complete") meta.push(t.status);
+      nodes.push(row(adds.length ? "add" : "drop", who, parts.join(", ") + ".", meta,
+        ago(t.status_updated || t.created), null));
+    });
+    count("c-lg", nodes.length);
+    fill("feed-lg", nodes, "No roster moves yet this week.");
+  }
+
+  function fetchRotowire(){
+    return fetch(ROTOWIRE).then(function(r){ return r.text(); }).then(function(x){
+      var d = new DOMParser().parseFromString(x, "text/xml");
+      return Array.prototype.map.call(d.querySelectorAll("item"), function(it){
+        function txt(sel){ var n = it.querySelector(sel); return n ? n.textContent.trim() : ""; }
+        return { t: Date.parse(txt("pubDate")) || 0, title: clean(txt("title")),
+                 sub: clean(txt("description")), href: txt("link") };
+      });
+    }).catch(function(){ return []; });
+  }
+
+  function loadWire(rosters, teams, week){
+    var pill = document.getElementById("wire-pill");
+    var ptxt = document.getElementById("wire-txt");
+    function setw(on, s){ if (ptxt) ptxt.textContent = s; if (pill) pill.className = on ? "pill on" : "pill"; }
+
+    var rosterIds = [];
+    (rosters || []).forEach(function(r){ (r.players || []).forEach(function(p){ rosterIds.push(p); }); });
+
+    return Promise.all([
+      fetch(ESPN_NEWS).then(function(r){ return r.json(); }).catch(function(){ return null; }),
+      fetchRotowire(),
+      fetch(API + "players/nfl/trending/add?lookback_hours=24&limit=12").then(function(r){ return r.json(); }).catch(function(){ return []; }),
+      fetch(API + "players/nfl/trending/drop?lookback_hours=24&limit=12").then(function(r){ return r.json(); }).catch(function(){ return []; }),
+      fetch(API + "league/" + LEAGUE + "/transactions/" + week).then(function(r){ return r.json(); }).catch(function(){ return []; })
+    ]).then(function(res){
+      var espn = res[0] && res[0].articles ? res[0].articles : [];
+      var roto = res[1] || [], adds = res[2] || [], drops = res[3] || [], txns = res[4] || [];
+
+      var need = rosterIds.slice();
+      adds.forEach(function(a){ need.push(a.player_id); });
+      drops.forEach(function(d){ need.push(d.player_id); });
+      Object.keys(txns).forEach(function(k){
+        var t = txns[k];
+        if (t && t.adds) Object.keys(t.adds).forEach(function(id){ need.push(id); });
+        if (t && t.drops) Object.keys(t.drops).forEach(function(id){ need.push(id); });
+      });
+
+      return resolvePlayers(need).then(function(map){
+        renderInjuries(rosters, teams, map);
+        renderNews(espn, roto);
+        renderWaivers(adds, drops, map);
+        renderLeagueWire(txns, teams, map);
+        var srcs = [];
+        if (espn.length) srcs.push("ESPN");
+        if (roto.length) srcs.push("RotoWire");
+        srcs.push("Sleeper");
+        setw(true, srcs.join(" · "));
+      });
+    }).catch(function(){
+      setw(false, "Offline");
+      ["feed-inj","feed-news","feed-wav","feed-lg"].forEach(function(id){
+        fill(id, [], "The wire is unavailable right now.");
+      });
+    });
+  }
+
+  function initTabs(){
+    var tabs = document.querySelectorAll("#wire-tabs .tab");
+    Array.prototype.forEach.call(tabs, function(t){
+      t.addEventListener("click", function(){
+        Array.prototype.forEach.call(tabs, function(x){ x.className = "tab"; });
+        t.className = "tab on";
+        Array.prototype.forEach.call(document.querySelectorAll(".pane"), function(p){ p.className = "pane"; });
+        var pane = document.getElementById("pane-" + t.getAttribute("data-pane"));
+        if (pane) pane.className = "pane on";
+      });
+    });
+  }
+
   function load(){
     return getJSON("state/nfl").then(function(st){
       var week = Math.max(1, Number(st.week) || 1);
@@ -475,6 +807,7 @@ h1 .em{color:var(--a)}
         var any = renderBoard(matchups, teams);
         renderStandings(teams, livePts);
         stamp(week, any);
+        loadWire(res[0], teams, week);
       });
     }).catch(function(e){
       fail(String(e.message || e));
@@ -489,8 +822,8 @@ h1 .em{color:var(--a)}
     });
   }
 
-  if (document.readyState !== "loading") { reveal(); load(); }
-  else document.addEventListener("DOMContentLoaded", function(){ reveal(); load(); });
+  if (document.readyState !== "loading") { initTabs(); reveal(); load(); }
+  else document.addEventListener("DOMContentLoaded", function(){ initTabs(); reveal(); load(); });
 
   setInterval(function(){ if (!document.hidden) load(); }, REFRESH);
   document.addEventListener("visibilitychange", function(){ if (!document.hidden) load(); });
