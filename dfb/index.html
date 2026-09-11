@@ -238,6 +238,9 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
    blurb used to stretch the frame and "cover" cropped the card's left edge. */
 .lead .art{background:#0C0F14;display:flex;align-items:center}
 .lead .art img{width:100%;height:auto;object-fit:contain}
+/* section headers: let the note drop under the heading on narrow screens instead
+   of pushing the page 12px wider than a 375px phone. */
+.shead{flex-wrap:wrap;row-gap:6px}
 </style>
 </head>
 <body>
