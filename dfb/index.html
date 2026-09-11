@@ -233,6 +233,11 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
   .rise{opacity:1;transform:none}
 }
 @media (max-width:600px){ .page{padding:0 17px 72px} .shead{margin:44px 0 14px} }
+
+/* lead art: show the whole OG card. The caption sets the card height, so a long
+   blurb used to stretch the frame and "cover" cropped the card's left edge. */
+.lead .art{background:#0C0F14;display:flex;align-items:center}
+.lead .art img{width:100%;height:auto;object-fit:contain}
 </style>
 </head>
 <body>
@@ -268,14 +273,14 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
     <h2>Lead Story</h2>
     <span class="note">Updated Sept 10</span>
   </div>
-  <a class="lead" href="opening-day-recap.html">
-    <div class="art"><img src="img/opening-day-recap.png" alt="" loading="eager" width="1200" height="630"></div>
+  <a class="lead" href="wk1-thursday-night.html">
+    <div class="art"><img src="img/wk1-thursday-night.png" alt="" loading="eager" width="1200" height="630"></div>
     <div class="cap">
-      <div class="tag">Opening Day Recap</div>
-      <h3>What Your League Chat Got Right (And Wrong)</h3>
-      <p>The opener was a Super Bowl rematch and nobody said so. Plus the A.J. Brown panic that turned out to be a high-ankle sprain, and the Brock Bowers injury nobody in chat had noticed yet.</p>
-      <div class="date">Sept 10, 2026 &middot; 1 of 16 Week 1 games played</div>
-      <span class="go">Read the recap <span class="arw">&rarr;</span></span>
+      <div class="tag">Thursday Night</div>
+      <h3>Same Bet, Other Side Of The World</h3>
+      <p>The NFL's first regular-season game in Australia, and the team named for Puka Nacua stacks the Rams the way JohnnyBoVonny stacked the Patriots on Wednesday. Plus the night's only head-to-head, and the champions' first points &mdash; from a kicker.</p>
+      <div class="date">Sept 10, 2026 &middot; game 2 of 16 in Week 1</div>
+      <span class="go">Read the preview <span class="arw">&rarr;</span></span>
     </div>
   </a>
 </section>
@@ -284,9 +289,19 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
 <section class="rise">
   <div class="shead">
     <h2>The Desk</h2>
-    <span class="note">3 more pieces</span>
+    <span class="note">4 more pieces</span>
   </div>
   <div class="grid">
+
+    <a class="card" href="opening-day-recap.html">
+      <div class="art"><img src="img/opening-day-recap.png" alt="" loading="lazy" width="1200" height="630"></div>
+      <div class="txt">
+        <div class="tag">Opening Day Recap</div>
+        <h3>What Your League Chat Got Right (And Wrong)</h3>
+        <p>The opener was a Super Bowl rematch and nobody said so. Plus the A.J. Brown panic that turned out to be a high-ankle sprain, and the Bowers injury chat missed.</p>
+        <div class="date">Sept 10, 2026</div>
+      </div>
+    </a>
 
     <a class="card" href="wk1-opening-night.html">
       <div class="art"><img src="img/wk1-opening-night.png" alt="" loading="lazy" width="1200" height="630"></div>
