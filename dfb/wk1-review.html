@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>The Fairest Week This League Will Ever Have &mdash; Dem Fantasy Boyz</title>
+<meta name="description" content="Week 1 in review: the six best scores won, the six worst lost, in exact order">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Fairest Week This League Will Ever Have">
+<meta property="og:description" content="Week 1 in review: the six best scores won, the six worst lost, in exact order">
+<meta property="og:url" content="https://goonscrubbih.github.io/dfb/wk1-review.html">
+<meta property="og:image" content="https://goonscrubbih.github.io/dfb/img/wk1-review.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Fairest Week This League Will Ever Have">
+<meta name="twitter:description" content="Week 1 in review: the six best scores won, the six worst lost, in exact order">
+<meta name="twitter:image" content="https://goonscrubbih.github.io/dfb/img/wk1-review.png">
+<meta name="theme-color" content="#0C0F14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ground:#0C0F14; --surface:#141922; --sunk:#1A2029; --raise:#212936;
+  --ink:#F2F4F7; --body:#B7C0CB; --muted:#7A8595; --rule:#232B36; --rule-hard:#38424F;
+  --a:#E8A33D; --b:#5FA5F0; --a-dim:#4A3617; --b-dim:#17304C; --hot:#F0785A;
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --ground:#F6F5F3; --surface:#FFFFFF; --sunk:#ECEBE8; --raise:#FFFFFF;
+    --ink:#13171D; --body:#333B46; --muted:#69717D; --rule:#E1E0DC; --rule-hard:#B7B6B1;
+    --a:#A66A08; --b:#1B5FA8; --a-dim:#F5E7CE; --b-dim:#DCE8F7; --hot:#B34328;
+  }
+}
+:root[data-theme="light"]{
+  --ground:#F6F5F3; --surface:#FFFFFF; --sunk:#ECEBE8; --raise:#FFFFFF;
+  --ink:#13171D; --body:#333B46; --muted:#69717D; --rule:#E1E0DC; --rule-hard:#B7B6B1;
+  --a:#A66A08; --b:#1B5FA8; --a-dim:#F5E7CE; --b-dim:#DCE8F7; --hot:#B34328;
+}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--ground);color:var(--body);font-family:Spectral,Georgia,serif;
+  font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+.page{max-width:1000px;margin:0 auto;padding:0 24px 96px}
+h1,h2,h3,.slot,.gr,.st b,.tno{font-family:Oswald,"Arial Narrow",Arial,sans-serif}
+.mono,.kicker,.byline,.cap,.foot,.st span,.tmeta{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  font-variant-numeric:tabular-nums}
+.rail{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between;
+  margin-top:26px;padding:11px 0;border-top:3px solid var(--hot);border-bottom:1px solid var(--rule)}
+.rail b{font-family:Oswald,sans-serif;font-weight:600;font-size:14px;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--ink)}
+.rail span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  font-family:"JetBrains Mono",monospace}
+.rail a{color:var(--muted);text-decoration:none;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;font-family:"JetBrains Mono",monospace}
+.rail a:hover{color:var(--ink)}
+.rail .r{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--hot);margin:0 0 14px}
+.hero{padding:46px 0 0}
+h1{font-family:Oswald,sans-serif;font-weight:700;text-transform:uppercase;color:var(--ink);
+  margin:0 0 18px;font-size:clamp(36px,6.2vw,68px);line-height:.96;text-wrap:balance;max-width:16ch}
+.deck{font-size:clamp(18px,2vw,22px);line-height:1.5;max-width:56ch;margin:0;color:var(--body)}
+.deck em{font-style:italic;font-weight:600;color:var(--ink)}
+.byline{margin-top:24px;padding-top:13px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;
+  gap:7px 20px;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.byline b{color:var(--ink);font-weight:500}
+.sec{margin-top:58px}
+h2{font-family:Oswald,sans-serif;font-weight:600;text-transform:uppercase;font-size:clamp(21px,2.8vw,29px);
+  color:var(--ink);line-height:1.12;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid var(--rule-hard)}
+.col{max-width:64ch}
+p{margin:0 0 1.05em} strong{color:var(--ink);font-weight:600}
+.cap{font-size:11px;line-height:1.6;color:var(--muted);margin-top:14px;max-width:74ch}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin:30px 0}
+.st{background:var(--surface);padding:16px 18px}
+.st b{display:block;font-size:28px;font-weight:600;color:var(--ink);line-height:1}
+.st span{display:block;margin-top:6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);line-height:1.5}
+.st.hot b{color:var(--hot)} .st.a b{color:var(--a)} .st.b b{color:var(--b)}
+.xf{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:6px}
+.x{padding:19px 20px;background:var(--surface);border:1px solid var(--rule);border-radius:4px}
+.x h3{font-family:Oswald,sans-serif;font-size:15px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.05em;margin:0 0 4px;line-height:1.2}
+.x.a h3{color:var(--a)} .x.b h3{color:var(--b)} .x.n h3{color:var(--hot)}
+.x .who{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.x p{font-size:15px;margin:0}
+table{width:100%;border-collapse:collapse;font-size:14px;font-family:Oswald,sans-serif}
+th{text-align:left;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;padding:0 10px 8px 0;border-bottom:1.5px solid var(--rule-hard)}
+td{padding:10px 10px 10px 0;border-bottom:1px solid var(--rule);color:var(--body)}
+th.n,td.n{text-align:right;padding-right:0;font-family:"JetBrains Mono",monospace;
+  font-variant-numeric:tabular-nums}
+td.tm{color:var(--ink);font-weight:500}
+tr.me td{background:var(--sunk)}
+.pull{margin:38px 0;padding:26px 0;border-top:1px solid var(--hot);border-bottom:1px solid var(--hot)}
+.pull p{font-family:Oswald,sans-serif;font-weight:400;font-size:clamp(21px,2.6vw,27px);
+  line-height:1.24;color:var(--ink);margin:0;max-width:24ch;text-transform:uppercase}
+.pull cite{display:block;margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:10.5px;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-style:normal}
+.method{margin-top:52px;padding:26px;background:var(--surface);border:1px solid var(--rule);border-radius:4px}
+.method h2{border:0;padding:0;margin-bottom:10px;font-size:16px;letter-spacing:.1em}
+.method p,.method li{font-size:14.5px;line-height:1.62;color:var(--muted)}
+.foot{margin-top:32px;padding-top:15px;border-top:1px solid var(--rule);font-size:10.5px;
+  letter-spacing:.09em;color:var(--muted)}
+@media (max-width:760px){ .page{padding:0 17px 70px} }
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="rail">
+  <b>Dem Fantasy Boyz</b>
+  <div class="r"><a href="index.html">&larr; News Desk</a><span>Week 1 in review: the six best scores won, the six worst lost, in exact order &middot; 2026</span></div>
+</div>
+
+<div class="hero">
+  <p class="kicker">Week 1 in review</p>
+  <h1>The Fairest Week This League Will Ever Have</h1>
+  <p class="deck">Rank all twelve teams by what they scored. The top six are 1&ndash;0. The bottom six are 0&ndash;1. <em>In exact order.</em> Nobody was robbed, which in this league's record book is the strange result.</p>
+  <div class="byline">
+    <span>Sept 17, 2026</span>
+    <span>Week 1 final &middot; all 16 games played</span>
+  </div>
+</div>
+
+<div class="col">
+<p>This desk has spent two pieces on the gap between scoring well and winning &mdash; the manager with the best all-play record in league history and a career .500, the one with the best record on below-average scoring. Week 1 produced the opposite of all that. <strong>Every team that outscored the field won. Every team that didn't, lost.</strong> Twelve teams, zero injustices.</p>
+
+<p>It still managed a four-point heartbreak, a 94-point floor and a defense that scored nothing at all.</p>
+</div>
+
+<div class="strip">
+  <div class="st hot"><b>158.96</b><span>DeionSandalz, high score</span></div>
+  <div class="st"><b>94.16</b><span>Rage, low score</span></div>
+  <div class="st b"><b>4.38</b><span>closest game &mdash; the K&amp;Y matchup</span></div>
+  <div class="st g"><b>0</b><span>teams beaten by the schedule</span></div>
+</div>
+
+<section class="sec">
+  <h2>The scoreboard</h2>
+  <table>
+    <thead><tr><th>Result</th><th class="n">Margin</th><th class="n">All-play</th></tr></thead>
+    <tbody>
+      <tr><td class="tm">DeionSandalz 158.96 &mdash; 126.46 Nacua Matata</td><td class="n">32.50</td><td class="n">11&ndash;0</td></tr>
+      <tr><td class="tm">The BEAGLES 158.56 &mdash; 127.90 Peeka Egbuka</td><td class="n">30.66</td><td class="n">10&ndash;1</td></tr>
+      <tr><td class="tm">Team Traffikhan 156.60 &mdash; 105.52 Sex Panthers</td><td class="n">51.08</td><td class="n">9&ndash;2</td></tr>
+      <tr><td class="tm">I Choose You Pukachu! 148.36 &mdash; 106.92 JohnnyBoVonny</td><td class="n">41.44</td><td class="n">8&ndash;3</td></tr>
+      <tr class="me"><td class="tm">Tampa Tropics 144.90 &mdash; 94.16 Rage</td><td class="n">50.74</td><td class="n">7&ndash;4</td></tr>
+      <tr><td class="tm">Benjamin's Buttons 136.62 &mdash; 132.24 The Taylords</td><td class="n">4.38</td><td class="n">6&ndash;5</td></tr>
+    </tbody>
+  </table>
+  <p class="cap">All-play is the winner's record against the entire field that week. Every winner's all-play is above .500 and every loser's is below it &mdash; the six games sorted themselves perfectly.</p>
+</section>
+
+<section class="sec">
+  <h2>The Matchup of the Week was the closest game on the board</h2>
+  <div class="col">
+  <p>Benjamin's Buttons beat The Taylords by <strong>4.38</strong>. The next-closest margin was 30.66, so the game this desk billed as the week's best was closer than the other five by a factor of seven.</p>
+
+  <p>Buttons won it with a quarterback who scored <strong>&minus;0.38</strong>. Kyler Murray was the second-worst starter in the league on Sunday and it did not matter, because Jahmyr Gibbs went for 33.60, D'Andre Swift for 32.40 and Isaiah Likely &mdash; a tight end nobody previewed &mdash; for 27.80.</p>
+
+  <p>The Taylords lost it in two lineup slots. <strong>The Los Angeles defense scored 0.00</strong> and Jaylen Waddle scored 1.20. Kenneth Walker's 34.10 and Zay Flowers's 26.00 were wasted on the margin between those two numbers and anything at all.</p>
+
+  <p>One more thing the preview will take credit for: <strong>Parker Washington scored 19.30</strong>. He was the most disputed player in the matchup &mdash; our own board had him at WR41 and near replacement level, the industry had him ten to fifteen spots higher, and the preview said plainly that if the higher read was right the projection was light by about thirteen points. It was.</p>
+  </div>
+</section>
+
+<div class="pull">
+  <p>Buttons started a quarterback who scored minus-0.38 and won anyway</p>
+  <cite>Benjamin's Buttons 136.62, The Taylords 132.24</cite>
+</div>
+
+<section class="sec">
+  <h2>Rage found the floor</h2>
+  <div class="col">
+  <p>This desk is written from Rage's side of the league, so: <strong>Rage scored 94.16, last of twelve, and went 0&ndash;11 against the field.</strong> Not merely beaten &mdash; beaten by everybody.</p>
+
+  <p>Ja'Marr Chase, the most valuable starter anyone rostered according to our own draft review, scored <strong>3.20</strong>. MarShawn Lloyd, the pick this desk called the best of the entire draft, scored 3.70. And the lineup card did the rest: <strong>Cade Otton started at tight end for 5.60 while Dalton Kincaid sat on the bench for 18.00</strong>, and Devaughn Vele's 19.90 sat next to him.</p>
+
+  <p>That is 32 points of bench sitting behind two starters, in a game lost by 50.74 &mdash; so it would not have changed the result. It does change the standings' points-for column, which is the tiebreaker this league settles playoff seeds with.</p>
+
+  <p><strong>Tampa Tropics is now 5&ndash;0 all-time against Rage.</strong> The margin history: 32, 58, 17, 1.5, and now 50.7. The trend that made last week's preview interesting has un-trended.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>The stack this desk covered twice scored two points</h2>
+  <div class="col">
+  <p>I Choose You Pukachu! led two articles last week for pairing Puka Nacua with the Rams defense against JohnnyBoVonny's identical Patriots bet. The final accounting: <strong>the Los Angeles defense scored 1.00 and Brandon Aubrey scored 1.00</strong>. Two points from two lineup slots.</p>
+
+  <p>Pukachu won by 41.44 anyway &mdash; Lamar Jackson 24.96, Ashton Jeanty 32.70, David Montgomery 28.90, Trey McBride 24.50. The A+ draft grade cashed in the places nobody wrote about, which is roughly what the draft review said would happen.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Best and worst</h2>
+  <div class="xf">
+    <div class="x a">
+      <h3>The week's five best</h3>
+      <p class="who">starters only</p>
+      <p>Caleb Williams 37.26 (Nacua Matata) &middot; Josh Allen 35.66 (The BEAGLES) &middot; Derrick Henry 35.30 (Peeka Egbuka) &middot; Kenneth Walker 34.10 (The Taylords) &middot; Jahmyr Gibbs 33.60 (Benjamin's Buttons).</p>
+    </div>
+    <div class="x n">
+      <h3>The week's five worst</h3>
+      <p class="who">starters only</p>
+      <p>Houston's defense &minus;4.00 (Peeka Egbuka) &middot; Kyler Murray &minus;0.38 (Benjamin's Buttons) &middot; Colston Loveland 0.00 (Peeka Egbuka) &middot; Jordan Addison 0.00 (Team Traffikhan) &middot; Kyle Pitts 0.00 (Tampa Tropics).</p>
+    </div>
+    <div class="x b">
+      <h3>Three of the top five lost</h3>
+      <p class="who">the cruel column</p>
+      <p>Caleb Williams put up the highest score in the league and Nacua Matata lost by 32.50. Derrick Henry's 35.30 lost by 30.66. The two best individual weeks in this league belonged to 0&ndash;1 teams.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Wednesday was a bloodbath for defenses</h2>
+  <div class="col">
+  <p>Thirteen transactions went through on waiver day and <strong>four of them were teams firing their defense</strong>: The Taylords dropped Los Angeles for Kansas City after the 0.00, Benjamin's Buttons swapped Minnesota for Tampa Bay, Tampa Tropics moved from Pittsburgh to San Francisco, and Team Traffikhan replaced Denver with Baltimore.</p>
+
+  <p>The Taylords also dropped Jared Goff for Jordan Love &mdash; then set their Week 2 lineup with Jayden Daniels at quarterback and Love on the bench, which suggests the move was about depth rather than the starter. Tampa Tropics dropped Rachaad White for Demond Claiborne, and Team Traffikhan cut Harrison Butker and Wan'Dale Robinson.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Standings after one week</h2>
+  <table>
+    <thead><tr><th>#</th><th>Team</th><th class="n">W&ndash;L</th><th class="n">Points for</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="tm">DeionSandalz</td><td class="n">1&ndash;0</td><td class="n">158.96</td></tr>
+      <tr><td class="n">2</td><td class="tm">The BEAGLES</td><td class="n">1&ndash;0</td><td class="n">158.56</td></tr>
+      <tr><td class="n">3</td><td class="tm">Team Traffikhan</td><td class="n">1&ndash;0</td><td class="n">156.60</td></tr>
+      <tr><td class="n">4</td><td class="tm">I Choose You Pukachu!</td><td class="n">1&ndash;0</td><td class="n">148.36</td></tr>
+      <tr><td class="n">5</td><td class="tm">Tampa Tropics</td><td class="n">1&ndash;0</td><td class="n">144.90</td></tr>
+      <tr><td class="n">6</td><td class="tm">Benjamin's Buttons</td><td class="n">1&ndash;0</td><td class="n">136.62</td></tr>
+      <tr><td class="n">7</td><td class="tm">The Taylords</td><td class="n">0&ndash;1</td><td class="n">132.24</td></tr>
+      <tr><td class="n">8</td><td class="tm">Peeka Egbuka</td><td class="n">0&ndash;1</td><td class="n">127.90</td></tr>
+      <tr><td class="n">9</td><td class="tm">Nacua Matata</td><td class="n">0&ndash;1</td><td class="n">126.46</td></tr>
+      <tr><td class="n">10</td><td class="tm">JohnnyBoVonny</td><td class="n">0&ndash;1</td><td class="n">106.92</td></tr>
+      <tr><td class="n">11</td><td class="tm">Sex Panthers</td><td class="n">0&ndash;1</td><td class="n">105.52</td></tr>
+      <tr class="me"><td class="n">12</td><td class="tm">Rage</td><td class="n">0&ndash;1</td><td class="n">94.16</td></tr>
+    </tbody>
+  </table>
+  <p class="cap">Ordered by record, then points for &mdash; which after one week is simply the scoring order.</p>
+</section>
+
+<div class="method">
+  <h2>How this was put together</h2>
+  <p>Final scores, lineups and player totals pulled from Sleeper after Week 1 closed. All-play is computed from the same weekly scores: each team's score compared against the other eleven, which is how "beaten by the schedule" is measured here rather than asserted.</p>
+  <p>Transactions are the league's own log for the Week 2 waiver period. This league runs rolling waiver priority, not FAAB, so there are no bid amounts to report.</p>
+</div>
+
+<p class="foot">Dem Fantasy Boyz &middot; Week 1 in review &middot; Sept 17, 2026</p>
+
+</div>
+</body>
+</html>
