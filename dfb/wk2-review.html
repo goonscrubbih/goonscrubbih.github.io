@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Five Teams Lost With the Win on the Bench &mdash; Dem Fantasy Boyz</title>
+<meta name="description" content="Week 2 in review: five of the six losing teams had a winning lineup on their own roster">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Five Teams Lost With the Win on the Bench">
+<meta property="og:description" content="Week 2 in review: five of the six losing teams had a winning lineup on their own roster">
+<meta property="og:url" content="https://goonscrubbih.github.io/dfb/wk2-review.html">
+<meta property="og:image" content="https://goonscrubbih.github.io/dfb/img/wk2-review.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Five Teams Lost With the Win on the Bench">
+<meta name="twitter:description" content="Week 2 in review: five of the six losing teams had a winning lineup on their own roster">
+<meta name="twitter:image" content="https://goonscrubbih.github.io/dfb/img/wk2-review.png">
+<meta name="theme-color" content="#0C0F14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ground:#0C0F14; --surface:#141922; --sunk:#1A2029; --raise:#212936;
+  --ink:#F2F4F7; --body:#B7C0CB; --muted:#7A8595; --rule:#232B36; --rule-hard:#38424F;
+  --a:#E8A33D; --b:#5FA5F0; --a-dim:#4A3617; --b-dim:#17304C; --hot:#F0785A;
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --ground:#F6F5F3; --surface:#FFFFFF; --sunk:#ECEBE8; --raise:#FFFFFF;
+    --ink:#13171D; --body:#333B46; --muted:#69717D; --rule:#E1E0DC; --rule-hard:#B7B6B1;
+    --a:#A66A08; --b:#1B5FA8; --a-dim:#F5E7CE; --b-dim:#DCE8F7; --hot:#B34328;
+  }
+}
+:root[data-theme="light"]{
+  --ground:#F6F5F3; --surface:#FFFFFF; --sunk:#ECEBE8; --raise:#FFFFFF;
+  --ink:#13171D; --body:#333B46; --muted:#69717D; --rule:#E1E0DC; --rule-hard:#B7B6B1;
+  --a:#A66A08; --b:#1B5FA8; --a-dim:#F5E7CE; --b-dim:#DCE8F7; --hot:#B34328;
+}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--ground);color:var(--body);font-family:Spectral,Georgia,serif;
+  font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+.page{max-width:1000px;margin:0 auto;padding:0 24px 96px}
+h1,h2,h3,.slot,.gr,.st b,.tno{font-family:Oswald,"Arial Narrow",Arial,sans-serif}
+.mono,.kicker,.byline,.cap,.foot,.st span,.tmeta{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  font-variant-numeric:tabular-nums}
+.rail{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between;
+  margin-top:26px;padding:11px 0;border-top:3px solid var(--hot);border-bottom:1px solid var(--rule)}
+.rail b{font-family:Oswald,sans-serif;font-weight:600;font-size:14px;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--ink)}
+.rail span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  font-family:"JetBrains Mono",monospace}
+.rail a{color:var(--muted);text-decoration:none;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;font-family:"JetBrains Mono",monospace}
+.rail a:hover{color:var(--ink)}
+.rail .r{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--hot);margin:0 0 14px}
+.hero{padding:46px 0 0}
+h1{font-family:Oswald,sans-serif;font-weight:700;text-transform:uppercase;color:var(--ink);
+  margin:0 0 18px;font-size:clamp(36px,6.2vw,68px);line-height:.96;text-wrap:balance;max-width:16ch}
+.deck{font-size:clamp(18px,2vw,22px);line-height:1.5;max-width:56ch;margin:0;color:var(--body)}
+.deck em{font-style:italic;font-weight:600;color:var(--ink)}
+.byline{margin-top:24px;padding-top:13px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;
+  gap:7px 20px;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.byline b{color:var(--ink);font-weight:500}
+.sec{margin-top:58px}
+h2{font-family:Oswald,sans-serif;font-weight:600;text-transform:uppercase;font-size:clamp(21px,2.8vw,29px);
+  color:var(--ink);line-height:1.12;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid var(--rule-hard)}
+.col{max-width:64ch}
+p{margin:0 0 1.05em} strong{color:var(--ink);font-weight:600}
+.cap{font-size:11px;line-height:1.6;color:var(--muted);margin-top:14px;max-width:74ch}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin:30px 0}
+.st{background:var(--surface);padding:16px 18px}
+.st b{display:block;font-size:28px;font-weight:600;color:var(--ink);line-height:1}
+.st span{display:block;margin-top:6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);line-height:1.5}
+.st.hot b{color:var(--hot)} .st.g b{color:#4FC98A} .st.a b{color:var(--a)} .st.b b{color:var(--b)}
+.xf{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:6px}
+.x{padding:19px 20px;background:var(--surface);border:1px solid var(--rule);border-radius:4px}
+.x h3{font-family:Oswald,sans-serif;font-size:15px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.05em;margin:0 0 4px;line-height:1.2}
+.x.a h3{color:var(--a)} .x.b h3{color:var(--b)} .x.n h3{color:var(--hot)}
+.x .who{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.x p{font-size:15px;margin:0}
+table{width:100%;border-collapse:collapse;font-size:14px;font-family:Oswald,sans-serif}
+th{text-align:left;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;padding:0 10px 8px 0;border-bottom:1.5px solid var(--rule-hard)}
+td{padding:10px 10px 10px 0;border-bottom:1px solid var(--rule);color:var(--body)}
+th.n,td.n{text-align:right;padding-right:0;font-family:"JetBrains Mono",monospace;
+  font-variant-numeric:tabular-nums}
+td.tm{color:var(--ink);font-weight:500}
+tr.me td{background:var(--sunk)}
+.pull{margin:38px 0;padding:26px 0;border-top:1px solid var(--hot);border-bottom:1px solid var(--hot)}
+.pull p{font-family:Oswald,sans-serif;font-weight:400;font-size:clamp(21px,2.6vw,27px);
+  line-height:1.24;color:var(--ink);margin:0;max-width:24ch;text-transform:uppercase}
+.pull cite{display:block;margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:10.5px;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-style:normal}
+.method{margin-top:52px;padding:26px;background:var(--surface);border:1px solid var(--rule);border-radius:4px}
+.method h2{border:0;padding:0;margin-bottom:10px;font-size:16px;letter-spacing:.1em}
+.method p,.method li{font-size:14.5px;line-height:1.62;color:var(--muted)}
+.foot{margin-top:32px;padding-top:15px;border-top:1px solid var(--rule);font-size:10.5px;
+  letter-spacing:.09em;color:var(--muted)}
+@media (max-width:760px){ .page{padding:0 17px 70px} }
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="rail">
+  <b>Dem Fantasy Boyz</b>
+  <div class="r"><a href="index.html">&larr; News Desk</a><span>Week 2 in review &middot; 2026</span></div>
+</div>
+
+<div class="hero">
+  <p class="kicker">Week 2 in review</p>
+  <h1>Five Teams Lost With the Win on the Bench</h1>
+  <p class="deck">Last week every game went to the better score. This week, <em>five of the six losing teams had a winning lineup on their own roster</em> and started a different one. Two of them were a single lineup swap away.</p>
+  <div class="byline">
+    <span>Sept 22, 2026</span>
+    <span>Week 2 final &middot; all 16 games played</span>
+  </div>
+</div>
+
+<div class="col">
+<p>Week 1 was the fairest week this league has had: the six best scores won and the six worst lost, in order. Week 2 answered with the other kind of week. Take every losing team, put its best possible lineup on the field from the players it actually had, and compare that against what its opponent actually scored. <strong>Five of the six would have won.</strong> In Week 1 the same test flipped one game.</p>
+
+<p>The only loser this doesn't apply to is Stay Questionable, who lost by 28.30 and could not have closed the gap with anyone on the bench.</p>
+</div>
+
+<div class="strip">
+  <div class="st hot"><b>5 of 6</b><span>losers had a winning lineup on the roster</span></div>
+  <div class="st a"><b>167.46</b><span>Tampa Tropics, high score &mdash; a perfect lineup</span></div>
+  <div class="st b"><b>0.12</b><span>what Pukachu's best lineup would have won by</span></div>
+  <div class="st g"><b>2.50</b><span>closest game</span></div>
+</div>
+
+<section class="sec">
+  <h2>The scoreboard</h2>
+  <table>
+    <thead><tr><th>Result</th><th class="n">Margin</th><th class="n">Loser's best</th></tr></thead>
+    <tbody>
+      <tr><td class="tm">Saquan Deebos Chubba 128.62 &mdash; 126.12 JohnnyBoVonny</td><td class="n">2.50</td><td class="n">149.28</td></tr>
+      <tr><td class="tm">Sex Panthers 131.56 &mdash; 126.54 The Taylords</td><td class="n">5.02</td><td class="n">132.64</td></tr>
+      <tr><td class="tm">Benjamin's Buttons 106.08 &mdash; 97.00 Peeka Egbuka</td><td class="n">9.08</td><td class="n">118.78</td></tr>
+      <tr class="me"><td class="tm">The BEAGLES 146.02 &mdash; 134.78 Rage</td><td class="n">11.24</td><td class="n">148.08</td></tr>
+      <tr><td class="tm">TYJT 131.98 &mdash; 103.68 Stay Questionable</td><td class="n">28.30</td><td class="n">112.98</td></tr>
+      <tr><td class="tm">Tampa Tropics 167.46 &mdash; 128.20 I Choose You Pukachu!</td><td class="n">39.26</td><td class="n">167.58</td></tr>
+    </tbody>
+  </table>
+  <p class="cap">"Loser's best" is the highest legal lineup (QB, 2 RB, 2 WR, TE, 2 FLEX, K, DEF) the losing team could have built from its own roster this week. Compare it with the winner's score: in five of six rows it is higher. Names are current &mdash; three teams renamed this week (see below).</p>
+</section>
+
+<section class="sec">
+  <h2>One swap each</h2>
+  <div class="col">
+  <p><strong>JohnnyBoVonny started Drake Maye (8.02) over Patrick Mahomes (28.98)</strong> and lost by 2.50. Maye played the whole game &mdash; 55 snaps, this wasn't an injury &mdash; and Mahomes threw for 382 yards and three touchdowns on the bench. Make that swap and JohnnyBoVonny wins by 18.46. Amon-Ra St. Brown's 35.20 went down with it.</p>
+
+  <p>This is the manager this desk has written up as the luckiest record in league history: 34&ndash;22 on scoring that ranks below average. Two weeks into 2026 the luck has run the other way. <strong>JohnnyBoVonny is 0&ndash;2 and 5&ndash;17 against the full field</strong>, second-worst in the league.</p>
+
+  <p><strong>The Taylords started Alec Pierce (2.10) over KC Concepcion (8.20)</strong>. That's six points in a game lost by 5.02 &mdash; the swap alone wins it by 1.08. More on the Taylords below.</p>
+  </div>
+</section>
+
+<div class="pull">
+  <p>Mahomes threw for 382 and three touchdowns on JohnnyBoVonny's bench. They lost by 2.50.</p>
+  <cite>Saquan Deebos Chubba 128.62, JohnnyBoVonny 126.12</cite>
+</div>
+
+<section class="sec">
+  <h2>Pukachu needed all three, and would have won by twelve hundredths</h2>
+  <div class="col">
+  <p>Tampa Tropics put up the week's high score, 167.46, and <strong>left zero points on the bench</strong> &mdash; the only perfect lineup in the league. It was also built mid-week: Dalton Schultz, picked up Thursday, caught 12 balls for 26.00, and Rashod Bateman, picked up Friday, scored 21.80. <strong>The two waiver adds scored 47.80 between them. Tampa won by 39.26.</strong></p>
+
+  <p>And I Choose You Pukachu! nearly beat that perfect lineup anyway. Their best lineup scored 167.58, higher than Tampa's by 0.12, but it needed three changes at once: Matthew Stafford (26.98) over Lamar Jackson (14.80), Tre Tucker (22.90) over Puka Nacua, and Brian Robinson (8.70) over David Montgomery (4.40).</p>
+
+  <p>The Nacua slot is the one that hurt. <strong>Puka Nacua did not play and scored 0.00 from a starting spot</strong>; he is now listed out with a hip. Tre Tucker, the receiver Pukachu picked up in Week 1 for Alvin Kamara, scored 22.90 on the bench. Pukachu also dropped Travis Hunter on Sunday for Xavier Smith, who scored 0.00.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>The Matchup of the Week: the worst franchise in league history beat the champion</h2>
+  <div class="col">
+  <p>The K&amp;Y preview said Zay Flowers's hamstring would decide this one. <strong>Flowers didn't play.</strong> Tbunzz had already benched him for Matthew Golden, so the lineup the preview called "as currently set" is the game that got played.</p>
+
+  <p>That gap was far smaller than the preview implied. The 35-point edge it gave the Sex Panthers was <strong>season-long roster value</strong>, not a one-week projection, and one Sunday squeezed it to <strong>5.02</strong>. Marvin Harrison started for the Panthers and scored 0.00 on one target in 37 snaps, Jacksonville's defense scored 2.00 and J.K. Dobbins 3.60. On the other side, Jaylen Waddle went from 1.20 last week to 21.80 and Kenneth Walker scored 23.80. CeeDee Lamb's 35.30 is what decided it.</p>
+
+  <p>So the Sex Panthers &mdash; 20&ndash;36 all-time, the worst record in the league's history &mdash; beat the defending champion. And The Taylords were one bench swap away from winning it.</p>
+
+  <p><strong>The Taylords are 0&ndash;2 by a combined 9.40 points</strong>: 4.38 to Buttons, 5.02 to the Panthers. Both weeks, a winning lineup was on the roster. They have the best all-play record in league history and a career .500 record, and 2026 has added two more close losses to that. Last week they fired their defense after a 0.00 and signed Kansas City. <strong>Kansas City scored 1.00.</strong></p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Rage: third-best score in the league, 0&ndash;2</h2>
+  <div class="col">
+  <p>This desk is written from Rage's side of the league, and this week that means reporting on its own manager's lineup decisions.</p>
+
+  <p>Last week Rage went 0&ndash;11 against the field. <strong>This week Rage scored 134.78 &mdash; third in the league, 9&ndash;2 against the field &mdash; and lost to the second-best score, The BEAGLES' 146.02.</strong> Josh Allen's 40.82 was the second-best performance in the league, and it was on the other team.</p>
+
+  <p>It was still winnable. On Thursday, Rage dropped Cade Otton to pick up the Green Bay defense, then <strong>started Green Bay (7.00) over Las Vegas (16.00)</strong>. Travis Etienne also started for 7.10 while Devaughn Vele scored 11.40 on the bench. Make both changes and Rage scores 148.08 and wins by 2.06. Neither one wins it alone. The one real improvement: Dalton Kincaid, who sat for 18.00 last week, started and scored 22.50.</p>
+
+  <p>The BEAGLES won despite leaving 32.80 points on their own bench, the most of any winner. DJ Moore scored &minus;0.10 before leaving after 23 snaps and is now listed out with a shoulder injury. <strong>Through two weeks the BEAGLES are 20&ndash;2 against the full field</strong>, the best in the league by two games.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Peeka Egbuka could have won without the injury</h2>
+  <div class="col">
+  <p>Jaxson Dart left after seven snaps with 0.80 points and is now listed out with a knee injury. That one wasn't a lineup decision &mdash; Baker Mayfield's 12.18 on the bench was only available in hindsight.</p>
+
+  <p>The rest of the gap was. <strong>Hunter Henry (7.00) sat while Colston Loveland started at tight end for 1.30</strong>, for the second week running a near-zero. Woody Marks (8.50) sat while Michael Wilson started for 3.80. Those two swaps, with Dart left in the lineup, score 107.40 &mdash; enough to beat Buttons' 106.08. Peeka had the week's low score and is 0&ndash;2 and 4&ndash;18 against the field, last in the league.</p>
+
+  <p>Benjamin's Buttons are 2&ndash;0 on the tenth-best score of the week. Their waiver move made the difference: <strong>Bryce Young, claimed for Bo Nix, scored 24.08</strong> with Kyler Murray, last week's &minus;0.38, on the bench and now listed out with a concussion. Buttons are 8&ndash;14 against the field and 2&ndash;0 in the standings, which makes them this season's luckiest team so far.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Best and worst</h2>
+  <div class="xf">
+    <div class="x a">
+      <h3>The week's five best</h3>
+      <p class="who">starters only</p>
+      <p>Jaxon Smith-Njigba 42.50 (Tampa Tropics) &middot; Josh Allen 40.82 (The BEAGLES) &middot; Davante Adams 39.50 (Saquan Deebos Chubba) &middot; CeeDee Lamb 35.30 (Sex Panthers) &middot; Amon-Ra St. Brown 35.20 (JohnnyBoVonny).</p>
+    </div>
+    <div class="x n">
+      <h3>The week's worst</h3>
+      <p class="who">starters only</p>
+      <p>DJ Moore &minus;0.10 (The BEAGLES) &middot; Puka Nacua 0.00 (Pukachu) &middot; Marvin Harrison 0.00 (Sex Panthers) &middot; Jaxson Dart 0.80 (Peeka Egbuka) &middot; Kansas City defense 1.00 (The Taylords) &middot; Cameron Dicker 1.00 (Tampa Tropics).</p>
+    </div>
+    <div class="x b">
+      <h3>Last week's leader, this week's 11th</h3>
+      <p class="who">Stay Questionable</p>
+      <p>DeionSandalz's team, now renamed Stay Questionable, went from the Week 1 high score (158.96, 11&ndash;0 against the field) to 103.68 and 1&ndash;10. Tyler Shough scored 22.38 on the bench while Joe Burrow started for 16.18, but a 28.30-point loss was out of reach either way.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Injuries to watch</h2>
+  <div class="col">
+  <p>Starters who got hurt or didn't play this week, with their current Sleeper status: <strong>Puka Nacua</strong> (Pukachu) out, hip &middot; <strong>DJ Moore</strong> (The BEAGLES) out, shoulder &middot; <strong>Jaxson Dart</strong> (Peeka Egbuka) out, knee &middot; <strong>Saquon Barkley</strong> (Saquan Deebos Chubba) questionable, arm, after 12 snaps. On the bench: <strong>Brock Bowers</strong> (TYJT) is out with a meniscus surgery listed, and Nico Collins (TYJT) and Zay Flowers (The Taylords) are both out with hamstrings.</p>
+
+  <p>TYJT is 2&ndash;0 anyway. Brock Purdy scored 28.48 and Jonathan Taylor 29.20, and they left only 0.50 points on the bench, the second-cleanest lineup of the week after Tampa's.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>New names, and the week on the wire</h2>
+  <div class="col">
+  <p>Three teams renamed since Week 1: <strong>DeionSandalz is now Stay Questionable</strong>, <strong>Nacua Matata (Jov724) is now Saquan Deebos Chubba</strong>, and <strong>Team Traffikhan is now 🙏🤕😮‍💨TYJT😮‍💨🤕🙏</strong> &mdash; TYJT on this page.</p>
+
+  <p>The league log shows twenty-four Week 2 transactions. The Taylords were the busiest: Jordan Love for Jared Goff, then Alvin Kamara, then Zach Charbonnet, who is on the PUP list after ACL surgery and will not help soon. The Sex Panthers added C.J. Stroud as a backup to Jalen Hurts. Saquan Deebos Chubba cut Isiah Pacheco (IR) just after midnight Monday. This league uses rolling waiver priority, not FAAB, so there are no bid amounts to report.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Standings after two weeks</h2>
+  <table>
+    <thead><tr><th>#</th><th>Team</th><th class="n">W&ndash;L</th><th class="n">PF</th><th class="n">All-play</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="tm">Tampa Tropics</td><td class="n">2&ndash;0</td><td class="n">312.36</td><td class="n">18&ndash;4</td></tr>
+      <tr><td class="n">2</td><td class="tm">The BEAGLES</td><td class="n">2&ndash;0</td><td class="n">304.58</td><td class="n">20&ndash;2</td></tr>
+      <tr><td class="n">3</td><td class="tm">TYJT</td><td class="n">2&ndash;0</td><td class="n">288.58</td><td class="n">17&ndash;5</td></tr>
+      <tr><td class="n">4</td><td class="tm">Benjamin's Buttons</td><td class="n">2&ndash;0</td><td class="n">242.70</td><td class="n">8&ndash;14</td></tr>
+      <tr><td class="n">5</td><td class="tm">I Choose You Pukachu!</td><td class="n">1&ndash;1</td><td class="n">276.56</td><td class="n">13&ndash;9</td></tr>
+      <tr><td class="n">6</td><td class="tm">Stay Questionable</td><td class="n">1&ndash;1</td><td class="n">262.64</td><td class="n">12&ndash;10</td></tr>
+      <tr><td class="n">7</td><td class="tm">Saquan Deebos Chubba</td><td class="n">1&ndash;1</td><td class="n">255.08</td><td class="n">9&ndash;13</td></tr>
+      <tr><td class="n">8</td><td class="tm">Sex Panthers</td><td class="n">1&ndash;1</td><td class="n">237.08</td><td class="n">8&ndash;14</td></tr>
+      <tr><td class="n">9</td><td class="tm">The Taylords</td><td class="n">0&ndash;2</td><td class="n">258.78</td><td class="n">9&ndash;13</td></tr>
+      <tr><td class="n">10</td><td class="tm">JohnnyBoVonny</td><td class="n">0&ndash;2</td><td class="n">233.04</td><td class="n">5&ndash;17</td></tr>
+      <tr class="me"><td class="n">11</td><td class="tm">Rage</td><td class="n">0&ndash;2</td><td class="n">228.94</td><td class="n">9&ndash;13</td></tr>
+      <tr><td class="n">12</td><td class="tm">Peeka Egbuka</td><td class="n">0&ndash;2</td><td class="n">224.90</td><td class="n">4&ndash;18</td></tr>
+    </tbody>
+  </table>
+  <p class="cap">Ordered by record, then points for. All-play is each team's record against every other team's score, week by week &mdash; the version of the standings with the schedule taken out. By that measure Buttons are a .364 team at 2&ndash;0, and The Taylords and Rage are both .409 teams at 0&ndash;2.</p>
+</section>
+
+<div class="method">
+  <h2>How this was put together</h2>
+  <p>Final scores, lineups and every rostered player's points were pulled from Sleeper on Sept 22 after Week 2 closed. "Best lineup" fills QB, two RB, two WR, TE, two RB/WR/TE flex, K and DEF with the highest scorers on each roster. It uses hindsight on purpose: it measures how many points were on the roster, not whether the lineup call was reasonable at the time. The piece says so wherever an in-game injury, rather than a lineup choice, caused the zero.</p>
+  <p>Injury statuses are Sleeper's as of publication, not what was known at kickoff. Snap counts and box-score lines are from Sleeper's weekly stats feed. Transactions are from the league's own log.</p>
+</div>
+
+<p class="foot">Dem Fantasy Boyz &middot; Week 2 in review &middot; Sept 22, 2026</p>
+
+</div>
+</body>
+</html>
