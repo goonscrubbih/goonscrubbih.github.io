@@ -5,444 +5,297 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Dem Fantasy Boyz — News Desk</title>
-<meta name="description" content="Draft reviews, matchup previews, and weekly recaps for the Dem Fantasy Boyz league.">
+<meta name="description" content="Weekly recaps, the Matchup of the Week, and live scores for the Dem Fantasy Boyz league.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Dem Fantasy Boyz — News Desk">
-<meta property="og:description" content="Draft reviews, matchup previews, and weekly recaps for the Dem Fantasy Boyz league.">
+<meta property="og:description" content="Weekly recaps, the Matchup of the Week, and live scores for the Dem Fantasy Boyz league.">
 <meta property="og:url" content="https://goonscrubbih.github.io/dfb/">
-<meta property="og:image" content="https://goonscrubbih.github.io/dfb/img/opening-day-recap.png">
-<meta name="theme-color" content="#0C0F14">
+<meta property="og:image" content="https://goonscrubbih.github.io/dfb/img/wk3-review.png">
+<meta name="theme-color" content="#EDF1F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1622" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.sleeper.app" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="desk.css?v=1">
 <style>
-:root{
-  --ground:#0C0F14; --surface:#141922; --sunk:#1A2029; --raise:#212936;
-  --ink:#F2F4F7; --body:#B7C0CB; --muted:#7A8595; --rule:#232B36; --rule-hard:#38424F;
-  --a:#E8A33D; --b:#5FA5F0; --hot:#F0785A; --win:#5FD08A;
-  --scrim:linear-gradient(180deg,rgba(12,15,20,0) 0%,rgba(12,15,20,.55) 42%,rgba(12,15,20,.95) 100%);
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.34);
-  --shadow-lift:0 2px 4px rgba(0,0,0,.44),0 18px 46px rgba(0,0,0,.46);
-}
-@media (prefers-color-scheme:light){
-  :root:not([data-theme="dark"]){
-    --ground:#F6F5F3; --surface:#FFFFFF; --sunk:#ECEBE8; --raise:#FFFFFF;
-    --ink:#13171D; --body:#333B46; --muted:#69717D; --rule:#E1E0DC; --rule-hard:#B7B6B1;
-    --a:#A66A08; --b:#1B5FA8; --hot:#B34328; --win:#1F7A47;
-    --scrim:linear-gradient(180deg,rgba(10,12,16,.12) 0%,rgba(10,12,16,.58) 46%,rgba(10,12,16,.92) 100%);
-    --shadow:0 1px 2px rgba(20,22,26,.07),0 8px 24px rgba(20,22,26,.09);
-    --shadow-lift:0 2px 6px rgba(20,22,26,.1),0 18px 44px rgba(20,22,26,.15);
-  }
-}
-:root[data-theme="light"]{
-  --ground:#F6F5F3; --surface:#FFFFFF; --sunk:#ECEBE8; --raise:#FFFFFF;
-  --ink:#13171D; --body:#333B46; --muted:#69717D; --rule:#E1E0DC; --rule-hard:#B7B6B1;
-  --a:#A66A08; --b:#1B5FA8; --hot:#B34328; --win:#1F7A47;
-  --scrim:linear-gradient(180deg,rgba(10,12,16,.12) 0%,rgba(10,12,16,.58) 46%,rgba(10,12,16,.92) 100%);
-  --shadow:0 1px 2px rgba(20,22,26,.07),0 8px 24px rgba(20,22,26,.09);
-  --shadow-lift:0 2px 6px rgba(20,22,26,.1),0 18px 44px rgba(20,22,26,.15);
-}
+.page{max-width:1160px;margin:0 auto;padding:0 28px 90px}
+.sec{margin-top:60px}
+.shead{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;margin:0 0 18px}
+.shead h2{margin:0;font-family:var(--display);font-weight:700;font-size:25px;letter-spacing:-.025em;color:var(--ink)}
+.shead .note{font-family:var(--display);font-size:14px;color:var(--muted)}
 
-*{box-sizing:border-box}
-html{color-scheme:light dark}
-body{margin:0;background:var(--ground);color:var(--body);
-  font-family:Spectral,Georgia,serif;font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased;
-  overflow-x:hidden}
-h1,h2,h3,.tag,.dsp{font-family:Oswald,"Arial Narrow",Arial,sans-serif}
-.mono,.date,.num{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
-a{color:inherit}
-.page{max-width:1120px;margin:0 auto;padding:0 24px 96px;position:relative;z-index:1}
-
-/* ---------- ambient glow ---------- */
-.glow{position:fixed;inset:0 0 auto 0;height:620px;pointer-events:none;z-index:0;opacity:.5;
-  background:
-    radial-gradient(900px 380px at 18% -8%, color-mix(in oklab,var(--a) 34%,transparent), transparent 70%),
-    radial-gradient(760px 340px at 84% -14%, color-mix(in oklab,var(--b) 30%,transparent), transparent 72%);
-  filter:blur(8px)}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .glow{opacity:.3}}
-:root[data-theme="light"] .glow{opacity:.3}
-
-/* ---------- masthead ---------- */
-.rail{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:space-between;
-  margin-top:22px;padding:12px 0;border-top:3px solid var(--hot);border-bottom:1px solid var(--rule)}
-.rail b{font-family:Oswald,sans-serif;font-weight:700;font-size:15px;letter-spacing:.19em;
-  text-transform:uppercase;color:var(--ink)}
-.rail .meta{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
-  font-family:"JetBrains Mono",monospace}
-
-.hero-head{padding:44px 0 6px}
-h1{font-weight:700;text-transform:uppercase;color:var(--ink);margin:0 0 14px;
-  font-size:clamp(40px,7.5vw,82px);line-height:.92;letter-spacing:-.005em}
-h1 .em{color:var(--a)}
-.deck{font-size:clamp(17px,1.9vw,20.5px);line-height:1.5;max-width:58ch;margin:0;color:var(--body)}
-
-/* ---------- section heads ---------- */
-.shead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
-  margin:58px 0 18px;padding-bottom:9px;border-bottom:1px solid var(--rule)}
-.shead h2{margin:0;font-size:15px;font-weight:600;letter-spacing:.19em;text-transform:uppercase;color:var(--ink)}
-.shead .note{font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
-  font-family:"JetBrains Mono",monospace;white-space:nowrap}
-
-/* ---------- live pill ---------- */
-.pill{display:inline-flex;align-items:center;gap:7px;padding:4px 11px;border-radius:100px;
-  background:var(--sunk);border:1px solid var(--rule);font-family:"JetBrains Mono",monospace;
-  font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.pill.on{color:var(--ink);border-color:color-mix(in oklab,var(--hot) 55%,var(--rule))}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--muted);flex:none}
-.pill.on .dot{background:var(--hot);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
+/* ---------- lead story ---------- */
+.lead{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:8px;align-items:center;
+  text-decoration:none;margin-top:8px;padding:12px;background:var(--surface);border-radius:var(--r-xl);
+  box-shadow:var(--shadow);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.lead:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.lead .art{border-radius:17px;overflow:hidden;background:#0C0F14}
+.lead .art img{width:100%;height:auto;transition:transform .8s var(--ease)}
+.lead:hover .art img{transform:scale(1.025)}
+.lead .cap{padding:18px 26px 18px 26px}
+.lead h3{margin:14px 0 12px;font-family:var(--display);font-weight:800;color:var(--ink);
+  font-size:clamp(28px,3.4vw,40px);line-height:1.04;letter-spacing:-.03em;text-wrap:balance}
+.lead p{margin:0 0 18px;font-size:17px;line-height:1.55;color:var(--body);text-wrap:pretty}
+.lead .go{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;
+  font-size:15px;color:var(--on-flag);background:var(--flag);padding:9px 16px;border-radius:999px}
+.lead .go i{font-style:normal;transition:transform .3s var(--ease)}
+.lead:hover .go i{transform:translateX(3px)}
+.lead .date{display:block;margin-top:14px;font-family:var(--display);font-size:13.5px;color:var(--muted)}
 
 /* ---------- scoreboard ---------- */
-.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:10px}
-.game{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:13px 15px;
-  box-shadow:var(--shadow);position:relative;overflow:hidden}
-.game.mj{border-color:color-mix(in oklab,var(--a) 62%,var(--rule));
-  box-shadow:var(--shadow),inset 0 0 0 1px color-mix(in oklab,var(--a) 22%,transparent)}
-.game.mj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--a)}
-.side{display:flex;align-items:center;gap:10px;padding:5px 0}
-.side + .side{border-top:1px dashed var(--rule)}
-.side .nm{flex:1;min-width:0;font-family:Oswald,sans-serif;font-size:15.5px;font-weight:500;
-  color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.012em}
-.side .mgr{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.08em;
-  color:var(--muted);text-transform:uppercase}
-.side .pts{font-family:"JetBrains Mono",monospace;font-size:17px;font-weight:700;color:var(--body);
-  flex:none;transition:color .3s}
-.side.lead .pts{color:var(--win)}
-.side.lead .nm{color:var(--ink)}
-.side.trail .nm,.side.trail .pts{opacity:.62}
-.gfoot{margin-top:8px;padding-top:7px;border-top:1px solid var(--rule);
-  font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
-.skel{background:var(--sunk);border-radius:4px;color:transparent;animation:sk 1.4s ease-in-out infinite}
-@keyframes sk{0%,100%{opacity:1}50%{opacity:.45}}
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.game{background:var(--surface);border-radius:var(--r-lg);padding:14px 17px 12px;box-shadow:var(--shadow)}
+.game.mj{box-shadow:var(--shadow),inset 0 0 0 2px var(--flag)}
+.side{display:flex;align-items:center;gap:12px;padding:4px 0}
+.side .who{flex:1;min-width:0}
+.side .nm{font-family:var(--display);font-weight:600;font-size:16.5px;letter-spacing:-.01em;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}
+.side .mgr{font-family:var(--display);font-size:12.5px;color:var(--muted);line-height:1.3}
+.side .pts{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02em;color:var(--ink);flex:none}
+.side.behind .nm,.side.behind .pts{color:var(--muted)}
+.side.me .nm::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--flag);margin-left:7px;vertical-align:.18em}
+.tug{display:flex;gap:4px;height:7px;margin:7px 0}
+.tug i{display:block;border-radius:999px;background:var(--line);min-width:6px;
+  transition:flex-grow 1s var(--ease),background-color .4s}
+.tug i.up{background:var(--turf)}
+.game.final .tug i.up{background:var(--ink)}
+.gfoot{display:flex;justify-content:space-between;gap:10px;margin-top:6px;padding-top:9px;
+  border-top:1px solid var(--line);font-family:var(--display);font-size:13px;color:var(--muted)}
+.skel{background:var(--sunk);border-radius:6px;color:transparent!important;animation:sk 1.5s ease-in-out infinite}
+@keyframes sk{0%,100%{opacity:1}50%{opacity:.5}}
 
-/* ---------- hero story ----------
-   The OG card carries its own headline as artwork, so the caption sits
-   BESIDE the poster rather than over it — overlaying duplicates the title. */
-.lead{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);
-  text-decoration:none;margin-top:20px;border-radius:10px;overflow:hidden;
-  border:1px solid var(--rule);background:var(--surface);box-shadow:var(--shadow);
-  transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s,border-color .22s}
-.lead:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--rule-hard)}
-.lead .art{position:relative;overflow:hidden;background:var(--sunk);min-height:100%}
-.lead .art img{width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform .5s cubic-bezier(.2,.7,.3,1)}
-.lead:hover .art img{transform:scale(1.035)}
-.lead .cap{padding:30px 32px;display:flex;flex-direction:column;justify-content:center;
-  border-left:1px solid var(--rule)}
-.lead .tag{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hot);margin-bottom:11px}
-.lead h3{margin:0 0 11px;font-size:clamp(23px,2.7vw,33px);font-weight:700;text-transform:uppercase;
-  line-height:1.07;color:var(--ink);letter-spacing:.004em}
-.lead p{margin:0 0 14px;font-size:15.5px;line-height:1.55;color:var(--body)}
-.lead .date{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-  font-family:"JetBrains Mono",monospace}
-.lead .go{margin-top:14px;font-family:Oswald,sans-serif;font-size:12.5px;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--a);display:inline-flex;align-items:center;gap:7px}
-.lead .go .arw{transition:transform .22s cubic-bezier(.2,.7,.3,1);display:inline-block}
-.lead:hover .go .arw{transform:translateX(4px)}
-@media (max-width:760px){
-  .lead{grid-template-columns:1fr}
-  .lead .art{aspect-ratio:1200/630}
-  .lead .cap{padding:20px 19px 22px;border-left:0;border-top:1px solid var(--rule)}
-}
+/* ---------- the desk ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.card{display:flex;flex-direction:column;text-decoration:none;background:var(--surface);border-radius:var(--r-lg);
+  padding:9px;box-shadow:var(--shadow);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.card .art{aspect-ratio:1200/630;border-radius:13px;overflow:hidden;background:#0C0F14}
+.card .art img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .8s var(--ease)}
+.card:hover .art img{transform:scale(1.035)}
+.card .txt{padding:14px 10px 8px;display:flex;flex-direction:column;align-items:flex-start;flex:1}
+.card h3{margin:11px 0 7px;font-family:var(--display);font-weight:700;font-size:20px;line-height:1.18;
+  letter-spacing:-.02em;color:var(--ink);text-wrap:balance}
+.card p{margin:0 0 12px;font-size:15.5px;line-height:1.5;color:var(--body);flex:1}
+.card .date{font-family:var(--display);font-size:13px;color:var(--muted)}
 
-/* ---------- article grid ---------- */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(292px,1fr));gap:16px;margin-top:18px}
-.card{display:flex;flex-direction:column;text-decoration:none;background:var(--surface);
-  border:1px solid var(--rule);border-radius:9px;overflow:hidden;box-shadow:var(--shadow);
-  transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s,border-color .22s}
-.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--rule-hard)}
-.card .art{aspect-ratio:16/9;overflow:hidden;background:var(--sunk);border-bottom:1px solid var(--rule)}
-.card .art img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;
-  transition:transform .5s cubic-bezier(.2,.7,.3,1)}
-.card:hover .art img{transform:scale(1.045)}
-.card .txt{padding:17px 19px 19px;display:flex;flex-direction:column;flex:1}
-.card .tag{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--hot);margin-bottom:8px}
-.card h3{margin:0 0 8px;font-size:20.5px;font-weight:600;text-transform:uppercase;color:var(--ink);
-  line-height:1.14;letter-spacing:.006em}
-.card p{margin:0 0 13px;font-size:14.5px;line-height:1.52;color:var(--body);flex:1}
-.card .date{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.earlier{margin-top:26px;background:var(--surface);border-radius:var(--r-lg);padding:8px;box-shadow:var(--shadow)}
+.earlier .eh{margin:10px 12px 6px;font-family:var(--display);font-size:14px;font-weight:600;color:var(--muted)}
+.old{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:12px;border-radius:12px;
+  text-decoration:none;transition:background-color .25s}
+.old:hover{background:var(--sunk)}
+.old .t{font-family:var(--display);font-weight:600;font-size:16px;color:var(--ink);letter-spacing:-.01em;line-height:1.3}
+.old .d{font-family:var(--display);font-size:13px;color:var(--muted);white-space:nowrap}
+@media (max-width:600px){ .old{grid-template-columns:1fr auto;gap:6px 12px} .old .chip{grid-column:1/-1;justify-self:start} }
 
-/* ---------- standings ---------- */
-.tbl{width:100%;border-collapse:collapse;font-family:"JetBrains Mono",monospace;font-size:13px}
-.tbl th{text-align:left;font-weight:500;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--muted);padding:0 10px 9px;border-bottom:1px solid var(--rule);white-space:nowrap}
-.tbl td{padding:9px 10px;border-bottom:1px solid var(--rule);color:var(--body)}
-.tbl tr:last-child td{border-bottom:0}
-.tbl .r{text-align:right}
-.tbl .rank{color:var(--muted);width:1%;white-space:nowrap}
-.tbl .team{font-family:Oswald,sans-serif;font-size:15.5px;font-weight:500;color:var(--ink);
-  letter-spacing:.012em}
-.tbl .mgrc{color:var(--muted);font-size:11px}
-.tbl tr.mj td{background:color-mix(in oklab,var(--a) 11%,transparent)}
-.tbl tr.mj .team{color:var(--a)}
-.wrap{overflow-x:auto;margin-top:16px;-webkit-overflow-scrolling:touch}
-
-/* ---------- footer ---------- */
-.foot{margin-top:56px;padding-top:16px;border-top:1px solid var(--rule);font-size:10.5px;
-  letter-spacing:.1em;color:var(--muted);font-family:"JetBrains Mono",monospace;
-  display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between}
-.err{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);
-  padding:16px;border:1px dashed var(--rule);border-radius:8px}
-
-/* ---------- the wire ---------- */
-.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 14px}
-.tab{font-family:Oswald,sans-serif;font-size:12px;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--muted);background:var(--sunk);border:1px solid var(--rule);border-radius:100px;
-  padding:7px 15px;cursor:pointer;transition:color .15s,border-color .15s,background .15s;
-  display:inline-flex;align-items:center;gap:7px}
-.tab:hover{color:var(--ink);border-color:var(--rule-hard)}
-.tab.on{color:var(--ground);background:var(--ink);border-color:var(--ink)}
-.tab .cnt{font-family:"JetBrains Mono",monospace;font-size:10px;opacity:.72;font-variant-numeric:tabular-nums}
-.pane{display:none}
-.pane.on{display:block}
-.feed{display:grid;gap:2px}
-.row{display:flex;gap:13px;align-items:flex-start;padding:13px 15px;background:var(--surface);
-  border:1px solid var(--rule);border-radius:6px;text-decoration:none;transition:border-color .15s,transform .15s}
-a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
-.row .bar{width:3px;align-self:stretch;border-radius:2px;background:var(--rule-hard);flex:none;margin:1px 0}
-.row.sev-out .bar,.row.sev-ir .bar{background:var(--hot)}
-.row.sev-doubtful .bar{background:#E8763D}
-.row.sev-questionable .bar{background:var(--a)}
-.row.add .bar{background:var(--win)}
-.row.drop .bar{background:var(--hot)}
+/* ---------- wire + standings ---------- */
+.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:start}
+.seg{display:inline-flex;flex-wrap:wrap;gap:3px;padding:4px;background:var(--sunk);border-radius:999px;margin:0 0 14px}
+.tab{font-family:var(--display);font-size:14px;font-weight:600;color:var(--muted);background:transparent;border:0;
+  border-radius:999px;padding:7px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  transition:color .2s,background-color .25s,box-shadow .25s}
+.tab:hover{color:var(--ink)}
+.tab.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(18,33,58,.12)}
+.tab .cnt{font-size:12px;font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums}
+.pane{display:none} .pane.on{display:block}
+.feed{display:grid;gap:6px}
+.feed.clip > .row:nth-child(n+7){display:none}
+.more{margin-top:8px;width:100%;font-family:var(--display);font-size:14px;font-weight:600;color:var(--ink);
+  background:var(--sunk);border:0;border-radius:var(--r-sm);padding:11px;cursor:pointer;transition:background-color .2s}
+.more:hover{background:var(--line)}
+.row{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:var(--surface);
+  border-radius:var(--r-sm);text-decoration:none;box-shadow:var(--shadow);transition:transform .25s var(--ease)}
+a.row:hover{transform:translateX(3px)}
+.row .sd{width:9px;height:9px;border-radius:50%;background:var(--line-2);flex:none;margin-top:7px}
+.row.sev-out .sd,.row.sev-ir .sd,.row.sev-sus .sd,.row.drop .sd{background:var(--warn)}
+.row.sev-doubtful .sd{background:var(--warn);opacity:.7}
+.row.sev-questionable .sd{background:var(--flag)}
+.row.add .sd{background:var(--turf)}
 .row .main{flex:1;min-width:0}
-.row .ttl{font-family:Oswald,sans-serif;font-size:15.5px;font-weight:500;color:var(--ink);
-  line-height:1.28;letter-spacing:.01em}
-.row .sub{font-size:13.5px;line-height:1.5;color:var(--body);margin-top:4px;
+.row .ttl{font-family:var(--display);font-weight:600;font-size:15.5px;color:var(--ink);line-height:1.3;letter-spacing:-.005em}
+.row .sub{font-size:14.5px;line-height:1.45;color:var(--body);margin-top:3px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.row .met{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--muted);margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 12px}
-.row .rt{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--muted);flex:none;
-  white-space:nowrap;padding-top:2px}
-.chip{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.11em;
-  text-transform:uppercase;padding:2px 7px;border-radius:3px;border:1px solid var(--rule-hard);color:var(--muted)}
-.chip.hot{color:var(--hot);border-color:color-mix(in oklab,var(--hot) 52%,var(--rule))}
-.chip.amb{color:var(--a);border-color:color-mix(in oklab,var(--a) 52%,var(--rule))}
-.chip.win{color:var(--win);border-color:color-mix(in oklab,var(--win) 52%,var(--rule))}
-.empty{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);
-  padding:22px 16px;border:1px dashed var(--rule);border-radius:6px;text-align:center}
+.row .met{font-family:var(--display);font-size:12.5px;color:var(--muted);margin-top:5px;display:flex;flex-wrap:wrap;gap:3px 12px}
+.row .rt{font-family:var(--display);font-size:12.5px;color:var(--muted);flex:none;white-space:nowrap;padding-top:2px}
+.empty,.err{font-family:var(--display);font-size:14px;color:var(--muted);padding:22px 18px;border-radius:var(--r-sm);
+  background:var(--sunk);text-align:center}
+.stand{background:var(--surface);border-radius:var(--r-lg);padding:14px 6px 6px;box-shadow:var(--shadow);
+  overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tbl .rank{color:var(--muted);width:1%;white-space:nowrap}
 
-/* ---------- entrance ---------- */
-.rise{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
-.rise.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){
-  *{animation-duration:.001ms!important;animation-iteration-count:1!important;
-    transition-duration:.001ms!important;scroll-behavior:auto!important}
-  .rise{opacity:1;transform:none}
+.foot{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;
+  justify-content:space-between;gap:8px 18px;font-family:var(--display);font-size:13.5px;color:var(--muted)}
+
+@media (max-width:860px){ .split{grid-template-columns:minmax(0,1fr);gap:56px} }
+@media (max-width:760px){
+  .lead{grid-template-columns:1fr;padding:9px}
+  .lead .art{border-radius:14px}
+  .lead .cap{padding:10px 12px 14px}
 }
-@media (max-width:600px){ .page{padding:0 17px 72px} .shead{margin:44px 0 14px} }
-
-/* lead art: show the whole OG card. The caption sets the card height, so a long
-   blurb used to stretch the frame and "cover" cropped the card's left edge. */
-.lead .art{background:#0C0F14;display:flex;align-items:center}
-.lead .art img{width:100%;height:auto;object-fit:contain}
-/* section headers: let the note drop under the heading on narrow screens instead
-   of pushing the page 12px wider than a 375px phone. */
-.shead{flex-wrap:wrap;row-gap:6px}
+@media (max-width:600px){
+  .page{padding:0 16px 70px}
+  .sec{margin-top:48px}
+  .shead h2{font-size:22px}
+  .board{grid-template-columns:1fr}
+  .seg{display:flex;flex-wrap:nowrap;width:100%;overflow-x:auto;scrollbar-width:none} .tab{flex:1 0 auto;justify-content:center;padding:7px 7px;font-size:13.5px;gap:4px}
+  .tab .cnt{font-size:11.5px}
+  .stand .tbl .pa{display:none}
+  .stand .tbl td,.stand .tbl th{padding-left:9px;padding-right:9px}
+  .stand .tbl .team{font-size:14.5px}
+}
 </style>
 </head>
 <body>
-<div class="glow"></div>
 <div class="page">
 
-<div class="rail">
-  <b>Dem Fantasy Boyz</b>
-  <span class="meta">News Desk &middot; 2026 Season</span>
-</div>
-
-<div class="hero-head rise">
-  <h1>The <span class="em">News</span> Desk</h1>
-  <p class="deck">Draft reviews, matchup previews, and weekly recaps for a 12-team full-PPR league that takes itself exactly the right amount of seriously.</p>
-</div>
-
-<!-- ============ LIVE SCOREBOARD ============ -->
-<section class="rise">
-  <div class="shead">
-    <h2>Scoreboard</h2>
-    <span class="pill" id="live-pill"><span class="dot"></span><span id="live-txt">Connecting</span></span>
-  </div>
-  <div class="board" id="board">
-    <div class="game"><div class="side"><span class="nm skel">Loading team</span><span class="pts skel">00.0</span></div><div class="side"><span class="nm skel">Loading team</span><span class="pts skel">00.0</span></div></div>
-    <div class="game"><div class="side"><span class="nm skel">Loading team</span><span class="pts skel">00.0</span></div><div class="side"><span class="nm skel">Loading team</span><span class="pts skel">00.0</span></div></div>
-    <div class="game"><div class="side"><span class="nm skel">Loading team</span><span class="pts skel">00.0</span></div><div class="side"><span class="nm skel">Loading team</span><span class="pts skel">00.0</span></div></div>
-  </div>
-</section>
+<header class="mast">
+  <a class="brand" href="./" aria-label="Dem Fantasy Boyz News Desk home"><span class="wm">Dem Fantasy Boyz</span><span class="badge">News Desk</span></a>
+  <span class="live" id="live-pill"><span class="dot"></span><span id="live-txt">Connecting</span></span>
+</header>
 
 <!-- ============ LEAD STORY ============ -->
-<section class="rise">
-  <div class="shead">
-    <h2>Lead Story</h2>
-    <span class="note">Updated Sept 23</span>
-  </div>
-  <a class="lead" href="wk3-ky-matchup.html">
-    <div class="art"><img src="img/wk3-ky-matchup.png" alt="" loading="eager" width="1200" height="630"></div>
+<section class="rise" aria-label="Latest story">
+  <a class="lead" href="wk3-review.html">
+    <div class="art"><img src="img/wk3-review.png" alt="" loading="eager" width="1200" height="630"></div>
     <div class="cap">
-      <div class="tag">K&amp;Y Matchup of the Week &middot; Week 3</div>
-      <h3>Josh Allen and Nine Other Guys</h3>
-      <p>The league's two best offenses, projected 2.5 points apart. One quarterback is a quarter of his team's scoring, one receiver's injury is migrating down his own body, and these two have met five times without ever being close.</p>
-      <div class="date">Sept 23, 2026 &middot; Week 3 preview</div>
-      <span class="go">Read the preview <span class="arw">&rarr;</span></span>
+      <span class="chip flag">Week 3 recap</span>
+      <h3>Four Teams Are 3&ndash;0. One of Them Is Lying.</h3>
+      <p>Three of the unbeatens are real. Benjamin's Buttons are 15&ndash;18 against the whole league and undefeated anyway. Plus the defense Rage keeps starting, which has scored a combined zero.</p>
+      <span class="go">Read the recap <i>&rarr;</i></span>
+      <span class="date">Sept 30 &middot; Week 3 final</span>
     </div>
   </a>
+</section>
+
+<!-- ============ SCOREBOARD ============ -->
+<section class="sec rise">
+  <div class="shead">
+    <h2>Scoreboard</h2>
+    <span class="note" id="board-note">Loading</span>
+  </div>
+  <div class="board" id="board">
+    <div class="game"><div class="side"><div class="who"><div class="nm skel">Loading team</div></div><span class="pts skel">000.0</span></div><div class="tug"><i style="flex-grow:1"></i><i style="flex-grow:1"></i></div><div class="side"><div class="who"><div class="nm skel">Loading team</div></div><span class="pts skel">000.0</span></div></div>
+    <div class="game"><div class="side"><div class="who"><div class="nm skel">Loading team</div></div><span class="pts skel">000.0</span></div><div class="tug"><i style="flex-grow:1"></i><i style="flex-grow:1"></i></div><div class="side"><div class="who"><div class="nm skel">Loading team</div></div><span class="pts skel">000.0</span></div></div>
+    <div class="game"><div class="side"><div class="who"><div class="nm skel">Loading team</div></div><span class="pts skel">000.0</span></div><div class="tug"><i style="flex-grow:1"></i><i style="flex-grow:1"></i></div><div class="side"><div class="who"><div class="nm skel">Loading team</div></div><span class="pts skel">000.0</span></div></div>
+  </div>
 </section>
 
 <!-- ============ ARCHIVE ============ -->
-<section class="rise">
+<section class="sec rise">
   <div class="shead">
-    <h2>The Desk</h2>
-    <span class="note">10 more pieces</span>
+    <h2>From the desk</h2>
+    <span class="note">11 more stories</span>
   </div>
   <div class="grid">
-
-    <a class="card" href="wk2-review.html">
-    <div class="art"><img src="img/wk2-review.png" alt="" loading="lazy" width="1200" height="630"></div>
-    <div class="txt">
-      <div class="tag">Week 2 in Review</div>
-      <h3>Five Teams Lost With the Win on the Bench</h3>
-      <p>Five of the six losing teams had a winning lineup on their own roster. Mahomes sat in a 2.50-point loss, Pukachu's best lineup beat a perfect one by 0.12, and the worst franchise in league history beat the champion.</p>
-      <div class="date">Sept 22, 2026</div>
+    <a class="card" href="wk3-ky-matchup.html">
+      <div class="art"><img src="img/wk3-ky-matchup.png" alt="" loading="lazy" width="1200" height="630"></div>
+      <div class="txt">
+        <span class="chip">Matchup of the Week</span>
+        <h3>Josh Allen and Nine Other Guys</h3>
+        <p>Pukachu vs The BEAGLES, projected 2.5 apart. Allen had his worst week; the nine other guys won by 31.9.</p>
+        <span class="date">Sept 23</span>
       </div>
-  </a>
-
+    </a>
+    <a class="card" href="wk2-review.html">
+      <div class="art"><img src="img/wk2-review.png" alt="" loading="lazy" width="1200" height="630"></div>
+      <div class="txt">
+        <span class="chip">Week 2 recap</span>
+        <h3>Five Teams Lost With the Win on the Bench</h3>
+        <p>Five of six losing teams had a winning lineup on their own roster. Mahomes sat in a 2.50-point loss.</p>
+        <span class="date">Sept 22</span>
+      </div>
+    </a>
     <a class="card" href="wk2-ky-matchup.html">
       <div class="art"><img src="img/wk2-ky-matchup.png" alt="" loading="lazy" width="1200" height="630"></div>
       <div class="txt">
-        <div class="tag">K&amp;Y Matchup of the Week &middot; Week 2</div>
+        <span class="chip">Matchup of the Week</span>
         <h3>A Hamstring Decides This One</h3>
-        <p>Sex Panthers vs The Taylords, three points apart on paper, if Zay Flowers could run. He couldn't; the Panthers won by 5.02.</p>
-        <div class="date">Sept 17, 2026</div>
+        <p>Sex Panthers vs The Taylords, three points apart on paper. The Panthers won by 5.02.</p>
+        <span class="date">Sept 17</span>
       </div>
     </a>
-
     <a class="card" href="wk1-review.html">
       <div class="art"><img src="img/wk1-review.png" alt="" loading="lazy" width="1200" height="630"></div>
       <div class="txt">
-        <div class="tag">Week 1 in Review</div>
+        <span class="chip">Week 1 recap</span>
         <h3>The Fairest Week This League Will Ever Have</h3>
-        <p>The six best scores won and the six worst lost, in exact order. Plus a 4.38-point heartbreak, Rage's 94-point floor, and a quarterback who scored minus-0.38 and won.</p>
-        <div class="date">Sept 17, 2026</div>
+        <p>The six best scores won and the six worst lost, in exact order.</p>
+        <span class="date">Sept 17</span>
       </div>
     </a>
-
     <a class="card" href="wk1-thursday-q2.html">
       <div class="art"><img src="img/wk1-thursday-q2.png" alt="" loading="lazy" width="1200" height="630"></div>
       <div class="txt">
-        <div class="tag">Week 1 &middot; 2nd Quarter</div>
+        <span class="chip">Live · 2nd quarter</span>
         <h3>Purdy Throws It To Pukachu</h3>
-        <p>An interception in Melbourne worth two points to the Rams defense, and the stack that had been chasing a number all night finally passed it.</p>
-        <div class="date">Sept 10, 2026</div>
+        <p>An interception in Melbourne, and the Rams stack finally passes its number.</p>
+        <span class="date">Sept 10</span>
       </div>
     </a>
-
     <a class="card" href="wk1-thursday-q1.html">
       <div class="art"><img src="img/wk1-thursday-q1.png" alt="" loading="lazy" width="1200" height="630"></div>
       <div class="txt">
-        <div class="tag">End of Q1 &middot; Thursday Night</div>
+        <span class="chip">Live · end of Q1</span>
         <h3>Pukachu Is 1.3 Points From The Number</h3>
-        <p>One quarter in Melbourne: the Rams stack at 15.5 of 16.8, the only points in the game going to Benjamin's Buttons.</p>
-        <div class="date">Sept 10, 2026</div>
+        <p>One quarter in: the Rams stack at 15.5 of 16.8.</p>
+        <span class="date">Sept 10</span>
       </div>
     </a>
-
-    <a class="card" href="wk1-thursday-night.html">
-      <div class="art"><img src="img/wk1-thursday-night.png" alt="" loading="lazy" width="1200" height="630"></div>
-      <div class="txt">
-        <div class="tag">Thursday Night Preview</div>
-        <h3>Same Bet, Other Side Of The World</h3>
-        <p>The NFL's first regular-season game in Australia, and the team named for Puka Nacua stacks the Rams the way JohnnyBoVonny stacked the Patriots.</p>
-        <div class="date">Sept 10, 2026</div>
-      </div>
-    </a>
-
-    <a class="card" href="opening-day-recap.html">
-      <div class="art"><img src="img/opening-day-recap.png" alt="" loading="lazy" width="1200" height="630"></div>
-      <div class="txt">
-        <div class="tag">Opening Day Recap</div>
-        <h3>What Your League Chat Got Right (And Wrong)</h3>
-        <p>The opener was a Super Bowl rematch and nobody said so. Plus the A.J. Brown panic that turned out to be a high-ankle sprain, and the Bowers injury chat missed.</p>
-        <div class="date">Sept 10, 2026</div>
-      </div>
-    </a>
-
-    <a class="card" href="wk1-opening-night.html">
-      <div class="art"><img src="img/wk1-opening-night.png" alt="" loading="lazy" width="1200" height="630"></div>
-      <div class="txt">
-        <div class="tag">Opening Night</div>
-        <h3>Most Of You Are Just Watching</h3>
-        <p>Eight of the league's 120 starters play in the Wednesday opener. Four teams — including both Matchup of the Week teams — have nobody in it at all.</p>
-        <div class="date">Sept 9, 2026</div>
-      </div>
-    </a>
-
-    <a class="card" href="wk1-ky-matchup.html">
-      <div class="art"><img src="img/wk1-ky.png" alt="" loading="lazy" width="1200" height="630"></div>
-      <div class="txt">
-        <div class="tag">K&amp;Y Matchup of the Week</div>
-        <h3>Both Of Them Still Have A Ring</h3>
-        <p>The last two champions open the season against each other. A slot-by-slot tale of the tape, the full series history, and the Parker Washington dispute.</p>
-        <div class="date">Sept 5, 2026</div>
-      </div>
-    </a>
-
-    <a class="card" href="2026-draft-review.html">
-      <div class="art"><img src="img/draft-standings.png" alt="" loading="lazy" width="1080" height="1350"></div>
-      <div class="txt">
-        <div class="tag">Draft Review</div>
-        <h3>Nobody Won This Draft On Value</h3>
-        <p>All 180 picks, twelve rosters graded on starting-lineup value over replacement, and why the best team came from the manager who ignored his cheat sheet.</p>
-        <div class="date">Sept 5, 2026</div>
-      </div>
-    </a>
-
+  </div>
+  <div class="earlier">
+    <h3 class="eh">Earlier</h3>
+      <a class="old" href="wk1-thursday-night.html"><span class="chip">Thursday night preview</span><span class="t">Same Bet, Other Side Of The World</span><span class="d">Sept 10</span></a>
+      <a class="old" href="opening-day-recap.html"><span class="chip">Opening day</span><span class="t">What Your League Chat Got Right (And Wrong)</span><span class="d">Sept 10</span></a>
+      <a class="old" href="wk1-opening-night.html"><span class="chip">Opening night</span><span class="t">Most Of You Are Just Watching</span><span class="d">Sept 9</span></a>
+      <a class="old" href="wk1-ky-matchup.html"><span class="chip">Matchup of the Week</span><span class="t">Both Of Them Still Have A Ring</span><span class="d">Sept 5</span></a>
+      <a class="old" href="2026-draft-review.html"><span class="chip">Draft review</span><span class="t">Nobody Won This Draft On Value</span><span class="d">Sept 5</span></a>
   </div>
 </section>
 
-<!-- ============ THE WIRE ============ -->
-<section class="rise">
-  <div class="shead">
-    <h2>The Wire</h2>
-    <span class="pill" id="wire-pill"><span class="dot"></span><span id="wire-txt">Connecting</span></span>
-  </div>
-
-  <div class="tabs" id="wire-tabs">
-    <button class="tab on" data-pane="inj">Injuries <span class="cnt" id="c-inj"></span></button>
-    <button class="tab" data-pane="news">Headlines <span class="cnt" id="c-news"></span></button>
-    <button class="tab" data-pane="wav">Waivers <span class="cnt" id="c-wav"></span></button>
-    <button class="tab" data-pane="lg">League <span class="cnt" id="c-lg"></span></button>
-  </div>
-
-  <div class="pane on" id="pane-inj">
-    <div class="feed" id="feed-inj">
-      <div class="row"><div class="bar"></div><div class="main"><div class="ttl skel">Loading injury report</div><div class="sub skel">status</div></div></div>
+<!-- ============ WIRE + STANDINGS ============ -->
+<div class="sec split rise">
+  <section>
+    <div class="shead">
+      <h2>The wire</h2>
+      <span class="live" id="wire-pill"><span class="dot"></span><span id="wire-txt">Connecting</span></span>
     </div>
-  </div>
-  <div class="pane" id="pane-news"><div class="feed" id="feed-news"></div></div>
-  <div class="pane" id="pane-wav"><div class="feed" id="feed-wav"></div></div>
-  <div class="pane" id="pane-lg"><div class="feed" id="feed-lg"></div></div>
-</section>
+    <div class="seg" id="wire-tabs" role="tablist">
+      <button class="tab on" data-pane="inj" role="tab" aria-selected="true">Injuries <span class="cnt" id="c-inj"></span></button>
+      <button class="tab" data-pane="news" role="tab" aria-selected="false">Headlines <span class="cnt" id="c-news"></span></button>
+      <button class="tab" data-pane="wav" role="tab" aria-selected="false">Waivers <span class="cnt" id="c-wav"></span></button>
+      <button class="tab" data-pane="lg" role="tab" aria-selected="false">League <span class="cnt" id="c-lg"></span></button>
+    </div>
+    <div class="pane on" id="pane-inj">
+      <div class="feed" id="feed-inj">
+        <div class="row"><span class="sd"></span><div class="main"><div class="ttl skel">Loading injury report</div><div class="sub skel">status</div></div></div>
+      </div>
+    </div>
+    <div class="pane" id="pane-news"><div class="feed" id="feed-news"></div></div>
+    <div class="pane" id="pane-wav"><div class="feed" id="feed-wav"></div></div>
+    <div class="pane" id="pane-lg"><div class="feed" id="feed-lg"></div></div>
+  </section>
 
-<!-- ============ STANDINGS ============ -->
-<section class="rise">
-  <div class="shead">
-    <h2>Standings</h2>
-    <span class="note" id="stand-note">Live from Sleeper</span>
-  </div>
-  <div class="wrap" id="stand-wrap">
-    <table class="tbl">
-      <thead><tr><th class="rank">#</th><th>Team</th><th class="r">W-L</th><th class="r">PF</th><th class="r">PA</th><th class="r">Now</th></tr></thead>
-      <tbody id="stand-body">
-        <tr><td class="rank">—</td><td class="team skel">Loading</td><td class="r skel">0-0</td><td class="r skel">0.0</td><td class="r skel">0.0</td><td class="r skel">0.0</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<div class="foot">
-  <span>Dem Fantasy Boyz &middot; 12-team full PPR</span>
-  <span id="stamp">Live data from Sleeper</span>
+  <section>
+    <div class="shead">
+      <h2>Standings</h2>
+      <span class="note" id="stand-note">Live from Sleeper</span>
+    </div>
+    <div class="stand" id="stand-wrap">
+      <table class="tbl">
+        <thead><tr><th class="rank">#</th><th>Team</th><th class="r">W&ndash;L</th><th class="r">PF</th><th class="r pa">PA</th><th class="r" id="now-th">Now</th></tr></thead>
+        <tbody id="stand-body">
+          <tr><td class="rank">&ndash;</td><td class="team skel">Loading</td><td class="r skel">0-0</td><td class="r skel">0.0</td><td class="r pa skel">0.0</td><td class="r skel">0.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </div>
+
+<footer class="foot">
+  <span>Dem Fantasy Boyz &middot; 12 teams &middot; full PPR</span>
+  <span id="stamp">Live data from Sleeper</span>
+</footer>
 
 </div>
 
@@ -473,7 +326,7 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
     var p = document.getElementById("live-pill");
     var t = document.getElementById("live-txt");
     if (t) t.textContent = text;
-    if (p) p.className = state ? "pill on" : "pill";
+    if (p) p.className = state ? "live on" : "live";
   }
 
   // roster_id -> {team, manager, isMJ, wins, losses, ties, pf, pa}
@@ -498,17 +351,16 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
     return out;
   }
 
-  function renderBoard(matchups, teams){
+  // mode: "live" (points on the board), "final" (last week, shown until this
+  // week kicks off) or "upcoming" (week 1, nothing played yet).
+  function renderBoard(matchups, teams, mode){
     var board = document.getElementById("board");
-    if (!board) return;
-
-    // pair rosters by matchup_id
+    if (!board) return false;
     var games = {};
     matchups.forEach(function(m){
       var k = m.matchup_id == null ? ("bye" + m.roster_id) : m.matchup_id;
       (games[k] = games[k] || []).push(m);
     });
-
     var keys = Object.keys(games).sort(function(a,b){ return Number(a) - Number(b); });
     board.textContent = "";
     var anyPoints = false;
@@ -519,39 +371,51 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
       var ta = teams[a.roster_id] || {team:"—", manager:"—"};
       var tb = b ? (teams[b.roster_id] || {team:"—", manager:"—"}) : null;
       var pa = Number(a.points)||0, pb = b ? (Number(b.points)||0) : 0;
-      if (pa > 0 || pb > 0) anyPoints = true;
+      var scored = pa > 0 || pb > 0;
+      if (scored) anyPoints = true;
 
-      var g = el("div", "game" + ((ta.isMJ || (tb && tb.isMJ)) ? " mj" : ""));
+      var g = el("div", "game" + ((ta.isMJ || (tb && tb.isMJ)) ? " mj" : "") + (mode === "final" ? " final" : ""));
 
-      function side(t, pts, other, live){
+      function side(t, pts, other){
         var cls = "side";
-        if (live && pts !== other) cls += pts > other ? " lead" : " trail";
+        if (scored && pts !== other) cls += pts > other ? " ahead" : " behind";
+        if (t.isMJ) cls += " me";
         var s = el("div", cls);
-        var wrap = el("div"); wrap.style.cssText = "flex:1;min-width:0";
-        wrap.appendChild(el("div", "nm", t.team));
-        wrap.appendChild(el("div", "mgr", t.manager));
-        s.appendChild(wrap);
-        s.appendChild(el("span", "pts", num(pts)));
+        var who = el("div", "who");
+        who.appendChild(el("div", "nm", t.team));
+        who.appendChild(el("div", "mgr", t.manager));
+        s.appendChild(who);
+        s.appendChild(el("span", "pts num", scored ? num(pts) : "–"));
         return s;
       }
 
-      var live = (pa > 0 || pb > 0);
-      g.appendChild(side(ta, pa, pb, live));
-      if (tb) g.appendChild(side(tb, pb, pa, live));
+      g.appendChild(side(ta, pa, pb));
+      if (tb) {
+        // the tug: each team's share of the combined score, drawn as one rounded bar
+        var tug = el("div", "tug");
+        var share = scored ? pa / (pa + pb) : 0.5;
+        var ia = el("i", scored ? (pa >= pb ? "up" : "") : "");
+        var ib = el("i", scored ? (pb > pa ? "up" : "") : "");
+        ia.style.flexGrow = String(share);
+        ib.style.flexGrow = String(1 - share);
+        tug.appendChild(ia); tug.appendChild(ib);
+        tug.setAttribute("aria-hidden", "true");
+        g.appendChild(tug);
+        g.appendChild(side(tb, pb, pa));
+      }
 
       var f = el("div", "gfoot");
-      f.appendChild(el("span", null, tb ? (live ? "In progress" : "Not started") : "Bye"));
-      if (tb && live) f.appendChild(el("span", null, "Δ " + num(Math.abs(pa - pb))));
+      var state = !tb ? "Bye" : mode === "final" ? "Final" : scored ? "In progress" : "Not started";
+      f.appendChild(el("span", null, state));
+      if (tb && scored) f.appendChild(el("span", "num", (mode === "final" ? "Won by " : "Lead ") + num(Math.abs(pa - pb))));
       g.appendChild(f);
-
       board.appendChild(g);
     });
-
     return anyPoints;
   }
 
   var noneFinal = false;
-  function renderStandings(teams, livePts){
+  function renderStandings(teams, livePts, showNow){
     var body = document.getElementById("stand-body");
     if (!body) return;
     var rows = Object.keys(teams).map(function(k){
@@ -573,30 +437,45 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
           return y.now - x.now;
         });
     body.textContent = "";
+    var nowTh = document.getElementById("now-th");
+    if (nowTh) nowTh.style.display = showNow ? "" : "none";
     rows.forEach(function(t, i){
       var tr = el("tr", t.isMJ ? "mj" : null);
       tr.appendChild(el("td", "rank", noneFinal ? "\u2013" : String(i + 1)));
-      var td = el("td");
-      td.appendChild(el("div", "team", t.team));
-      td.appendChild(el("div", "mgrc", t.manager));
+      var td = el("td", "team", t.team);
+      td.appendChild(el("span", "sub", t.manager));
       tr.appendChild(td);
       tr.appendChild(el("td", "r", t.wins + "-" + t.losses + (t.ties ? "-" + t.ties : "")));
       tr.appendChild(el("td", "r", num(t.pf)));
-      tr.appendChild(el("td", "r", num(t.pa)));
-      var now = el("td", "r", num(t.now));
-      if (t.now > 0) now.style.color = "var(--win)";
-      tr.appendChild(now);
+      tr.appendChild(el("td", "r pa", num(t.pa)));
+      if (showNow) {
+        var now = el("td", "r", num(t.now));
+        if (t.now > 0) now.style.color = "var(--turf)";
+        tr.appendChild(now);
+      }
       body.appendChild(tr);
     });
   }
 
-  function stamp(week, anyPoints){
+  function stamp(week, mode){
     var s = document.getElementById("stamp");
     var n = document.getElementById("stand-note");
+    var bn = document.getElementById("board-note");
     var time = new Date().toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
-    if (s) s.textContent = "Week " + week + " · updated " + time;
-    if (n) n.textContent = noneFinal ? ("Week " + week + " in progress · no games final") : ("Live · Week " + week);
-    setPill(true, anyPoints ? ("Week " + week + " live") : ("Week " + week));
+    if (s) s.textContent = "Updated " + time;
+    if (mode === "final") {
+      if (bn) bn.textContent = "Week " + (week - 1) + " final · Week " + week + " hasn’t kicked off";
+      if (n) n.textContent = "After Week " + (week - 1);
+      setPill(true, "Week " + (week - 1) + " final");
+    } else if (mode === "live") {
+      if (bn) bn.textContent = "Week " + week;
+      if (n) n.textContent = noneFinal ? "Week " + week + " · no games final" : "Live · Week " + week;
+      setPill(true, "Week " + week + " live");
+    } else {
+      if (bn) bn.textContent = "Week " + week;
+      if (n) n.textContent = "Week " + week + " · no games final";
+      setPill(true, "Week " + week);
+    }
   }
 
   function fail(msg){
@@ -691,7 +570,7 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
   function row(cls, title, sub, meta, rt, href){
     var n = el(href ? "a" : "div", "row" + (cls ? " " + cls : ""));
     if (href) { n.href = href; n.target = "_blank"; n.rel = "noopener noreferrer"; }
-    n.appendChild(el("div", "bar"));
+    n.appendChild(el("span", "sd"));
     var m = el("div", "main");
     m.appendChild(el("div", "ttl", title));
     if (sub) m.appendChild(el("div", "sub", sub));
@@ -708,8 +587,19 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
     var f = document.getElementById(id);
     if (!f) return;
     f.textContent = "";
+    f.classList.remove("clip");
+    var old = f.nextElementSibling;
+    if (old && old.className === "more") old.remove();
     if (!nodes.length) { f.appendChild(el("div", "empty", emptyMsg)); return; }
     nodes.forEach(function(n){ f.appendChild(n); });
+    // keep the wire to six rows until asked; a 24-row injury list buries the standings
+    if (nodes.length > 6 && !f.dataset.open) {
+      f.classList.add("clip");
+      var b = el("button", "more", "Show all " + nodes.length);
+      b.type = "button";
+      b.addEventListener("click", function(){ f.classList.remove("clip"); f.dataset.open = "1"; b.remove(); });
+      f.parentNode.insertBefore(b, f.nextSibling);
+    }
   }
   function count(id, n){
     var c = document.getElementById(id);
@@ -821,7 +711,7 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
   function loadWire(rosters, teams, week){
     var pill = document.getElementById("wire-pill");
     var ptxt = document.getElementById("wire-txt");
-    function setw(on, s){ if (ptxt) ptxt.textContent = s; if (pill) pill.className = on ? "pill on" : "pill"; }
+    function setw(on, s){ if (ptxt) ptxt.textContent = s; if (pill) pill.className = on ? "live on" : "live"; }
 
     var rosterIds = [];
     (rosters || []).forEach(function(r){ (r.players || []).forEach(function(p){ rosterIds.push(p); }); });
@@ -868,8 +758,8 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
     var tabs = document.querySelectorAll("#wire-tabs .tab");
     Array.prototype.forEach.call(tabs, function(t){
       t.addEventListener("click", function(){
-        Array.prototype.forEach.call(tabs, function(x){ x.className = "tab"; });
-        t.className = "tab on";
+        Array.prototype.forEach.call(tabs, function(x){ x.className = "tab"; x.setAttribute("aria-selected","false"); });
+        t.className = "tab on"; t.setAttribute("aria-selected","true");
         Array.prototype.forEach.call(document.querySelectorAll(".pane"), function(p){ p.className = "pane"; });
         var pane = document.getElementById("pane-" + t.getAttribute("data-pane"));
         if (pane) pane.className = "pane on";
@@ -889,10 +779,20 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
         var matchups = res[2] || [];
         var livePts = {};
         matchups.forEach(function(m){ livePts[m.roster_id] = Number(m.points) || 0; });
-        var any = renderBoard(matchups, teams);
-        renderStandings(teams, livePts);
-        stamp(week, any);
+        var live = matchups.some(function(m){ return Number(m.points) > 0; });
+        renderStandings(teams, livePts, live);
         loadWire(res[0], teams, week);
+        // Between Tuesday and kickoff Sleeper has already moved to the new week,
+        // so the board would be twelve zeros. Show last week's finals instead.
+        if (live || week === 1) {
+          renderBoard(matchups, teams, live ? "live" : "upcoming");
+          stamp(week, live ? "live" : "upcoming");
+          return;
+        }
+        return getJSON("league/" + LEAGUE + "/matchups/" + (week - 1)).then(function(prev){
+          renderBoard(prev || [], teams, "final");
+          stamp(week, "final");
+        });
       });
     }).catch(function(e){
       fail(String(e.message || e));
@@ -903,7 +803,7 @@ a.row:hover{border-color:var(--rule-hard);transform:translateX(2px)}
   function reveal(){
     var items = document.querySelectorAll(".rise");
     Array.prototype.forEach.call(items, function(n, i){
-      setTimeout(function(){ n.classList.add("in"); }, 60 * i);
+      setTimeout(function(){ n.classList.add("in"); }, 70 * i);
     });
   }
 
