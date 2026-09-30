@@ -15,106 +15,21 @@
 <meta name="twitter:title" content="The Fairest Week This League Will Ever Have">
 <meta name="twitter:description" content="Week 1 in review: the six best scores won, the six worst lost, in exact order">
 <meta name="twitter:image" content="https://goonscrubbih.github.io/dfb/img/wk1-review.png">
-<meta name="theme-color" content="#0C0F14">
+<meta name="theme-color" content="#EDF1F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1622" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
-<style>
-:root{
-  --ground:#0C0F14; --surface:#141922; --sunk:#1A2029; --raise:#212936;
-  --ink:#F2F4F7; --body:#B7C0CB; --muted:#7A8595; --rule:#232B36; --rule-hard:#38424F;
-  --a:#E8A33D; --b:#5FA5F0; --a-dim:#4A3617; --b-dim:#17304C; --hot:#F0785A;
-}
-@media (prefers-color-scheme:light){
-  :root:not([data-theme="dark"]){
-    --ground:#F6F5F3; --surface:#FFFFFF; --sunk:#ECEBE8; --raise:#FFFFFF;
-    --ink:#13171D; --body:#333B46; --muted:#69717D; --rule:#E1E0DC; --rule-hard:#B7B6B1;
-    --a:#A66A08; --b:#1B5FA8; --a-dim:#F5E7CE; --b-dim:#DCE8F7; --hot:#B34328;
-  }
-}
-:root[data-theme="light"]{
-  --ground:#F6F5F3; --surface:#FFFFFF; --sunk:#ECEBE8; --raise:#FFFFFF;
-  --ink:#13171D; --body:#333B46; --muted:#69717D; --rule:#E1E0DC; --rule-hard:#B7B6B1;
-  --a:#A66A08; --b:#1B5FA8; --a-dim:#F5E7CE; --b-dim:#DCE8F7; --hot:#B34328;
-}
-*{box-sizing:border-box}
-html{color-scheme:light dark}
-body{margin:0;background:var(--ground);color:var(--body);font-family:Spectral,Georgia,serif;
-  font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased}
-img{max-width:100%}
-.page{max-width:1000px;margin:0 auto;padding:0 24px 96px}
-h1,h2,h3,.slot,.gr,.st b,.tno{font-family:Oswald,"Arial Narrow",Arial,sans-serif}
-.mono,.kicker,.byline,.cap,.foot,.st span,.tmeta{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;
-  font-variant-numeric:tabular-nums}
-.rail{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between;
-  margin-top:26px;padding:11px 0;border-top:3px solid var(--hot);border-bottom:1px solid var(--rule)}
-.rail b{font-family:Oswald,sans-serif;font-weight:600;font-size:14px;letter-spacing:.17em;
-  text-transform:uppercase;color:var(--ink)}
-.rail span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
-  font-family:"JetBrains Mono",monospace}
-.rail a{color:var(--muted);text-decoration:none;font-size:10.5px;letter-spacing:.1em;
-  text-transform:uppercase;font-family:"JetBrains Mono",monospace}
-.rail a:hover{color:var(--ink)}
-.rail .r{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-.kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--hot);margin:0 0 14px}
-.hero{padding:46px 0 0}
-h1{font-family:Oswald,sans-serif;font-weight:700;text-transform:uppercase;color:var(--ink);
-  margin:0 0 18px;font-size:clamp(36px,6.2vw,68px);line-height:.96;text-wrap:balance;max-width:16ch}
-.deck{font-size:clamp(18px,2vw,22px);line-height:1.5;max-width:56ch;margin:0;color:var(--body)}
-.deck em{font-style:italic;font-weight:600;color:var(--ink)}
-.byline{margin-top:24px;padding-top:13px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;
-  gap:7px 20px;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
-.byline b{color:var(--ink);font-weight:500}
-.sec{margin-top:58px}
-h2{font-family:Oswald,sans-serif;font-weight:600;text-transform:uppercase;font-size:clamp(21px,2.8vw,29px);
-  color:var(--ink);line-height:1.12;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid var(--rule-hard)}
-.col{max-width:64ch}
-p{margin:0 0 1.05em} strong{color:var(--ink);font-weight:600}
-.cap{font-size:11px;line-height:1.6;color:var(--muted);margin-top:14px;max-width:74ch}
-.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
-  background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin:30px 0}
-.st{background:var(--surface);padding:16px 18px}
-.st b{display:block;font-size:28px;font-weight:600;color:var(--ink);line-height:1}
-.st span{display:block;margin-top:6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);line-height:1.5}
-.st.hot b{color:var(--hot)} .st.a b{color:var(--a)} .st.b b{color:var(--b)}
-.xf{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:6px}
-.x{padding:19px 20px;background:var(--surface);border:1px solid var(--rule);border-radius:4px}
-.x h3{font-family:Oswald,sans-serif;font-size:15px;font-weight:600;text-transform:uppercase;
-  letter-spacing:.05em;margin:0 0 4px;line-height:1.2}
-.x.a h3{color:var(--a)} .x.b h3{color:var(--b)} .x.n h3{color:var(--hot)}
-.x .who{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--muted);margin:0 0 10px}
-.x p{font-size:15px;margin:0}
-table{width:100%;border-collapse:collapse;font-size:14px;font-family:Oswald,sans-serif}
-th{text-align:left;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
-  font-weight:600;padding:0 10px 8px 0;border-bottom:1.5px solid var(--rule-hard)}
-td{padding:10px 10px 10px 0;border-bottom:1px solid var(--rule);color:var(--body)}
-th.n,td.n{text-align:right;padding-right:0;font-family:"JetBrains Mono",monospace;
-  font-variant-numeric:tabular-nums}
-td.tm{color:var(--ink);font-weight:500}
-tr.me td{background:var(--sunk)}
-.pull{margin:38px 0;padding:26px 0;border-top:1px solid var(--hot);border-bottom:1px solid var(--hot)}
-.pull p{font-family:Oswald,sans-serif;font-weight:400;font-size:clamp(21px,2.6vw,27px);
-  line-height:1.24;color:var(--ink);margin:0;max-width:24ch;text-transform:uppercase}
-.pull cite{display:block;margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:10.5px;
-  letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-style:normal}
-.method{margin-top:52px;padding:26px;background:var(--surface);border:1px solid var(--rule);border-radius:4px}
-.method h2{border:0;padding:0;margin-bottom:10px;font-size:16px;letter-spacing:.1em}
-.method p,.method li{font-size:14.5px;line-height:1.62;color:var(--muted)}
-.foot{margin-top:32px;padding-top:15px;border-top:1px solid var(--rule);font-size:10.5px;
-  letter-spacing:.09em;color:var(--muted)}
-@media (max-width:760px){ .page{padding:0 17px 70px} }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="desk.css?v=2">
+<link rel="stylesheet" href="legacy.css?v=2">
 </head>
-<body>
+<body class="legacy">
 <div class="page">
 
-<div class="rail">
-  <b>Dem Fantasy Boyz</b>
-  <div class="r"><a href="index.html">&larr; News Desk</a><span>Week 1 in review: the six best scores won, the six worst lost, in exact order &middot; 2026</span></div>
-</div>
+<header class="mast">
+  <a class="brand" href="index.html"><span class="wm">Dem Fantasy Boyz</span><span class="badge">News Desk</span></a>
+  <a class="back" href="index.html">&larr; All stories</a>
+</header>
 
 <div class="hero">
   <p class="kicker">Week 1 in review</p>
@@ -141,7 +56,7 @@ tr.me td{background:var(--sunk)}
 
 <section class="sec">
   <h2>The scoreboard</h2>
-  <table>
+  <div class="card-tbl"><table class="tbl">
     <thead><tr><th>Result</th><th class="n">Margin</th><th class="n">All-play</th></tr></thead>
     <tbody>
       <tr><td class="tm">DeionSandalz 158.96 &mdash; 126.46 Nacua Matata</td><td class="n">32.50</td><td class="n">11&ndash;0</td></tr>
@@ -151,7 +66,7 @@ tr.me td{background:var(--sunk)}
       <tr class="me"><td class="tm">Tampa Tropics 144.90 &mdash; 94.16 Rage</td><td class="n">50.74</td><td class="n">7&ndash;4</td></tr>
       <tr><td class="tm">Benjamin's Buttons 136.62 &mdash; 132.24 The Taylords</td><td class="n">4.38</td><td class="n">6&ndash;5</td></tr>
     </tbody>
-  </table>
+  </table></div>
   <p class="cap">All-play is the winner's record against the entire field that week. Every winner's all-play is above .500 and every loser's is below it &mdash; the six games sorted themselves perfectly.</p>
 </section>
 
@@ -227,7 +142,7 @@ tr.me td{background:var(--sunk)}
 
 <section class="sec">
   <h2>Standings after one week</h2>
-  <table>
+  <div class="card-tbl"><table class="tbl">
     <thead><tr><th>#</th><th>Team</th><th class="n">W&ndash;L</th><th class="n">Points for</th></tr></thead>
     <tbody>
       <tr><td class="n">1</td><td class="tm">DeionSandalz</td><td class="n">1&ndash;0</td><td class="n">158.96</td></tr>
@@ -243,7 +158,7 @@ tr.me td{background:var(--sunk)}
       <tr><td class="n">11</td><td class="tm">Sex Panthers</td><td class="n">0&ndash;1</td><td class="n">105.52</td></tr>
       <tr class="me"><td class="n">12</td><td class="tm">Rage</td><td class="n">0&ndash;1</td><td class="n">94.16</td></tr>
     </tbody>
-  </table>
+  </table></div>
   <p class="cap">Ordered by record, then points for &mdash; which after one week is simply the scoring order.</p>
 </section>
 
@@ -253,7 +168,7 @@ tr.me td{background:var(--sunk)}
   <p>Transactions are the league's own log for the Week 2 waiver period. This league runs rolling waiver priority, not FAAB, so there are no bid amounts to report.</p>
 </div>
 
-<p class="foot">Dem Fantasy Boyz &middot; Week 1 in review &middot; Sept 17, 2026</p>
+<div class="end"><span>Dem Fantasy Boyz &middot; Week 1 in review &middot; Sept 17, 2026</span><a href="index.html">More from the News Desk &rarr;</a></div>
 
 </div>
 </body>

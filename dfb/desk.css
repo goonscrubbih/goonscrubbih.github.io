@@ -14,7 +14,7 @@
   --flag:#F4C430; --flag-soft:rgba(244,196,48,.13); --on-flag:#1B1500;
   --turf:#4CC38A; --turf-soft:rgba(76,195,138,.14);
   --warn:#F08A6B; --warn-soft:rgba(240,138,107,.14);
-  --amber:#E9B04A;
+  --amber:#E9B04A; --team-a:#EDB54A; --team-b:#72ACF5;
   --shadow:0 1px 0 rgba(255,255,255,.035) inset,0 12px 32px -14px rgba(0,0,0,.7);
   --shadow-lift:0 1px 0 rgba(255,255,255,.05) inset,0 20px 44px -16px rgba(0,0,0,.8);
   --r-xl:26px; --r-lg:20px; --r:16px; --r-sm:12px;
@@ -30,7 +30,7 @@
     --flag:#F2BD1F; --flag-soft:rgba(242,189,31,.18); --on-flag:#1B1500;
     --turf:#15804E; --turf-soft:rgba(21,128,78,.1);
     --warn:#BF4526; --warn-soft:rgba(191,69,38,.09);
-    --amber:#9A6A06;
+    --amber:#9A6A06; --team-a:#9A6A06; --team-b:#1F5FB8;
     --shadow:0 1px 2px rgba(18,33,58,.05),0 10px 30px -14px rgba(18,33,58,.22);
     --shadow-lift:0 2px 4px rgba(18,33,58,.06),0 18px 40px -14px rgba(18,33,58,.3);
   }
@@ -42,7 +42,7 @@
   --flag:#F2BD1F; --flag-soft:rgba(242,189,31,.18); --on-flag:#1B1500;
   --turf:#15804E; --turf-soft:rgba(21,128,78,.1);
   --warn:#BF4526; --warn-soft:rgba(191,69,38,.09);
-  --amber:#9A6A06;
+  --amber:#9A6A06; --team-a:#9A6A06; --team-b:#1F5FB8;
   --shadow:0 1px 2px rgba(18,33,58,.05),0 10px 30px -14px rgba(18,33,58,.22);
   --shadow-lift:0 2px 4px rgba(18,33,58,.06),0 18px 40px -14px rgba(18,33,58,.3);
 }
