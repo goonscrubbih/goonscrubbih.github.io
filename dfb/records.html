@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Dem Fantasy Boyz — Record Book</title>
+<meta name="description" content="League records for Dem Fantasy Boyz: best weeks, best seasons, player highs, every title, and your record against every team.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dem Fantasy Boyz — Record Book">
+<meta property="og:description" content="Best weeks, best seasons, player highs, every title, and your record against every team.">
+<meta property="og:url" content="https://goonscrubbih.github.io/dfb/records.html">
+<meta property="og:image" content="https://goonscrubbih.github.io/dfb/img/records.png?v=1">
+<meta name="theme-color" content="#EDF1F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1622" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.sleeper.app" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="desk.css?v=2">
+<style>
+.page{max-width:1000px;margin:0 auto;padding:0 28px 90px}
+.sec{margin-top:60px}
+.shead{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;margin:0 0 18px}
+.shead h2{margin:0;font-family:var(--display);font-weight:700;font-size:25px;letter-spacing:-.025em;color:var(--ink)}
+.shead .note{font-family:var(--display);font-size:14px;color:var(--muted)}
+.hed{padding:30px 0 0}
+.hed .chip{margin-bottom:16px}
+.hed h1{font-family:var(--display);font-weight:800;color:var(--ink);margin:0 0 14px;
+  font-size:clamp(36px,6vw,56px);line-height:1.02;letter-spacing:-.03em}
+.hed .dek{font-size:clamp(18px,2.2vw,21px);line-height:1.5;margin:0;max-width:60ch;text-wrap:pretty}
+
+/* segmented tabs, same look as the hub's wire */
+.seg{display:inline-flex;flex-wrap:wrap;gap:3px;padding:4px;background:var(--sunk);border-radius:999px;margin:0 0 14px}
+.tab{font-family:var(--display);font-size:14px;font-weight:600;color:var(--muted);background:transparent;border:0;
+  border-radius:999px;padding:7px 14px;cursor:pointer;transition:color .2s,background-color .25s,box-shadow .25s}
+.tab:hover{color:var(--ink)}
+.tab.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(18,33,58,.12)}
+.pane{display:none} .pane.on{display:block}
+
+.box{background:var(--surface);border-radius:var(--r-lg);padding:14px 6px 6px;box-shadow:var(--shadow);
+  overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tbl .rank{color:var(--muted);width:1%;white-space:nowrap}
+.tbl .when{white-space:nowrap}
+.tbl .big{font-weight:700;color:var(--ink);font-size:16px}
+.tbl td.r .sub{text-align:right}
+.res{font-weight:700}
+.res.w{color:var(--turf)} .res.l{color:var(--warn)} .res.t{color:var(--muted)}
+.wait,.err{font-family:var(--display);font-size:14px;color:var(--muted);padding:22px 18px;border-radius:var(--r-sm);
+  background:var(--sunk);text-align:center}
+.skel{background:var(--sunk);border-radius:6px;color:transparent!important;animation:sk 1.5s ease-in-out infinite}
+@keyframes sk{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* champions strip */
+.champs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.champ{background:var(--surface);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);font-family:var(--display)}
+.champ.mj{box-shadow:var(--shadow),inset 0 0 0 2px var(--flag)}
+.champ .yr{font-size:13px;font-weight:600;color:var(--muted)}
+.champ .nm{font-weight:700;font-size:18px;color:var(--ink);letter-spacing:-.01em;line-height:1.2;margin:6px 0 2px}
+.champ .mg{font-size:13px;color:var(--muted)}
+.champ .fn{margin-top:10px;padding-top:9px;border-top:1px solid var(--line);font-size:13px;color:var(--body);
+  font-variant-numeric:tabular-nums}
+.champ.open .nm{color:var(--muted)}
+
+/* head to head */
+.pick{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 16px;font-family:var(--display)}
+.pick label{font-size:14px;font-weight:600;color:var(--muted)}
+.pick select{font:600 16px/1.2 var(--display);color:var(--ink);background:var(--surface);border:1px solid var(--line-2);
+  border-radius:999px;padding:10px 38px 10px 16px;box-shadow:var(--shadow);max-width:100%;cursor:pointer;
+  appearance:none;-webkit-appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+  background-position:calc(100% - 20px) 55%,calc(100% - 15px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+.pick .tot{font-size:14px;color:var(--muted)}
+.pick .tot b{color:var(--ink)}
+.opps{display:grid;gap:8px}
+.opp{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);font-family:var(--display)}
+.opp > summary,.gm > summary{list-style:none;cursor:pointer}
+.opp > summary::-webkit-details-marker,.gm > summary::-webkit-details-marker{display:none}
+.opp > summary{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:4px 16px;align-items:center;padding:14px 18px}
+.opp .nm{font-weight:600;font-size:16.5px;color:var(--ink);letter-spacing:-.01em;line-height:1.25;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.opp .mg{font-size:12.5px;color:var(--muted)}
+.opp .rec{font-weight:800;font-size:21px;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums;text-align:right}
+.opp .rec.up{color:var(--turf)} .opp .rec.down{color:var(--warn)}
+.opp .pf{font-size:12.5px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;line-height:1.3}
+.chev{width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);
+  transform:rotate(45deg);margin:0 4px 4px;transition:transform .25s var(--ease)}
+details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
+.opp .games{padding:0 10px 10px;display:grid;gap:6px}
+.gm{background:var(--sunk);border-radius:var(--r-sm)}
+.gm > summary{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:11px 14px}
+.gm .wk{font-size:13.5px;color:var(--muted);white-space:nowrap}
+.gm .wk b{color:var(--ink);font-weight:600}
+.gm .sc{font-weight:600;font-size:15.5px;color:var(--ink);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.gm .sc .l{color:var(--muted);font-weight:400}
+.gm .tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0}
+.bk{padding:2px 12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.lu h4{margin:6px 0 6px;font-size:14px;font-weight:700;color:var(--ink);line-height:1.25}
+.lu h4 span{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
+.lu table{width:100%;border-collapse:collapse;font-size:14px}
+.lu td{padding:5px 4px;border-bottom:1px solid var(--line);color:var(--body);vertical-align:top}
+.lu td.sl{color:var(--muted);font-size:12px;font-weight:600;width:1%;white-space:nowrap;padding-top:7px}
+.lu td.p{color:var(--ink)}
+.lu td.p small{display:block;color:var(--muted);font-size:12px}
+.lu td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lu tr.top td.r{font-weight:700;color:var(--ink)}
+.lu tr.tot td{border-bottom:0;font-weight:700;color:var(--ink)}
+.lu tr.bn td{border-bottom:0;color:var(--muted);font-size:13px}
+
+.foot{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;
+  justify-content:space-between;gap:8px 18px;font-family:var(--display);font-size:13.5px;color:var(--muted)}
+.foot a{color:var(--ink);font-weight:600;text-decoration:none}
+
+@media (max-width:600px){
+  .page{padding:0 16px 70px}
+  .sec{margin-top:48px}
+  .shead h2{font-size:22px}
+  .seg{display:flex;flex-wrap:nowrap;width:100%;overflow-x:auto;scrollbar-width:none}
+  .tab{flex:1 0 auto;padding:7px 9px;font-size:13.5px}
+  .box{padding:12px 2px 4px}
+  .box .tbl{font-size:14px}
+  .box .tbl td,.box .tbl th{padding-left:7px;padding-right:7px}
+  .box .tbl .hide-s{display:none}
+  .opp > summary{grid-template-columns:minmax(0,1fr) auto auto;padding:13px 14px;gap:4px 10px}
+  .gm > summary{grid-template-columns:minmax(0,1fr) auto auto;gap:4px 10px}
+  .gm .tags{grid-column:1/-1;grid-row:2}
+  .bk{grid-template-columns:1fr;gap:4px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="mast">
+  <a class="brand" href="./" aria-label="Dem Fantasy Boyz News Desk home"><span class="wm">Dem Fantasy Boyz</span><span class="badge">News Desk</span></a>
+  <a class="back" href="./">&larr; News Desk</a>
+</header>
+
+<section class="hed rise">
+  <span class="chip flag">Record book</span>
+  <h1>The Record Book</h1>
+  <p class="dek" id="dek">Every week this league has played, pulled live from Sleeper: the biggest scores, the best seasons, every title, and your record against everyone.</p>
+  <div class="by"><span class="live" id="pill"><span class="dot"></span><span id="pill-txt">Loading league history</span></span></div>
+</section>
+
+<div class="stats rise" id="stats"></div>
+
+<!-- ============ CHAMPIONS ============ -->
+<section class="sec rise">
+  <div class="shead"><h2>Champions</h2><span class="note" id="champ-note"></span></div>
+  <div class="champs" id="champs"><div class="wait">Loading</div></div>
+</section>
+
+<!-- ============ TROPHY CASE ============ -->
+<section class="sec rise">
+  <div class="shead"><h2>Playoffs and chips</h2><span class="note">Every manager, every season</span></div>
+  <div class="box"><table class="tbl" id="hall">
+    <thead><tr><th>Manager</th><th class="r">Chips</th><th class="r hide-s">Finals</th><th class="r">Playoff W&ndash;L</th><th class="r hide-s">Trips</th><th class="r">Reg W&ndash;L</th></tr></thead>
+    <tbody><tr><td colspan="6"><div class="wait">Loading</div></td></tr></tbody>
+  </table></div>
+</section>
+
+<!-- ============ TEAM RECORDS ============ -->
+<section class="sec rise">
+  <div class="shead"><h2>Team records</h2><span class="note">Top 10</span></div>
+  <div class="seg" role="tablist" data-group="team">
+    <button class="tab on" data-pane="t-week" role="tab" aria-selected="true">Most in a week</button>
+    <button class="tab" data-pane="t-season" role="tab" aria-selected="false">Most in a season</button>
+    <button class="tab" data-pane="t-low" role="tab" aria-selected="false">Fewest in a week</button>
+  </div>
+  <div class="pane on" id="t-week"><div class="box"><div class="wait">Loading</div></div></div>
+  <div class="pane" id="t-season"><div class="box"><div class="wait">Loading</div></div></div>
+  <div class="pane" id="t-low"><div class="box"><div class="wait">Loading</div></div></div>
+</section>
+
+<!-- ============ PLAYER RECORDS ============ -->
+<section class="sec rise">
+  <div class="shead"><h2>Player records</h2><span class="note">Points scored in a starting lineup</span></div>
+  <div class="seg" role="tablist" data-group="player">
+    <button class="tab on" data-pane="p-game" role="tab" aria-selected="true">Most in a game</button>
+    <button class="tab" data-pane="p-season" role="tab" aria-selected="false">Most in a season</button>
+  </div>
+  <div class="pane on" id="p-game"><div class="box"><div class="wait">Loading</div></div></div>
+  <div class="pane" id="p-season"><div class="box"><div class="wait">Loading</div></div></div>
+</section>
+
+<!-- ============ HEAD TO HEAD ============ -->
+<section class="sec rise" id="h2h">
+  <div class="shead"><h2>Head to head</h2><span class="note">Regular season and playoffs</span></div>
+  <div class="pick">
+    <label for="who">Your team</label>
+    <select id="who" disabled><option>Loading</option></select>
+    <span class="tot" id="who-tot"></span>
+  </div>
+  <div class="opps" id="opps"><div class="wait">Loading</div></div>
+</section>
+
+<section class="method">
+  <h2>How these are counted</h2>
+  <p>Everything here is computed in your browser from Sleeper, every time the page loads, across every season in the league's history. Weeks still being played are left out until they go final.</p>
+  <p>Weekly records count every finished week, playoffs included. Season totals are regular-season points only, so a season in progress can still climb. Player records count points scored from a starting lineup; a season record is one player's starts for one team. Playoff records count championship-bracket games, including the third-place game. Consolation games don't count.</p>
+</section>
+
+<footer class="foot">
+  <a href="./">&larr; Back to the News Desk</a>
+  <span id="stamp">Live data from Sleeper</span>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var LEAGUE = "1372014717660323840";
+  var Goon = "871521045843226624";
+  var API = "https://api.sleeper.app/v1/";
+  var GQL = "https://sleeper.app/graphql";
+  var CACHE = "dfb-records-v1:";
+
+  function el(t, cls, txt){
+    var n = document.createElement(t);
+    if (cls) n.className = cls;
+    if (txt !== undefined && txt !== null) n.textContent = txt;
+    return n;
+  }
+  function pts(v){ return (Math.round((Number(v) || 0) * 100) / 100).toFixed(2); }
+  function getJSON(path){
+    return fetch(API + path).then(function(r){
+      if (!r.ok) throw new Error(path + " -> " + r.status);
+      return r.json();
+    });
+  }
+  function store(k, v){ try { localStorage.setItem(CACHE + k, JSON.stringify(v)); } catch (e) {} }
+  function recall(k){ try { var s = localStorage.getItem(CACHE + k); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
+  function pill(on, txt){
+    document.getElementById("pill-txt").textContent = txt;
+    document.getElementById("pill").className = on ? "live on" : "live";
+  }
+
+  // ---------- loading ----------
+  // One season, trimmed to the fields this page uses so finished seasons fit in
+  // localStorage. Weeks that haven't gone final are dropped.
+  function loadSeason(lg, state){
+    var season = String(lg.season);
+    var done = lg.status === "complete";
+    if (done) {
+      var hit = recall(lg.league_id);
+      if (hit) return Promise.resolve(hit);
+    }
+    var lastFinal = 18;
+    if (!done) {
+      if (state.season !== season) lastFinal = 0;
+      else if (state.season_type === "regular") lastFinal = (Number(state.week) || 1) - 1;
+    }
+    var weeks = [];
+    for (var w = 1; w <= lastFinal; w++) weeks.push(w);
+    var lid = lg.league_id;
+    return Promise.all([
+      getJSON("league/" + lid + "/users"),
+      getJSON("league/" + lid + "/rosters"),
+      getJSON("league/" + lid + "/winners_bracket").catch(function(){ return []; }),
+      Promise.all(weeks.map(function(w){
+        return getJSON("league/" + lid + "/matchups/" + w).catch(function(){ return []; });
+      }))
+    ]).then(function(res){
+      var users = {};
+      (res[0] || []).forEach(function(u){
+        users[u.user_id] = {
+          name: String(u.display_name || "Unknown").trim(),
+          team: String((u.metadata && u.metadata.team_name) || u.display_name || "").trim()
+        };
+      });
+      var rosters = {};
+      (res[1] || []).forEach(function(r){
+        var key = r.owner_id || ("orphan-" + season + "-" + r.roster_id);
+        var u = users[r.owner_id] || {};
+        rosters[r.roster_id] = { owner: key, team: u.team || ("Team " + r.roster_id), name: u.name || "No manager" };
+      });
+      var wk = {};
+      res[3].forEach(function(list, i){
+        var rows = (list || []).filter(function(m){ return m.matchup_id != null; }).map(function(m){
+          var all = 0;
+          Object.keys(m.players_points || {}).forEach(function(k){ all += Number(m.players_points[k]) || 0; });
+          var p = Number(m.custom_points != null ? m.custom_points : m.points) || 0;
+          return { r: m.roster_id, m: m.matchup_id, p: p,
+                   s: m.starters || [], sp: (m.starters_points || []).map(Number), bench: Math.max(0, all - (Number(m.points) || 0)) };
+        });
+        // a week nobody scored in hasn't been played
+        if (rows.some(function(x){ return x.p > 0; })) wk[weeks[i]] = rows;
+      });
+      var st = lg.settings || {};
+      var out = {
+        id: lid, season: season, done: done,
+        pws: Number(st.playoff_week_start) || 15,
+        prt: Number(st.playoff_round_type) || 0,
+        slots: (lg.roster_positions || []).filter(function(p){ return p !== "BN" && p !== "IR" && p !== "TAXI"; }),
+        rosters: rosters,
+        bracket: (res[2] || []).map(function(g){ return { r: g.r, t1: g.t1, t2: g.t2, w: g.w, l: g.l, p: g.p }; }),
+        weeks: wk
+      };
+      if (done) store(lid, out);
+      return out;
+    });
+  }
+
+  function loadAll(){
+    return getJSON("state/nfl").then(function(state){
+      var chain = [];
+      function walk(id){
+        if (!id || id === "0") return Promise.resolve(chain);
+        var hit = recall("lg:" + id);
+        var p = hit ? Promise.resolve(hit) : getJSON("league/" + id).then(function(lg){
+          if (lg && lg.status === "complete") store("lg:" + id, lg);
+          return lg;
+        });
+        return p.then(function(lg){
+          if (!lg) return chain;
+          chain.push(lg);
+          return walk(lg.previous_league_id);
+        });
+      }
+      return walk(LEAGUE).then(function(){
+        var live = chain.filter(function(lg){ return lg.status !== "pre_draft" && lg.status !== "drafting"; });
+        pill(false, "Loading " + live.length + " seasons");
+        return Promise.all(live.map(function(lg){ return loadSeason(lg, state); }));
+      });
+    }).then(function(seasons){
+      return seasons.sort(function(a, b){ return Number(a.season) - Number(b.season); });
+    });
+  }
+
+  // ---------- crunching ----------
+  function roundWeeks(s, r, lastRound){
+    var w = s.pws + r - 1;
+    if (s.prt === 2) { w = s.pws + 2 * (r - 1); return [w, w + 1]; }
+    if (s.prt === 1 && r === lastRound) return [w, w + 1];
+    return [w];
+  }
+
+  function crunch(seasons){
+    var mgr = {};        // owner -> {name, team, latest season, reg/playoff records, titles}
+    var games = [];      // every head-to-head game, regular season + championship bracket
+    var weekly = [];     // every team score in a finished week
+    var seasonPts = [];  // regular-season points per team per season
+    var pGame = [];      // player starts
+    var pSeason = {};    // season|owner|player -> total
+
+    function M(s, rid){
+      var r = s.rosters[rid] || { owner: "orphan-" + s.season + "-" + rid, team: "Team " + rid, name: "No manager" };
+      var m = mgr[r.owner];
+      if (!m) m = mgr[r.owner] = { id: r.owner, name: r.name, team: r.team, last: s.season, seasons: 0,
+        w: 0, l: 0, t: 0, pw: 0, pl: 0, trips: 0, titles: [], finals: [] };
+      if (Number(s.season) >= Number(m.last)) { m.last = s.season; m.name = r.name; m.team = r.team; }
+      return { mg: m, team: r.team, name: r.name, owner: r.owner };
+    }
+
+    seasons.forEach(function(s){
+      var seen = {};
+      Object.keys(s.rosters).forEach(function(rid){ M(s, rid).mg.seasons++; seen[rid] = 1; });
+      var byWeek = s.weeks;
+      var regTot = {};
+      var lastRound = 0;
+      s.bracket.forEach(function(g){ if (g.r > lastRound) lastRound = g.r; });
+
+      Object.keys(byWeek).forEach(function(k){
+        var wk = Number(k), rows = byWeek[k], reg = wk < s.pws;
+        var pairs = {};
+        rows.forEach(function(x){
+          var who = M(s, x.r);
+          weekly.push({ season: s.season, week: wk, reg: reg, p: x.p, team: who.team, name: who.name, owner: who.owner, r: x.r, m: x.m });
+          if (reg) regTot[x.r] = (regTot[x.r] || 0) + x.p;
+          (pairs[x.m] = pairs[x.m] || []).push(x);
+          x.s.forEach(function(pid, i){
+            if (!pid || pid === "0") return;
+            var v = Number(x.sp[i]) || 0;
+            pGame.push({ pid: pid, p: v, season: s.season, week: wk, reg: reg, team: who.team, name: who.name, owner: who.owner });
+            if (reg) {
+              var key = s.season + "|" + who.owner + "|" + pid;
+              var e = pSeason[key] || (pSeason[key] = { pid: pid, p: 0, n: 0, season: s.season, team: who.team, name: who.name, owner: who.owner });
+              e.p += v; e.n++;
+            }
+          });
+        });
+        if (!reg) return;
+        Object.keys(pairs).forEach(function(mid){
+          var g = pairs[mid];
+          if (g.length !== 2) return;
+          games.push(makeGame(s, wk, [wk], "Regular season", g[0].r, g[1].r));
+        });
+      });
+
+      Object.keys(regTot).forEach(function(rid){
+        var who = M(s, rid);
+        seasonPts.push({ season: s.season, p: regTot[rid], team: who.team, name: who.name, owner: who.owner, live: !s.done });
+      });
+
+      // playoffs: championship bracket only, placement games below 3rd skipped
+      var trips = {};
+      s.bracket.forEach(function(g){
+        if (typeof g.t1 === "number") trips[g.t1] = 1;
+        if (typeof g.t2 === "number") trips[g.t2] = 1;
+        if (g.p && g.p > 3) return;
+        if (typeof g.t1 !== "number" || typeof g.t2 !== "number") return;
+        var wks = roundWeeks(s, g.r, lastRound);
+        if (!wks.every(function(w){ return byWeek[w]; })) return;
+        var lbl = g.p === 1 ? "Championship" : g.p === 3 ? "Third place" : (g.r === lastRound - 1 ? "Semifinal" : "Playoffs");
+        var gm = makeGame(s, wks[0], wks, lbl, g.t1, g.t2, g.w);
+        gm.playoff = true;
+        games.push(gm);
+        if (g.w) {
+          var win = M(s, g.w).mg, lose = M(s, g.w === g.t1 ? g.t2 : g.t1).mg;
+          win.pw++; lose.pl++;
+          if (g.p === 1) { win.titles.push(s.season); lose.finals.push(s.season); win.finals.push(s.season); }
+        }
+      });
+      Object.keys(trips).forEach(function(rid){ M(s, rid).mg.trips++; });
+    });
+
+    function makeGame(s, wk, wks, label, ra, rb, winner){
+      function side(rid){
+        var who = M(s, rid), p = 0, lines = [];
+        wks.forEach(function(w){
+          (s.weeks[w] || []).forEach(function(x){ if (x.r === rid) { p += x.p; lines.push(x); } });
+        });
+        return { r: rid, owner: who.owner, team: who.team, name: who.name, p: p, lines: lines };
+      }
+      var a = side(ra), b = side(rb);
+      var g = { season: s.season, week: wk, weeks: wks, label: label, a: a, b: b, slots: s.slots };
+      g.win = winner ? (winner === ra ? a.owner : b.owner) : (a.p === b.p ? null : (a.p > b.p ? a.owner : b.owner));
+      return g;
+    }
+
+    games.forEach(function(g){
+      if (g.playoff) return;
+      [g.a, g.b].forEach(function(x){
+        var m = mgr[x.owner];
+        if (g.win === null) m.t++;
+        else if (g.win === x.owner) m.w++;
+        else m.l++;
+      });
+    });
+
+    // opponent lookup for weekly rows (same matchup id, same week, same season)
+    var idx = {};
+    weekly.forEach(function(x){ (idx[x.season + "|" + x.week + "|" + x.m] = idx[x.season + "|" + x.week + "|" + x.m] || []).push(x); });
+    weekly.forEach(function(x){
+      var pair = idx[x.season + "|" + x.week + "|" + x.m];
+      x.opp = pair.length === 2 ? (pair[0] === x ? pair[1] : pair[0]) : null;
+    });
+
+    var ps = Object.keys(pSeason).map(function(k){ return pSeason[k]; });
+    return { seasons: seasons, mgr: mgr, games: games, weekly: weekly, seasonPts: seasonPts, pGame: pGame, pSeason: ps };
+  }
+
+  // ---------- player names ----------
+  var names = recall("names") || {};
+  function isTeamId(id){ return !/^\d+$/.test(String(id)); }
+  function playerLabel(id){
+    if (isTeamId(id)) return { name: id + " D/ST", pos: "DEF" };
+    var p = names[id];
+    if (!p) return { name: "Player " + id, pos: "" };
+    return { name: ((p.first_name || "") + " " + (p.last_name || "")).trim() || ("Player " + id), pos: p.position || "" };
+  }
+  function resolve(ids){
+    var need = [], seen = {};
+    ids.forEach(function(i){ if (!isTeamId(i) && !names[i] && !seen[i]) { seen[i] = 1; need.push(i); } });
+    if (!need.length) return Promise.resolve();
+    var chunks = [];
+    for (var i = 0; i < need.length; i += 100) chunks.push(need.slice(i, i + 100));
+    return Promise.all(chunks.map(function(c){
+      var q = "{" + c.map(function(id, i){
+        return "p" + i + ':get_player(sport:"nfl",player_id:"' + id + '"){first_name last_name position}';
+      }).join(" ") + "}";
+      return fetch(GQL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ query: q }) })
+        .then(function(r){ return r.json(); })
+        .then(function(j){
+          if (j && j.data) Object.keys(j.data).forEach(function(k){ if (j.data[k]) names[c[Number(k.slice(1))]] = j.data[k]; });
+        }).catch(function(){});
+    })).then(function(){ store("names", names); });
+  }
+
+  // ---------- rendering ----------
+  function teamCell(team, name){
+    var td = el("td", "team", team);
+    td.appendChild(el("span", "sub", name));
+    return td;
+  }
+  function whenText(season, week, reg){ return season + " · Wk " + week + (reg === false ? " · Playoffs" : ""); }
+  function table(head, rows){
+    var t = el("table", "tbl"), th = el("thead"), tr = el("tr");
+    head.forEach(function(h){ var c = el("th", h[1] || null, h[0]); tr.appendChild(c); });
+    th.appendChild(tr); t.appendChild(th);
+    var tb = el("tbody");
+    rows.forEach(function(r){ tb.appendChild(r); });
+    t.appendChild(tb);
+    return t;
+  }
+  function fillBox(id, node){
+    var box = document.querySelector("#" + id + " .box");
+    box.textContent = "";
+    box.appendChild(node);
+  }
+  function top(list, n, desc){
+    return list.slice().sort(function(a, b){ return desc ? b.p - a.p : a.p - b.p; }).slice(0, n);
+  }
+
+  function renderStats(D){
+    var box = document.getElementById("stats");
+    box.textContent = "";
+    var played = D.weekly.length;
+    var total = 0; D.weekly.forEach(function(x){ total += x.p; });
+    var champs = 0; D.seasons.forEach(function(s){ if (s.bracket.some(function(g){ return g.p === 1 && g.w; })) champs++; });
+    var first = D.seasons.length ? D.seasons[0].season : "";
+    [[String(D.seasons.length), "seasons since " + first],
+     [String(D.games.length), "head-to-head games"],
+     [Math.round(total).toLocaleString(), "points scored"],
+     [String(champs), champs === 1 ? "champion crowned" : "champions crowned"]].forEach(function(s, i){
+      var d = el("div", "stat" + (i === 0 ? " flag" : ""));
+      d.appendChild(el("b", null, s[0]));
+      d.appendChild(el("span", null, s[1]));
+      box.appendChild(d);
+    });
+    document.getElementById("dek").textContent = "Every week this league has played since " + first +
+      ", pulled live from Sleeper: the biggest scores, the best seasons, every title, and your record against everyone.";
+  }
+
+  function renderChamps(D){
+    var box = document.getElementById("champs");
+    box.textContent = "";
+    D.seasons.slice().reverse().forEach(function(s){
+      var fin = D.games.filter(function(g){ return g.season === s.season && g.label === "Championship"; })[0];
+      var c = el("div", "champ");
+      c.appendChild(el("div", "yr", s.season));
+      if (fin && fin.win) {
+        var w = fin.win === fin.a.owner ? fin.a : fin.b, l = w === fin.a ? fin.b : fin.a;
+        if (w.owner === Goon) c.className += " mj";
+        c.appendChild(el("div", "nm", w.team));
+        c.appendChild(el("div", "mg", w.name));
+        c.appendChild(el("div", "fn", "Beat " + l.team + ", " + pts(w.p) + " to " + pts(l.p)));
+      } else {
+        c.className += " open";
+        c.appendChild(el("div", "nm", s.done ? "No final on record" : "To be decided"));
+        c.appendChild(el("div", "mg", s.done ? "Bracket missing from Sleeper" : "Season in progress"));
+      }
+      box.appendChild(c);
+    });
+    document.getElementById("champ-note").textContent = "Since " + (D.seasons[0] ? D.seasons[0].season : "");
+  }
+
+  function renderHall(D){
+    var list = Object.keys(D.mgr).map(function(k){ return D.mgr[k]; }).filter(function(m){ return m.id.indexOf("orphan-") !== 0; });
+    list.sort(function(a, b){
+      return b.titles.length - a.titles.length || (b.finals.length - a.finals.length) ||
+        (b.pw - a.pw) || (b.trips - a.trips) || (b.w - a.w) || a.name.localeCompare(b.name);
+    });
+    var rows = list.map(function(m){
+      var tr = el("tr", m.id === Goon ? "mj" : null);
+      var td = el("td", "team", m.name);
+      td.appendChild(el("span", "sub", m.team + (m.last !== D.seasons[D.seasons.length - 1].season ? " · last played " + m.last : "")));
+      tr.appendChild(td);
+      var c = el("td", "r big", m.titles.length ? "🏆 " + m.titles.length : "0");
+      if (m.titles.length) c.appendChild(el("span", "sub", m.titles.join(", ")));
+      tr.appendChild(c);
+      tr.appendChild(el("td", "r hide-s", String(m.finals.length)));
+      tr.appendChild(el("td", "r", m.pw + "–" + m.pl));
+      tr.appendChild(el("td", "r hide-s", m.trips + " of " + m.seasons));
+      tr.appendChild(el("td", "r", m.w + "–" + m.l + (m.t ? "–" + m.t : "")));
+      return tr;
+    });
+    var t = document.getElementById("hall");
+    var tb = t.querySelector("tbody");
+    tb.textContent = "";
+    rows.forEach(function(r){ tb.appendChild(r); });
+  }
+
+  function weekTable(list){
+    return table([["#", "rank"], ["Team"], ["Opponent", "hide-s"], ["Pts", "r"]], list.map(function(x, i){
+      var tr = el("tr", x.owner === Goon ? "mj" : null);
+      tr.appendChild(el("td", "rank", String(i + 1)));
+      var t = teamCell(x.team, x.name);
+      t.querySelector(".sub").textContent = x.name + " \u00b7 " + whenText(x.season, x.week, x.reg);
+      tr.appendChild(t);
+      var o = el("td", "hide-s");
+      if (x.opp) {
+        var res = x.p > x.opp.p ? "W" : x.p < x.opp.p ? "L" : "T";
+        o.appendChild(el("span", "res " + res.toLowerCase(), res + " "));
+        o.appendChild(document.createTextNode("vs " + x.opp.team + " (" + pts(x.opp.p) + ")"));
+      }
+      tr.appendChild(o);
+      tr.appendChild(el("td", "r big", pts(x.p)));
+      return tr;
+    }));
+  }
+
+  function renderTeams(D){
+    fillBox("t-week", weekTable(top(D.weekly, 10, true)));
+    fillBox("t-low", weekTable(top(D.weekly.filter(function(x){ return x.p > 0; }), 10, false)));
+    fillBox("t-season", table([["#", "rank"], ["Team"], ["Season", "r"], ["Pts", "r"]], top(D.seasonPts, 10, true).map(function(x, i){
+      var tr = el("tr", x.owner === Goon ? "mj" : null);
+      tr.appendChild(el("td", "rank", String(i + 1)));
+      tr.appendChild(teamCell(x.team, x.name));
+      var s = el("td", "r", x.season);
+      if (x.live) s.appendChild(el("span", "sub", "in progress"));
+      tr.appendChild(s);
+      tr.appendChild(el("td", "r big", pts(x.p)));
+      return tr;
+    })));
+  }
+
+  function renderPlayers(D){
+    function rows(list, when){
+      return list.map(function(x, i){
+        var tr = el("tr", x.owner === Goon ? "mj" : null), pl = playerLabel(x.pid);
+        tr.appendChild(el("td", "rank", String(i + 1)));
+        var td = el("td", "team", pl.name);
+        td.appendChild(el("span", "sub", [pl.pos, x.team + " (" + x.name + ")"].filter(Boolean).join(" \u00b7 ")));
+        tr.appendChild(td);
+        tr.appendChild(when(x));
+        tr.appendChild(el("td", "r big", pts(x.p)));
+        return tr;
+      });
+    }
+    fillBox("p-game", table([["#", "rank"], ["Player"], ["When", "r"], ["Pts", "r"]], rows(top(D.pGame, 10, true), function(x){
+      var c = el("td", "r", x.season);
+      c.appendChild(el("span", "sub", "Wk " + x.week + (x.reg ? "" : " \u00b7 Playoffs")));
+      return c;
+    })));
+    fillBox("p-season", table([["#", "rank"], ["Player"], ["Season", "r"], ["Pts", "r"]], rows(top(D.pSeason, 10, true), function(x){
+      var c = el("td", "r", x.season);
+      c.appendChild(el("span", "sub", x.n + (x.n === 1 ? " start" : " starts")));
+      return c;
+    })));
+  }
+
+  // ---------- head to head ----------
+  var SLOT = { SUPER_FLEX: "SF", REC_FLEX: "W/T", WRRB_FLEX: "W/R", FLEX: "FLX", IDP_FLEX: "IDP", DEF: "DEF" };
+  function lineup(side, slots){
+    var wrap = el("div", "lu");
+    var h = el("h4", null, side.team);
+    h.appendChild(el("span", null, side.name));
+    wrap.appendChild(h);
+    var t = el("table"), tb = el("tbody"), rows = [], bench = 0, best = -Infinity;
+    side.lines.forEach(function(x, wi){
+      x.s.forEach(function(pid, i){
+        var v = Number(x.sp[i]) || 0;
+        rows.push({ slot: SLOT[slots[i]] || slots[i] || "", pid: pid, p: v, wk: side.lines.length > 1 ? wi + 1 : 0 });
+        if (v > best) best = v;
+      });
+      bench += x.bench;
+    });
+    rows.forEach(function(r){
+      var tr = el("tr", r.p === best && best > 0 ? "top" : null);
+      tr.appendChild(el("td", "sl", r.slot));
+      var p = el("td", "p");
+      if (!r.pid || r.pid === "0") p.textContent = "Empty slot";
+      else {
+        var pl = playerLabel(r.pid);
+        p.textContent = pl.name;
+        if (pl.pos || r.wk) p.appendChild(el("small", null, [pl.pos, r.wk ? "Week " + r.wk + " of 2" : ""].filter(Boolean).join(" · ")));
+      }
+      tr.appendChild(p);
+      tr.appendChild(el("td", "r", pts(r.p)));
+      tb.appendChild(tr);
+    });
+    var tot = el("tr", "tot");
+    tot.appendChild(el("td", "sl", ""));
+    tot.appendChild(el("td", null, "Total"));
+    tot.appendChild(el("td", "r", pts(side.p)));
+    tb.appendChild(tot);
+    var bn = el("tr", "bn");
+    bn.appendChild(el("td", "sl", ""));
+    bn.appendChild(el("td", null, "Left on the bench"));
+    bn.appendChild(el("td", "r", pts(bench)));
+    tb.appendChild(bn);
+    t.appendChild(tb);
+    wrap.appendChild(t);
+    return wrap;
+  }
+
+  var namesReady = null;
+  function gameRow(g, me){
+    var mine = g.a.owner === me ? g.a : g.b, theirs = mine === g.a ? g.b : g.a;
+    var res = g.win === null ? "T" : g.win === me ? "W" : "L";
+    var d = el("details", "gm");
+    var s = el("summary");
+    var wk = el("span", "wk");
+    wk.appendChild(el("b", null, g.season));
+    wk.appendChild(document.createTextNode(" · Wk " + g.weeks.join("–")));
+    s.appendChild(wk);
+    var tags = el("span", "tags");
+    if (g.playoff) tags.appendChild(el("span", "chip" + (g.label === "Championship" ? " flag" : ""), g.label));
+    s.appendChild(tags);
+    var sc = el("span", "sc");
+    sc.appendChild(el("span", "res " + res.toLowerCase(), res + " "));
+    sc.appendChild(document.createTextNode(pts(mine.p) + " "));
+    sc.appendChild(el("span", "l", "– " + pts(theirs.p)));
+    s.appendChild(sc);
+    var ch = el("span", "chev"); ch.setAttribute("aria-hidden", "true");
+    s.appendChild(ch);
+    d.appendChild(s);
+    d.addEventListener("toggle", function(){
+      if (!d.open || d.dataset.built) return;
+      d.dataset.built = "1";
+      var bk = el("div", "bk");
+      bk.appendChild(el("div", "wait", "Loading lineups"));
+      d.appendChild(bk);
+      var ids = [];
+      [mine, theirs].forEach(function(x){ x.lines.forEach(function(l){ ids = ids.concat(l.s); }); });
+      (namesReady || Promise.resolve()).then(function(){ return resolve(ids); }).then(function(){
+        bk.textContent = "";
+        bk.appendChild(lineup(mine, g.slots));
+        bk.appendChild(lineup(theirs, g.slots));
+      });
+    });
+    return d;
+  }
+
+  function renderH2H(D, me){
+    var box = document.getElementById("opps");
+    box.textContent = "";
+    var vs = {};
+    D.games.forEach(function(g){
+      if (g.a.owner !== me && g.b.owner !== me) return;
+      var mine = g.a.owner === me ? g.a : g.b, theirs = mine === g.a ? g.b : g.a;
+      var o = vs[theirs.owner] || (vs[theirs.owner] = { owner: theirs.owner, games: [], w: 0, l: 0, t: 0, pw: 0, pl: 0, pf: 0, pa: 0 });
+      o.games.push(g);
+      o.pf += mine.p; o.pa += theirs.p;
+      var k = g.win === null ? "t" : g.win === me ? "w" : "l";
+      o[k]++;
+      if (g.playoff && k !== "t") o[k === "w" ? "pw" : "pl"]++;
+    });
+    var list = Object.keys(vs).map(function(k){ return vs[k]; });
+    list.sort(function(a, b){ return (b.games.length - a.games.length) || ((b.w - b.l) - (a.w - a.l)); });
+    var W = 0, L = 0, T = 0;
+    list.forEach(function(o){ W += o.w; L += o.l; T += o.t; });
+    var tot = document.getElementById("who-tot");
+    tot.textContent = "";
+    tot.appendChild(el("b", null, W + "–" + L + (T ? "–" + T : "")));
+    tot.appendChild(document.createTextNode(" all time"));
+    if (!list.length) { box.appendChild(el("div", "wait", "No games on record for this team yet.")); return; }
+    list.forEach(function(o){
+      var m = D.mgr[o.owner] || { team: "Unknown", name: "" };
+      var d = el("details", "opp");
+      var s = el("summary");
+      var who = el("div");
+      who.appendChild(el("div", "nm", m.team));
+      who.appendChild(el("div", "mg", m.name + (o.pw || o.pl ? " · playoffs " + o.pw + "–" + o.pl : "")));
+      s.appendChild(who);
+      var right = el("div");
+      right.appendChild(el("div", "rec" + (o.w > o.l ? " up" : o.w < o.l ? " down" : ""), o.w + "–" + o.l + (o.t ? "–" + o.t : "")));
+      right.appendChild(el("div", "pf", pts(o.pf) + " – " + pts(o.pa)));
+      s.appendChild(right);
+      var ch = el("span", "chev"); ch.setAttribute("aria-hidden", "true");
+      s.appendChild(ch);
+      d.appendChild(s);
+      d.addEventListener("toggle", function(){
+        if (!d.open || d.dataset.built) return;
+        d.dataset.built = "1";
+        var gl = el("div", "games");
+        o.games.slice().sort(function(a, b){ return (b.season - a.season) || (b.week - a.week); })
+          .forEach(function(g){ gl.appendChild(gameRow(g, me)); });
+        d.appendChild(gl);
+      });
+      box.appendChild(d);
+    });
+  }
+
+  function initPicker(D){
+    var sel = document.getElementById("who");
+    var latest = D.seasons[D.seasons.length - 1].season;
+    var list = Object.keys(D.mgr).map(function(k){ return D.mgr[k]; })
+      .filter(function(m){ return m.id.indexOf("orphan-") !== 0; })
+      .sort(function(a, b){ return ((b.last === latest) - (a.last === latest)) || a.team.localeCompare(b.team); });
+    sel.textContent = "";
+    var cur = el("optgroup"); cur.label = "This season";
+    var old = el("optgroup"); old.label = "Former managers";
+    list.forEach(function(m){
+      var o = el("option", null, m.team + " (" + m.name + ")");
+      o.value = m.id;
+      (m.last === latest ? cur : old).appendChild(o);
+    });
+    sel.appendChild(cur);
+    if (old.children.length) sel.appendChild(old);
+    var want = (location.hash.match(/^#vs-(.+)$/) || [])[1];
+    sel.value = D.mgr[want] ? want : (D.mgr[Goon] ? Goon : list[0].id);
+    sel.disabled = false;
+    sel.addEventListener("change", function(){
+      try { history.replaceState(null, "", "#vs-" + sel.value); } catch (e) {}
+      renderH2H(D, sel.value);
+    });
+    renderH2H(D, sel.value);
+  }
+
+  function initTabs(){
+    Array.prototype.forEach.call(document.querySelectorAll(".seg"), function(seg){
+      var tabs = seg.querySelectorAll(".tab");
+      Array.prototype.forEach.call(tabs, function(t){
+        t.addEventListener("click", function(){
+          Array.prototype.forEach.call(tabs, function(x){
+            x.className = "tab"; x.setAttribute("aria-selected", "false");
+            document.getElementById(x.getAttribute("data-pane")).className = "pane";
+          });
+          t.className = "tab on"; t.setAttribute("aria-selected", "true");
+          document.getElementById(t.getAttribute("data-pane")).className = "pane on";
+        });
+      });
+    });
+  }
+
+  function fail(msg){
+    pill(false, "Offline");
+    Array.prototype.forEach.call(document.querySelectorAll(".wait"), function(n){
+      n.className = "err"; n.textContent = "Records unavailable right now. " + msg;
+    });
+  }
+
+  function reveal(){
+    Array.prototype.forEach.call(document.querySelectorAll(".rise"), function(n, i){
+      setTimeout(function(){ n.classList.add("in"); }, 70 * i);
+    });
+  }
+
+  function start(){
+    initTabs();
+    reveal();
+    loadAll().then(function(seasons){
+      if (!seasons.length) throw new Error("No seasons found.");
+      var D = crunch(seasons);
+      renderStats(D);
+      renderChamps(D);
+      renderHall(D);
+      renderTeams(D);
+      initPicker(D);
+      var ids = [];
+      D.pGame.forEach(function(x){ ids.push(x.pid); });
+      // record tables first, then every other name in the background for the lineups
+      var firstIds = top(D.pGame, 10, true).concat(top(D.pSeason, 10, true)).map(function(x){ return x.pid; });
+      renderPlayers(D);
+      resolve(firstIds).then(function(){ renderPlayers(D); });
+      namesReady = resolve(ids);
+      pill(true, seasons.length + " seasons · live from Sleeper");
+      document.getElementById("stamp").textContent = "Updated " + new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    }).catch(function(e){ fail(String(e.message || e)); });
+  }
+
+  if (document.readyState !== "loading") start();
+  else document.addEventListener("DOMContentLoaded", start);
+})();
+</script>
+</body>
+</html>

@@ -43,6 +43,22 @@
 .lead:hover .go i{transform:translateX(3px)}
 .lead .date{display:block;margin-top:14px;font-family:var(--display);font-size:13.5px;color:var(--muted)}
 
+.mast-r{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mast-r .back:hover{transform:translateX(2px)}
+
+/* ---------- record book promo ---------- */
+.promo{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 24px;text-decoration:none;
+  background:var(--surface);border-radius:var(--r-lg);padding:20px 24px;box-shadow:var(--shadow),inset 4px 0 0 var(--flag);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.promo:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift),inset 4px 0 0 var(--flag)}
+.promo .pt{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;flex:1 1 320px}
+.promo b{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.02em;color:var(--ink);line-height:1.2;margin-top:4px}
+.promo .pd{font-size:16px;line-height:1.5;color:var(--body)}
+.promo .go{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;
+  font-size:15px;color:var(--on-flag);background:var(--flag);padding:9px 16px;border-radius:999px;white-space:nowrap}
+.promo .go i{font-style:normal;transition:transform .3s var(--ease)}
+.promo:hover .go i{transform:translateX(3px)}
+
 /* ---------- scoreboard ---------- */
 .board{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .game{background:var(--surface);border-radius:var(--r-lg);padding:14px 17px 12px;box-shadow:var(--shadow)}
@@ -151,7 +167,7 @@ a.row:hover{transform:translateX(3px)}
 
 <header class="mast">
   <a class="brand" href="./" aria-label="Dem Fantasy Boyz News Desk home"><span class="wm">Dem Fantasy Boyz</span><span class="badge">News Desk</span></a>
-  <span class="live" id="live-pill"><span class="dot"></span><span id="live-txt">Connecting</span></span>
+  <span class="mast-r"><a class="back" href="records.html">Record book &rarr;</a><span class="live" id="live-pill"><span class="dot"></span><span id="live-txt">Connecting</span></span></span>
 </header>
 
 <!-- ============ LEAD STORY ============ -->
@@ -179,6 +195,15 @@ a.row:hover{transform:translateX(3px)}
     <div class="game"><div class="side"><div class="who"><div class="nm skel">Loading team</div></div><span class="pts skel">000.0</span></div><div class="tug"><i style="flex-grow:1"></i><i style="flex-grow:1"></i></div><div class="side"><div class="who"><div class="nm skel">Loading team</div></div><span class="pts skel">000.0</span></div></div>
     <div class="game"><div class="side"><div class="who"><div class="nm skel">Loading team</div></div><span class="pts skel">000.0</span></div><div class="tug"><i style="flex-grow:1"></i><i style="flex-grow:1"></i></div><div class="side"><div class="who"><div class="nm skel">Loading team</div></div><span class="pts skel">000.0</span></div></div>
   </div>
+</section>
+
+<!-- ============ RECORD BOOK ============ -->
+<section class="sec rise">
+  <a class="promo" href="records.html">
+    <span class="pt"><span class="chip flag">Record book</span><b>Every record this league has set</b>
+      <span class="pd">Top 10 weeks and seasons, player highs, every title, and your record against every team.</span></span>
+    <span class="go">Open the record book <i>&rarr;</i></span>
+  </a>
 </section>
 
 <!-- ============ ARCHIVE ============ -->
