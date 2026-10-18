@@ -51,16 +51,29 @@
 .skel{background:var(--sunk);border-radius:6px;color:transparent!important;animation:sk 1.5s ease-in-out infinite}
 @keyframes sk{0%,100%{opacity:1}50%{opacity:.5}}
 
-/* champions strip */
-.champs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.champ{background:var(--surface);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);font-family:var(--display)}
-.champ.mj{box-shadow:var(--shadow),inset 0 0 0 2px var(--flag)}
-.champ .yr{font-size:13px;font-weight:600;color:var(--muted)}
-.champ .nm{font-weight:700;font-size:18px;color:var(--ink);letter-spacing:-.01em;line-height:1.2;margin:6px 0 2px}
-.champ .mg{font-size:13px;color:var(--muted)}
-.champ .fn{margin-top:10px;padding-top:9px;border-top:1px solid var(--line);font-size:13px;color:var(--body);
-  font-variant-numeric:tabular-nums}
-.champ.open .nm{color:var(--muted)}
+/* champions ticker: one strip, scrolls on its own, pauses on hover */
+.ticker{display:flex;align-items:stretch;margin-top:26px;background:var(--surface);border-radius:999px;
+  box-shadow:var(--shadow);overflow:hidden;font-family:var(--display)}
+.ticker .lbl{flex:none;display:flex;align-items:center;gap:7px;padding:0 16px 0 18px;font-size:13.5px;font-weight:700;
+  color:var(--on-flag);background:var(--flag);border-radius:999px;position:relative;z-index:1;white-space:nowrap}
+.ticker .view{flex:1;min-width:0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent)}
+.ticker .track{display:flex;width:max-content;animation:tick var(--dur,40s) linear infinite}
+.ticker:hover .track,.ticker:focus-within .track{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-50%)}}
+.ticker .set{display:flex;flex:none}
+.ticker .it{display:flex;align-items:center;gap:9px;padding:11px 24px;white-space:nowrap;font-size:14.5px;color:var(--body);
+  border-right:1px solid var(--line);font-variant-numeric:tabular-nums}
+.ticker .it .yr{font-weight:700;color:var(--muted)}
+.ticker .it b{font-weight:700;color:var(--ink)}
+.ticker .it .sc{color:var(--muted)}
+.ticker .it.mj b{background:linear-gradient(transparent 60%,var(--flag-soft) 60%)}
+.ticker .it.open b{color:var(--muted);font-weight:600}
+@media (prefers-reduced-motion:reduce){
+  .ticker .view{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .ticker .set + .set{display:none}
+}
 
 /* head to head */
 .pick{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 16px;font-family:var(--display)}
@@ -145,20 +158,11 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
 
 <div class="stats rise" id="stats"></div>
 
-<!-- ============ CHAMPIONS ============ -->
-<section class="sec rise">
-  <div class="shead"><h2>Champions</h2><span class="note" id="champ-note"></span></div>
-  <div class="champs" id="champs"><div class="wait">Loading</div></div>
-</section>
-
-<!-- ============ TROPHY CASE ============ -->
-<section class="sec rise">
-  <div class="shead"><h2>Playoffs and chips</h2><span class="note">Every manager, every season</span></div>
-  <div class="box"><table class="tbl" id="hall">
-    <thead><tr><th>Manager</th><th class="r">Chips</th><th class="r hide-s">Finals</th><th class="r">Playoff W&ndash;L</th><th class="r hide-s">Trips</th><th class="r">Reg W&ndash;L</th></tr></thead>
-    <tbody><tr><td colspan="6"><div class="wait">Loading</div></td></tr></tbody>
-  </table></div>
-</section>
+<!-- ============ CHAMPIONS TICKER ============ -->
+<div class="ticker rise" role="region" aria-label="Champions">
+  <span class="lbl"><span aria-hidden="true">🏆</span> Champions</span>
+  <div class="view" tabindex="0"><div class="track" id="champs"><div class="set"><span class="it">Loading champions</span></div></div></div>
+</div>
 
 <!-- ============ TEAM RECORDS ============ -->
 <section class="sec rise">
@@ -182,6 +186,15 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
   </div>
   <div class="pane on" id="p-game"><div class="box"><div class="wait">Loading</div></div></div>
   <div class="pane" id="p-season"><div class="box"><div class="wait">Loading</div></div></div>
+</section>
+
+<!-- ============ TROPHY CASE ============ -->
+<section class="sec rise">
+  <div class="shead"><h2>Playoffs and chips</h2><span class="note">Every manager, every season</span></div>
+  <div class="box"><table class="tbl" id="hall">
+    <thead><tr><th>Manager</th><th class="r">Chips</th><th class="r hide-s">Finals</th><th class="r">Playoff W&ndash;L</th><th class="r hide-s">Trips</th><th class="r">Reg W&ndash;L</th></tr></thead>
+    <tbody><tr><td colspan="6"><div class="wait">Loading</div></td></tr></tbody>
+  </table></div>
 </section>
 
 <!-- ============ HEAD TO HEAD ============ -->
@@ -525,26 +538,31 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
   }
 
   function renderChamps(D){
-    var box = document.getElementById("champs");
-    box.textContent = "";
+    var track = document.getElementById("champs");
+    track.textContent = "";
+    var set = el("div", "set");
     D.seasons.slice().reverse().forEach(function(s){
       var fin = D.games.filter(function(g){ return g.season === s.season && g.label === "Championship"; })[0];
-      var c = el("div", "champ");
-      c.appendChild(el("div", "yr", s.season));
+      var it = el("span", "it");
+      it.appendChild(el("span", "yr", s.season));
       if (fin && fin.win) {
         var w = fin.win === fin.a.owner ? fin.a : fin.b, l = w === fin.a ? fin.b : fin.a;
-        if (w.owner === Goon) c.className += " mj";
-        c.appendChild(el("div", "nm", w.team));
-        c.appendChild(el("div", "mg", w.name));
-        c.appendChild(el("div", "fn", "Beat " + l.team + ", " + pts(w.p) + " to " + pts(l.p)));
+        if (w.owner === Goon) it.className += " mj";
+        it.appendChild(el("b", null, w.team));
+        it.appendChild(el("span", null, "(" + w.name + ") beat " + l.team));
+        it.appendChild(el("span", "sc", pts(w.p) + "\u2013" + pts(l.p)));
       } else {
-        c.className += " open";
-        c.appendChild(el("div", "nm", s.done ? "No final on record" : "To be decided"));
-        c.appendChild(el("div", "mg", s.done ? "Bracket missing from Sleeper" : "Season in progress"));
+        it.className += " open";
+        it.appendChild(el("b", null, s.done ? "No final on record" : "Title to be decided"));
       }
-      box.appendChild(c);
+      set.appendChild(it);
     });
-    document.getElementById("champ-note").textContent = "Since " + (D.seasons[0] ? D.seasons[0].season : "");
+    // two copies side by side; sliding by half loops without a seam
+    var copy = set.cloneNode(true);
+    copy.setAttribute("aria-hidden", "true");
+    track.appendChild(set);
+    track.appendChild(copy);
+    track.style.setProperty("--dur", Math.max(20, Math.round(set.scrollWidth / 45)) + "s");
   }
 
   function renderHall(D){
