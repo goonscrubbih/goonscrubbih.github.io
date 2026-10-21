@@ -152,7 +152,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
 <section class="hed rise">
   <span class="chip flag">Record book</span>
   <h1>The Record Book</h1>
-  <p class="dek" id="dek">Every week this league has played, pulled live from Sleeper: the biggest scores, the best seasons, every title, and your record against everyone.</p>
+  <p class="dek" id="dek">Every week this league has played, on ESPN and Sleeper: the biggest scores, the best seasons, every title, and your record against everyone.</p>
   <div class="by"><span class="live" id="pill"><span class="dot"></span><span id="pill-txt">Loading league history</span></span></div>
 </section>
 
@@ -210,13 +210,14 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
 
 <section class="method">
   <h2>How these are counted</h2>
-  <p>Everything here is computed in your browser from Sleeper, every time the page loads, across every season in the league's history. Weeks still being played are left out until they go final.</p>
+  <p>Everything here is computed in your browser every time the page loads. Seasons 2022 on come live from Sleeper. The ESPN years, 2016 to 2021, come from a one-time export of the league's ESPN history: same 12-team full-PPR format, with one flex instead of two. Weeks still being played are left out until they go final.</p>
+  <p>ESPN managers are matched to their Sleeper accounts, so career records run across both sites. Managers who left before the move to Sleeper are listed by team name. ESPN didn't keep bench points for every year, so some ESPN box scores show a dash for points left on the bench.</p>
   <p>Weekly records count every finished week, playoffs included. Season totals are regular-season points only, so a season in progress can still climb. Player records count points scored from a starting lineup; a season record is one player's starts for one team. Playoff records count championship-bracket games, including the third-place game. Consolation games don't count.</p>
 </section>
 
 <footer class="foot">
   <a href="./">&larr; Back to the News Desk</a>
-  <span id="stamp">Live data from Sleeper</span>
+  <span id="stamp">ESPN 2016–21 + live Sleeper data</span>
 </footer>
 
 </div>
@@ -337,6 +338,14 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
         pill(false, "Loading " + live.length + " seasons");
         return Promise.all(live.map(function(lg){ return loadSeason(lg, state); }));
       });
+    }).then(function(seasons){
+      // ESPN era (2016-2021): a static export, owners already mapped to Sleeper user ids
+      return fetch("data/espn-2016-2021.json").then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; })
+        .then(function(espn){
+          if (!espn) return seasons;
+          Object.keys(espn.names || {}).forEach(function(k){ names[k] = espn.names[k]; });
+          return seasons.concat(espn.seasons || []);
+        });
     }).then(function(seasons){
       return seasons.sort(function(a, b){ return Number(a.season) - Number(b.season); });
     });
@@ -467,7 +476,8 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
 
   // ---------- player names ----------
   var names = recall("names") || {};
-  function isTeamId(id){ return !/^\d+$/.test(String(id)); }
+  function isEspn(id){ return String(id).charAt(0) === "e"; }
+  function isTeamId(id){ return !isEspn(id) && !/^\d+$/.test(String(id)); }
   function playerLabel(id){
     if (isTeamId(id)) return { name: id + " D/ST", pos: "DEF" };
     var p = names[id];
@@ -476,7 +486,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
   }
   function resolve(ids){
     var need = [], seen = {};
-    ids.forEach(function(i){ if (!isTeamId(i) && !names[i] && !seen[i]) { seen[i] = 1; need.push(i); } });
+    ids.forEach(function(i){ if (!isTeamId(i) && !isEspn(i) && !names[i] && !seen[i]) { seen[i] = 1; need.push(i); } });
     if (!need.length) return Promise.resolve();
     var chunks = [];
     for (var i = 0; i < need.length; i += 100) chunks.push(need.slice(i, i + 100));
@@ -534,7 +544,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
       box.appendChild(d);
     });
     document.getElementById("dek").textContent = "Every week this league has played since " + first +
-      ", pulled live from Sleeper: the biggest scores, the best seasons, every title, and your record against everyone.";
+      ": ESPN from 2016 to 2021, then live from Sleeper. The biggest scores, the best seasons, every title, and your record against everyone.";
   }
 
   function renderChamps(D){
@@ -657,14 +667,14 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
     var h = el("h4", null, side.team);
     h.appendChild(el("span", null, side.name));
     wrap.appendChild(h);
-    var t = el("table"), tb = el("tbody"), rows = [], bench = 0, best = -Infinity;
+    var t = el("table"), tb = el("tbody"), rows = [], bench = 0, benchUnknown = false, best = -Infinity;
     side.lines.forEach(function(x, wi){
       x.s.forEach(function(pid, i){
         var v = Number(x.sp[i]) || 0;
         rows.push({ slot: SLOT[slots[i]] || slots[i] || "", pid: pid, p: v, wk: side.lines.length > 1 ? wi + 1 : 0 });
         if (v > best) best = v;
       });
-      bench += x.bench;
+      if (x.bench == null) benchUnknown = true; else bench += x.bench;
     });
     rows.forEach(function(r){
       var tr = el("tr", r.p === best && best > 0 ? "top" : null);
@@ -688,7 +698,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
     var bn = el("tr", "bn");
     bn.appendChild(el("td", "sl", ""));
     bn.appendChild(el("td", null, "Left on the bench"));
-    bn.appendChild(el("td", "r", pts(bench)));
+    bn.appendChild(el("td", "r", benchUnknown ? "\u2014" : pts(bench)));
     tb.appendChild(bn);
     t.appendChild(tb);
     wrap.appendChild(t);
@@ -856,7 +866,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
       renderPlayers(D);
       resolve(firstIds).then(function(){ renderPlayers(D); });
       namesReady = resolve(ids);
-      pill(true, seasons.length + " seasons · live from Sleeper");
+      pill(true, seasons.length + " seasons · ESPN + Sleeper");
       document.getElementById("stamp").textContent = "Updated " + new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
     }).catch(function(e){ fail(String(e.message || e)); });
   }
