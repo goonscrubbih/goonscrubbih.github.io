@@ -505,7 +505,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
   // ---------- rendering ----------
   function teamCell(team, name){
     var td = el("td", "team", team);
-    td.appendChild(el("span", "sub", name));
+    if (name !== team) td.appendChild(el("span", "sub", name));
     return td;
   }
   function whenText(season, week, reg){ return season + " · Wk " + week + (reg === false ? " · Playoffs" : ""); }
@@ -559,7 +559,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
         var w = fin.win === fin.a.owner ? fin.a : fin.b, l = w === fin.a ? fin.b : fin.a;
         if (w.owner === Goon) it.className += " mj";
         it.appendChild(el("b", null, w.team));
-        function who(x){ return /^(Former manager|No manager)$/.test(x.name) ? "" : " (" + x.name + ")"; }
+        function who(x){ return (x.name === x.team || /^(Former manager|No manager)$/.test(x.name)) ? "" : " (" + x.name + ")"; }
         it.appendChild(el("span", null, who(w).trim() + " beat " + l.team + who(l)));
         it.appendChild(el("span", "sc", pts(w.p) + "\u2013" + pts(l.p)));
       } else {
@@ -585,7 +585,8 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
     var rows = list.map(function(m){
       var tr = el("tr", m.id === Goon ? "mj" : null);
       var td = el("td", "team", m.name);
-      td.appendChild(el("span", "sub", m.team + (m.last !== D.seasons[D.seasons.length - 1].season ? " · last played " + m.last : "")));
+      var lastTxt = m.last !== D.seasons[D.seasons.length - 1].season ? "last played " + m.last : "";
+      td.appendChild(el("span", "sub", [m.team === m.name ? "" : m.team, lastTxt].filter(Boolean).join(" · ")));
       tr.appendChild(td);
       var c = el("td", "r big", m.titles.length ? "🏆 " + m.titles.length : "0");
       if (m.titles.length) c.appendChild(el("span", "sub", m.titles.join(", ")));
@@ -607,7 +608,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
       var tr = el("tr", x.owner === Goon ? "mj" : null);
       tr.appendChild(el("td", "rank", String(i + 1)));
       var t = teamCell(x.team, x.name);
-      t.querySelector(".sub").textContent = x.name + " \u00b7 " + whenText(x.season, x.week, x.reg);
+      (t.querySelector(".sub") || t.appendChild(el("span", "sub"))).textContent = (x.name === x.team ? "" : x.name + " \u00b7 ") + whenText(x.season, x.week, x.reg);
       tr.appendChild(t);
       var o = el("td", "hide-s");
       if (x.opp) {
@@ -642,7 +643,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
         var tr = el("tr", x.owner === Goon ? "mj" : null), pl = playerLabel(x.pid);
         tr.appendChild(el("td", "rank", String(i + 1)));
         var td = el("td", "team", pl.name);
-        td.appendChild(el("span", "sub", [pl.pos, x.team + " (" + x.name + ")"].filter(Boolean).join(" \u00b7 ")));
+        td.appendChild(el("span", "sub", [pl.pos, x.team === x.name ? x.team : x.team + " (" + x.name + ")"].filter(Boolean).join(" \u00b7 ")));
         tr.appendChild(td);
         tr.appendChild(when(x));
         tr.appendChild(el("td", "r big", pts(x.p)));
@@ -804,7 +805,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
     var cur = el("optgroup"); cur.label = "This season";
     var old = el("optgroup"); old.label = "Former managers";
     list.forEach(function(m){
-      var o = el("option", null, m.team + " (" + m.name + ")");
+      var o = el("option", null, m.team === m.name ? m.team : m.team + " (" + m.name + ")");
       o.value = m.id;
       (m.last === latest ? cur : old).appendChild(o);
     });
