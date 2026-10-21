@@ -559,7 +559,8 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
         var w = fin.win === fin.a.owner ? fin.a : fin.b, l = w === fin.a ? fin.b : fin.a;
         if (w.owner === Goon) it.className += " mj";
         it.appendChild(el("b", null, w.team));
-        it.appendChild(el("span", null, "(" + w.name + ") beat " + l.team));
+        function who(x){ return /^(Former manager|No manager)$/.test(x.name) ? "" : " (" + x.name + ")"; }
+        it.appendChild(el("span", null, who(w).trim() + " beat " + l.team + who(l)));
         it.appendChild(el("span", "sc", pts(w.p) + "\u2013" + pts(l.p)));
       } else {
         it.className += " open";
