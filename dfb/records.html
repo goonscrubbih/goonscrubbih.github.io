@@ -532,12 +532,13 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
     box.textContent = "";
     var played = D.weekly.length;
     var total = 0; D.weekly.forEach(function(x){ total += x.p; });
-    var champs = 0; D.seasons.forEach(function(s){ if (s.bracket.some(function(g){ return g.p === 1 && g.w; })) champs++; });
+    var champSet = {}, champs = 0;
+    D.games.forEach(function(g){ if (g.label === "Championship" && g.win && !champSet[g.win]) { champSet[g.win] = 1; champs++; } });
     var first = D.seasons.length ? D.seasons[0].season : "";
     [[String(D.seasons.length), "seasons since " + first],
      [String(D.games.length), "head-to-head games"],
      [Math.round(total).toLocaleString(), "points scored"],
-     [String(champs), champs === 1 ? "champion crowned" : "champions crowned"]].forEach(function(s, i){
+     [String(champs), champs === 1 ? "different champion crowned" : "different champions crowned"]].forEach(function(s, i){
       var d = el("div", "stat" + (i === 0 ? " flag" : ""));
       d.appendChild(el("b", null, s[0]));
       d.appendChild(el("span", null, s[1]));
