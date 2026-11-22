@@ -171,10 +171,12 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
     <button class="tab on" data-pane="t-week" role="tab" aria-selected="true">Most in a week</button>
     <button class="tab" data-pane="t-season" role="tab" aria-selected="false">Most in a season</button>
     <button class="tab" data-pane="t-low" role="tab" aria-selected="false">Fewest in a week</button>
+    <button class="tab" data-pane="t-pa" role="tab" aria-selected="false">Most against (avg)</button>
   </div>
   <div class="pane on" id="t-week"><div class="box"><div class="wait">Loading</div></div></div>
   <div class="pane" id="t-season"><div class="box"><div class="wait">Loading</div></div></div>
   <div class="pane" id="t-low"><div class="box"><div class="wait">Loading</div></div></div>
+  <div class="pane" id="t-pa"><div class="box"><div class="wait">Loading</div></div></div>
 </section>
 
 <!-- ============ PLAYER RECORDS ============ -->
@@ -213,6 +215,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
   <p>Everything here is computed in your browser every time the page loads. Seasons 2022 on come live from Sleeper. The ESPN years, 2016 to 2021, come from a one-time export of the league's ESPN history: same 12-team full-PPR format, with one flex instead of two. Weeks still being played are left out until they go final.</p>
   <p>ESPN managers are matched to their Sleeper accounts, so career records run across both sites. Managers who left before the move to Sleeper are listed by team name. ESPN didn't keep bench points for every year, so some ESPN box scores show a dash for points left on the bench.</p>
   <p>Weekly records count every finished week, playoffs included. Season totals are regular-season points only, so a season in progress can still climb. Player records count points scored from a starting lineup; a season record is one player's starts for one team. Playoff records count championship-bracket games, including the third-place game. Consolation games don't count.</p>
+  <p>Points against is the average your opponents scored on you in regular-season games, at least four games in. "vs league" compares it with that season's league-wide average score, because scoring has climbed since the ESPN years.</p>
 </section>
 
 <footer class="foot">
@@ -470,8 +473,28 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
       x.opp = pair.length === 2 ? (pair[0] === x ? pair[1] : pair[0]) : null;
     });
 
+    // points against: regular-season games only, per team per season, vs that season's league average
+    var paS = {}, lgS = {}, doneS = {};
+    seasons.forEach(function(s){ doneS[s.season] = s.done; });
+    games.forEach(function(g){
+      if (g.playoff) return;
+      var L = lgS[g.season] || (lgS[g.season] = { sum: 0, n: 0 });
+      L.sum += g.a.p + g.b.p; L.n += 2;
+      [[g.a, g.b], [g.b, g.a]].forEach(function(pr){
+        var x = pr[0], o = pr[1], k = g.season + "|" + x.owner;
+        var e = paS[k] || (paS[k] = { season: g.season, owner: x.owner, team: x.team, name: x.name, pa: 0, pf: 0, n: 0, w: 0, l: 0, t: 0, live: !doneS[g.season] });
+        e.pa += o.p; e.pf += x.p; e.n++;
+        if (g.win === null) e.t++; else if (g.win === x.owner) e.w++; else e.l++;
+      });
+    });
+    var paSeason = Object.keys(paS).map(function(k){
+      var e = paS[k], L = lgS[e.season];
+      e.p = e.pa / e.n; e.pfg = e.pf / e.n; e.diff = e.p - L.sum / L.n;
+      return e;
+    }).filter(function(e){ return e.n >= 4; });
+
     var ps = Object.keys(pSeason).map(function(k){ return pSeason[k]; });
-    return { seasons: seasons, mgr: mgr, games: games, weekly: weekly, seasonPts: seasonPts, pGame: pGame, pSeason: ps };
+    return { seasons: seasons, mgr: mgr, games: games, weekly: weekly, seasonPts: seasonPts, pGame: pGame, pSeason: ps, paSeason: paSeason };
   }
 
   // ---------- player names ----------
@@ -634,6 +657,24 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
       if (x.live) s.appendChild(el("span", "sub", "in progress"));
       tr.appendChild(s);
       tr.appendChild(el("td", "r big", pts(x.p)));
+      return tr;
+    })));
+  }
+
+  function renderPA(D){
+    fillBox("t-pa", table([["#", "rank"], ["Team"], ["Season", "r"], ["Against / game", "r"]], top(D.paSeason, 10, true).map(function(x, i){
+      var tr = el("tr", x.owner === Goon ? "mj" : null);
+      tr.appendChild(el("td", "rank", String(i + 1)));
+      var t = teamCell(x.team, x.name);
+      (t.querySelector(".sub") || t.appendChild(el("span", "sub"))).textContent = (x.name === x.team ? "" : x.name + " \u00b7 ") +
+        x.w + "-" + x.l + (x.t ? "-" + x.t : "") + " \u00b7 scored " + pts(x.pfg) + " a game";
+      tr.appendChild(t);
+      var s = el("td", "r", x.season);
+      if (x.live) s.appendChild(el("span", "sub", "in progress"));
+      tr.appendChild(s);
+      var c = el("td", "r big", pts(x.p));
+      c.appendChild(el("span", "sub", (x.diff >= 0 ? "+" : "\u2212") + Math.abs(x.diff).toFixed(1) + " vs league"));
+      tr.appendChild(c);
       return tr;
     })));
   }
@@ -861,6 +902,7 @@ details[open] > summary .chev{transform:rotate(-135deg);margin-bottom:-2px}
       renderChamps(D);
       renderHall(D);
       renderTeams(D);
+      renderPA(D);
       initPicker(D);
       var ids = [];
       D.pGame.forEach(function(x){ ids.push(x.pid); });
